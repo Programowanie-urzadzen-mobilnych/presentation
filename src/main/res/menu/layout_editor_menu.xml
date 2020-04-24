@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+
+    <item
+        android:id="@+id/save_layout_in_storage"
+        android:title="@string/SAVE_LAYOUT_in_STORAGE"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/load_layout_from_file"
+        android:title="@string/LOAD_LAYOUT_FROM_FILE"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/save_Layout_in_app"
+        android:title="@string/SAVE_LAYOUT_IN_APP"
+        app:showAsAction="never" />
+</menu>

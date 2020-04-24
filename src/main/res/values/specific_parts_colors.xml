@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ACTION_BAR_TITLE_COLOR">@color/WHITE</color>
+    <color name="ACTION_BAR_BACKGROUND_COLOR">@color/PURPLE</color>
+    <color name="MENU_ITEM_BACKGROUND_COLOR">@color/WHITE</color>
+    <color name="DATA_BLOCK_CONTENT_BACKGROUND_COLOR">@color/LIGHT_GREY</color>
+</resources>

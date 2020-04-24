@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomActionBarStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@color/ACTION_BAR_BACKGROUND_COLOR</item>
+        <item name="android:label">Pomiary</item>
+    </style>
+    <style name="CustomPopupStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@color/MENU_ITEM_BACKGROUND_COLOR</item>
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownVerticalOffset">-4dp</item>
+    </style>
+</resources>

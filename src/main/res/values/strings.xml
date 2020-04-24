@@ -6,6 +6,7 @@
     <string name="ADD_BLOCK">Dodaj blok</string>
     <string name="BLOCK_TITLE">Tytuł bloku...</string>
     <string name="BLOCK_TYPE">Typ bloku:</string>
+    <string name="LAYOUT_LIST_ACTION_BAR_TTLE">Lista układów</string>
     <string-array name="BLOCK_TYPE_SPINNER">
         <item>Wartość</item>
         <item>Tabela</item>

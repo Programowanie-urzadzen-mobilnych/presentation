@@ -20,8 +20,10 @@ import com.representation.R;
 
 import java.util.ArrayList;
 
+import layouts.DataLayout;
+
 public class LayoutEditor extends AppCompatActivity {
-    public static ArrayList<DataBlock> dataBlocks;
+    public static DataLayout layout;
     public static DataBlockAdapter dataBlockAdapter;
 
     @Override
@@ -37,13 +39,13 @@ public class LayoutEditor extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         // Construct the data source
-        dataBlocks = new ArrayList<>();
-        dataBlocks.add(new DataBlock("Przykładowy tytuł", DataBlock.BlockTypeEnum.CHART));
-        dataBlocks.add(new DataBlock("Drugi tytuł", DataBlock.BlockTypeEnum.VALUE));
-        dataBlocks.add(new DataBlock("Trzeci tytuł", DataBlock.BlockTypeEnum.TABLE));
+        layout = new DataLayout("", new ArrayList<DataBlock>());
+        layout.getDataBlocks().add(new DataBlock("Przykładowy tytuł", DataBlock.BlockTypeEnum.CHART));
+        layout.getDataBlocks().add(new DataBlock("Drugi tytuł", DataBlock.BlockTypeEnum.VALUE));
+        layout.getDataBlocks().add(new DataBlock("Trzeci tytuł", DataBlock.BlockTypeEnum.TABLE));
 
         // Create the adapter to convert the array to views
-        dataBlockAdapter = new DataBlockAdapter(this, dataBlocks);
+        dataBlockAdapter = new DataBlockAdapter(this, layout.getDataBlocks());
 
         // Attach the adapter to a ListView
         ListView list = findViewById(R.id.layout_editor_list_view);
@@ -53,7 +55,7 @@ public class LayoutEditor extends AppCompatActivity {
         final Button addButton = findViewById(R.id.add_block_to_layout);
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                dataBlocks.add(new DataBlock());
+                layout.getDataBlocks().add(new DataBlock());
                 dataBlockAdapter.notifyDataSetChanged();
             }
         });

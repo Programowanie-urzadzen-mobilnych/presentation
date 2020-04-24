@@ -25,7 +25,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    //implementation 'net.rdrei.android.dirchooser:library:3.2@aar'
+    implementation 'lib.kashif:folderpicker:2.4'
     implementation 'androidx.appcompat:appcompat:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

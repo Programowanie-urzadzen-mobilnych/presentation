@@ -1,0 +1,14 @@
+<resources>
+    <string name="LAYOUT_EDITOR_ACTION_BAR_TITLE">Edytor układów</string>
+    <string name="SAVE_LAYOUT_in_STORAGE">Zapisz układ na dysku</string>
+    <string name="LOAD_LAYOUT_FROM_FILE">Wczytaj układ z pliku</string>
+    <string name="SAVE_LAYOUT_IN_APP">Zapisz układ</string>
+    <string name="ADD_BLOCK">Dodaj blok</string>
+    <string name="BLOCK_TITLE">Tytuł bloku...</string>
+    <string name="BLOCK_TYPE">Typ bloku:</string>
+    <string-array name="BLOCK_TYPE_SPINNER">
+        <item>Wartość</item>
+        <item>Tabela</item>
+        <item>Wykres</item>
+    </string-array>
+</resources>

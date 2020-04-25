@@ -14,13 +14,13 @@ public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedL
     public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int spinnerPosition, long id) {
         switch(spinnerPosition){
             case 0:
-                LayoutEditor.dataBlocks.get(itemPosition).setBlockType(DataBlock.BlockTypeEnum.VALUE);
+                LayoutEditor.layout.getDataBlocks().get(itemPosition).setBlockType(DataBlock.BlockTypeEnum.VALUE);
                 break;
             case 1:
-                LayoutEditor.dataBlocks.get(itemPosition).setBlockType(DataBlock.BlockTypeEnum.TABLE);
+                LayoutEditor.layout.getDataBlocks().get(itemPosition).setBlockType(DataBlock.BlockTypeEnum.TABLE);
                 break;
             case 2:
-                LayoutEditor.dataBlocks.get(itemPosition).setBlockType(DataBlock.BlockTypeEnum.CHART);
+                LayoutEditor.layout.getDataBlocks().get(itemPosition).setBlockType(DataBlock.BlockTypeEnum.CHART);
                 break;
         }
     }

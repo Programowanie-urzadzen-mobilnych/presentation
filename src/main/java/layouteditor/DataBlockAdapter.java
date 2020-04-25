@@ -35,7 +35,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         final Button deleteButton = convertView.findViewById(R.id.delete_block_button);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                LayoutEditor.dataBlocks.remove(position);
+                LayoutEditor.layout.getDataBlocks().remove(position);
                 LayoutEditor.dataBlockAdapter.notifyDataSetChanged();
             }
         });
@@ -44,8 +44,8 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         final Button moveDownButton = convertView.findViewById(R.id.move_block_down_button);
         moveDownButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(LayoutEditor.dataBlocks.size()>position+1) {
-                    Collections.swap(LayoutEditor.dataBlocks, position, position + 1);
+                if(LayoutEditor.layout.getDataBlocks().size()>position+1) {
+                    Collections.swap(LayoutEditor.layout.getDataBlocks(), position, position + 1);
                     LayoutEditor.dataBlockAdapter.notifyDataSetChanged();
                 }
             }
@@ -56,7 +56,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         moveUpButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(position>0) {
-                    Collections.swap(LayoutEditor.dataBlocks, position, position - 1);
+                    Collections.swap(LayoutEditor.layout.getDataBlocks(), position, position - 1);
                     LayoutEditor.dataBlockAdapter.notifyDataSetChanged();
                 }
             }

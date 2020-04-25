@@ -15,6 +15,6 @@ public class CustomTextWatcher implements TextWatcher {
     public void onTextChanged(CharSequence s, int start, int before, int count) { }
     @Override
     public void afterTextChanged(Editable s) {
-        LayoutEditor.dataBlocks.get(itemPosition).setBlockTitle(s.toString());
+        LayoutEditor.layout.getDataBlocks().get(itemPosition).setBlockTitle(s.toString());
     }
 }

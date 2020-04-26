@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
-    android:layout_width="wrap_content">
+    android:layout_width="wrap_content" >
 
     <item
-        android:id="@+id/layouts_list_add_new_layout"
+        android:id="@+id/measurements_add_new_layout"
         android:title="@string/ADD_NEW_LAYOUT"
         app:showAsAction="never" />
 </menu>

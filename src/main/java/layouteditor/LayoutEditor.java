@@ -32,7 +32,7 @@ public class LayoutEditor extends AppCompatActivity {
         setContentView(R.layout.activity_layout_editor);
 
         // Configure action bar
-        Toolbar actionbar = findViewById(R.id.action_bar);
+        Toolbar actionbar = findViewById(R.id.layout_editor_action_bar);
         actionbar.setTitle(R.string.LAYOUT_EDITOR_ACTION_BAR_TITLE);
         setSupportActionBar(actionbar);
         ActionBar ab = getSupportActionBar();

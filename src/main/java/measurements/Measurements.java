@@ -23,17 +23,28 @@ public class Measurements extends AppCompatActivity {
         setContentView(R.layout.activity_measurements);
 
         // Configure action bar
-        Toolbar actionbar = findViewById(R.id.action_bar);
-        actionbar.setTitle(R.string.LAYOUT_LIST_ACTION_BAR_TTLE);
+        Toolbar actionbar = findViewById(R.id.measurements_action_bar);
+        actionbar.setTitle(R.string.MEASUREMENTS_ACTION_BAR_TITLE);
         setSupportActionBar(actionbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.measurements_add_new_layout) {
+            Intent i = new Intent(this, LayoutEditor.class);
+            this.startActivity(i);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.measurments_menu, menu);
+        inflater.inflate(R.menu.measurements_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 }

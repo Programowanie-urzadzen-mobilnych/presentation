@@ -8,4 +8,8 @@
         android:id="@+id/measurements_add_new_layout"
         android:title="@string/ADD_NEW_LAYOUT"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/measurements_show_layouts_list"
+        android:title="@string/SHOW_LAYOUTS_LIST"
+        app:showAsAction="never" />
 </menu>

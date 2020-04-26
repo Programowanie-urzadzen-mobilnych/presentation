@@ -10,10 +10,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.representation.R;
 
 import layouteditor.LayoutEditor;
+import layouts.LayoutsList;
 
 public class Measurements extends AppCompatActivity {
 
@@ -35,6 +37,9 @@ public class Measurements extends AppCompatActivity {
         int itemId = item.getItemId();
         if (itemId == R.id.measurements_add_new_layout) {
             Intent i = new Intent(this, LayoutEditor.class);
+            this.startActivity(i);
+        } else if (itemId == R.id.measurements_show_layouts_list) {
+            Intent i = new Intent(this, LayoutsList.class);
             this.startActivity(i);
         }
 

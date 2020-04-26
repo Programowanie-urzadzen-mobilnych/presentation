@@ -32,7 +32,7 @@ public class LayoutsList extends AppCompatActivity {
         setContentView(R.layout.activity_layouts_list);
 
         // Configure action bar
-        Toolbar actionbar = findViewById(R.id.action_bar);
+        Toolbar actionbar = findViewById(R.id.layouts_list_action_bar);
         actionbar.setTitle(R.string.LAYOUT_LIST_ACTION_BAR_TTLE);
         setSupportActionBar(actionbar);
         ActionBar ab = getSupportActionBar();
@@ -64,7 +64,7 @@ public class LayoutsList extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-        if (itemId == R.id.add_new_layout) {
+        if (itemId == R.id.layouts_list_add_new_layout) {
             Intent i = new Intent(this, LayoutEditor.class);
             this.startActivity(i);
         }

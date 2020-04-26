@@ -44,6 +44,8 @@ public class LayoutEditor extends AppCompatActivity {
         setSupportActionBar(actionbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
+
 
         // Construct the data source
         layout = new DataLayout("", new ArrayList<DataBlock>());
@@ -78,11 +80,11 @@ public class LayoutEditor extends AppCompatActivity {
         } else if (itemId == R.id.load_layout_from_file) {
             Toast.makeText(getApplicationContext(), "Wczytaj układ z pliku", Toast.LENGTH_SHORT).show();
             // TODO: Functionality of loading files from file to the app
-        } else if (itemId == R.id.save_Layout_in_app) {
+        } else if (itemId == R.id.save_Layout_in_app || itemId == android.R.id.home) {
             displayPopupWindow();
         }
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     @Override

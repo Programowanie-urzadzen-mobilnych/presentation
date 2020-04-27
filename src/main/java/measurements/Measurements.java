@@ -1,10 +1,13 @@
 package measurements;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -38,6 +41,19 @@ public class Measurements extends AppCompatActivity {
         setSupportActionBar(actionbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
+        refreshCurrentlySelectedLayout();
+    }
+
+    private void refreshCurrentlySelectedLayout() {
+        TextView currentlySelectedLayout = findViewById(R.id.currently_selected_layout);
+        String selectedLayoutsTitles = "";
+        for (DataLayout layout: layouts) {
+            if(layout.isSelected()){
+                selectedLayoutsTitles += layout.getLayoutTitle() + "\n";
+            }
+        }
+        currentlySelectedLayout.setText(selectedLayoutsTitles);
     }
 
     @Override
@@ -59,6 +75,41 @@ public class Measurements extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.measurements_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        for (int position = 0; position < layouts.size(); position++) {
+            // Check the menu item already added or not
+            if (menu.findItem(position) == null) {
+                // If it don't exist in menu then check if it should appear in quick select menu
+                if (layouts.get(position).isQuickMenuElement()){
+                    // add the menu item to menu
+                    MenuItem item = menu.add(
+                        Menu.NONE, // groupId
+                        position, // itemId
+                        position, // order
+                        layouts.get(position).getLayoutTitle() // title
+                    );
+
+                    final int finalPosition = position;
+                    item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem menuItem) {
+                            // Deselect all layouts
+                            for (int i = 0; i < layouts.size(); i++) {
+                                layouts.get(i).setSelected(false);
+                            }
+                            // Select the layout on given position
+                            layouts.get(finalPosition).setSelected(true);
+                            refreshCurrentlySelectedLayout();
+                            return true;
+                        }
+                    });
+                }
+            }
+        }
+        super.onPrepareOptionsMenu(menu);
+        return true;
     }
 
     @Override

@@ -50,7 +50,7 @@ public class Measurements extends AppCompatActivity {
         // This method displays all default layouts (there shouldn't be more than one,
         // so this method will show a bug if there would be one)
         TextView currentlyDefaultLayoutText = findViewById(R.id.currently_default_layout);
-        String defaultLayoutsTitles = "";
+        String defaultLayoutsTitles = "Default Layouts:\n";
         for (DataLayout layout: layouts) {
             if(layout.isDefaultChoice()){
                 defaultLayoutsTitles += layout.getLayoutTitle() + "\n";
@@ -63,7 +63,7 @@ public class Measurements extends AppCompatActivity {
         // This method displays all selected layouts (there shouldn't be more than one,
         // so this method will show a bug if there would be one)
         TextView currentlySelectedLayoutText = findViewById(R.id.currently_selected_layout);
-        String selectedLayoutsTitles = "";
+        String selectedLayoutsTitles = "Selected Layouts:\n";
         for (DataLayout layout: layouts) {
             if(layout.isSelected()){
                 selectedLayoutsTitles += layout.getLayoutTitle() + "\n";

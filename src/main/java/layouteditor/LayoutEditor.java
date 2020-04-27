@@ -172,6 +172,7 @@ public class LayoutEditor extends AppCompatActivity {
         popup.setContentView(popupLayout);
         popup.setOutsideTouchable(true);
         popup.setFocusable(true);
+
         int popupWidth = ViewGroup.LayoutParams.WRAP_CONTENT;
         int popupHeight = ViewGroup.LayoutParams.WRAP_CONTENT;
         popup.setWidth(popupWidth);

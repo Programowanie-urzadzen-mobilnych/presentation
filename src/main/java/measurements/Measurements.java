@@ -108,28 +108,6 @@ public class Measurements extends AppCompatActivity {
                 }
             }
         }
-
-        // Set an icon for the new menu item
-        // purple.setIcon(R.drawable.ic_palette_purple_36dp);
-
-        // Set the show as action flags for new menu item
-        /*purple.setShowAsActionFlags(
-                MenuItem.SHOW_AS_ACTION_WITH_TEXT |
-                        MenuItem.SHOW_AS_ACTION_ALWAYS
-        );*/
-
-        // Set a click listener for the new menu item
-        /*purple.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Toast.makeText(mContext, menuItem.getTitle() + " Clicked", Toast.LENGTH_SHORT).show();
-                mTextView.setTextColor(Color.parseColor("#800080"));
-                return true;
-            }
-        });
-
-        Toast.makeText(mContext, "Purple MenuItem Added", Toast.LENGTH_SHORT).show();*/
-
         super.onPrepareOptionsMenu(menu);
         return true;
     }

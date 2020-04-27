@@ -134,7 +134,7 @@ public class LayoutEditor extends AppCompatActivity {
         // If layout is default u shouldn't be able to undefault it,
         // because there won't be any default layouts. In that case checkbox is deactivated.
         if(layout.isDefaultChoice()){
-            isDefault.setActivated(false);
+            isDefault.setEnabled(false);
         }
 
         final CheckBox isInQuickMenu = popupLayout.findViewById(R.id.layout_quick_select_checkbox);
@@ -150,11 +150,13 @@ public class LayoutEditor extends AppCompatActivity {
                 Database.deselectAllLayouts();
                 layout.setSelected(true);
 
-                // If newly added layout is selected as default and it wasn't default before
-                // (checkbox is activated.) than all layouts need to be undefaulted before making
-                // this one default. This will prevent multiple default layouts.
+                // If newly added layout is selected as default and checkbox is enabled than all
+                // layouts need to be undefaulted before making this one default. This will prevent
+                // multiple default layouts.
                 if(isDefault.isChecked()){
-                    Database.undefaultAllLayouts();
+                    if(isDefault.isEnabled()){
+                        Database.undefaultAllLayouts();
+                    }
                     layout.setDefaultChoice(true);
                 } else {
                     layout.setDefaultChoice(false);

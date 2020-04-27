@@ -18,8 +18,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
+    private Context mContext;
     public DataBlockAdapter(Context context, ArrayList<DataBlock> dataBlocks) {
         super(context, 0, dataBlocks);
+        this.mContext = context;
     }
 
     @Override
@@ -35,8 +37,10 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         final Button deleteButton = convertView.findViewById(R.id.delete_block_button);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                LayoutEditor.layout.getDataBlocks().remove(position);
-                LayoutEditor.dataBlockAdapter.notifyDataSetChanged();
+                if (mContext instanceof LayoutEditor) {
+                    ((LayoutEditor)mContext).daleteButtonHandler(position);
+                }
+                notifyDataSetChanged();
             }
         });
 
@@ -44,10 +48,10 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         final Button moveDownButton = convertView.findViewById(R.id.move_block_down_button);
         moveDownButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(LayoutEditor.layout.getDataBlocks().size()>position+1) {
-                    Collections.swap(LayoutEditor.layout.getDataBlocks(), position, position + 1);
-                    LayoutEditor.dataBlockAdapter.notifyDataSetChanged();
+                if (mContext instanceof LayoutEditor) {
+                    ((LayoutEditor)mContext).moveDownButtonHandler(position);
                 }
+                notifyDataSetChanged();
             }
         });
 
@@ -55,10 +59,10 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         final Button moveUpButton = convertView.findViewById(R.id.move_block_up_button);
         moveUpButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(position>0) {
-                    Collections.swap(LayoutEditor.layout.getDataBlocks(), position, position - 1);
-                    LayoutEditor.dataBlockAdapter.notifyDataSetChanged();
+                if (mContext instanceof LayoutEditor) {
+                    ((LayoutEditor)mContext).moveUpButtonHandler(position);
                 }
+                notifyDataSetChanged();
             }
         });
 
@@ -76,7 +80,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         blockTitleInput.setText(dataBlock.getBlockTitle());
 
         // Declare new TextWatcher and put it in editText tag. Also bind it to this EditText
-        CustomTextWatcher newWatcher = new CustomTextWatcher(position);
+        CustomTextWatcher newWatcher = new CustomTextWatcher(position, mContext);
         holder.editText.setTag(newWatcher);
         holder.editText.addTextChangedListener(newWatcher);
 
@@ -95,7 +99,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         }
         // Apply custom OnItemSelectedListener, which will change date in ArrayList connected witch Adapter,
         // when user apply changes to the spinner on the ListView
-        blockTypeInput.setOnItemSelectedListener(new CustomOnItemSelectedListener(position));
+        blockTypeInput.setOnItemSelectedListener(new CustomOnItemSelectedListener(position, mContext));
 
         // Return the completed view to render on screen
         return convertView;

@@ -19,12 +19,13 @@ import com.representation.R;
 
 import java.util.ArrayList;
 
+import data.Database;
 import layouteditor.DataBlock;
 import layouteditor.LayoutEditor;
+import measurements.Measurements;
 
 public class LayoutsList extends AppCompatActivity {
-    public static ArrayList<DataLayout> layouts;
-    public static DataLayoutAdapter dataLayoutAdapter;
+    private ArrayList<DataLayout> layouts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +39,12 @@ public class LayoutsList extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        // Construct the data source
-        layouts = new ArrayList<>();
-        layouts.add(new DataLayout("Tytuł pierwszy"));
-        layouts.add(new DataLayout("Tytuł drugi", new ArrayList<DataBlock>()));
-        layouts.add(new DataLayout("Tytuł trzeci", new ArrayList<DataBlock>(), false));
+        // TODO: Replace data collecting method
+        // Collect needed data from DataBase
+        this.layouts = Database.layouts;
 
         // Create the adapter to convert the array to views
-        dataLayoutAdapter = new DataLayoutAdapter(this, layouts);
+        DataLayoutAdapter dataLayoutAdapter = new DataLayoutAdapter(this, layouts);
 
         // Attach the adapter to a ListView
         ListView list = findViewById(R.id.layout_list_list_view);
@@ -77,5 +76,42 @@ public class LayoutsList extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.layout_list_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onBackPressed(){
+        // define what happens when back button pressed (the button on the bottom left corner)
+        Intent i = new Intent(this, Measurements.class);
+        this.startActivity(i);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // TODO: Replace data pushing method
+        // Push changed data to DataBase
+        Database.layouts = this.layouts;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // TODO: Replace data collecting method
+        // Collect needed data from DataBase
+        this.layouts = Database.layouts;
+    }
+
+    public void deleteButtonHandler(int position) {
+        // Remove chosen layout from list
+        this.layouts.remove(position);
+    }
+
+    public void selectButtonHandler(int position) {
+        // Deselect all layouts
+        for (int i = 0; i < layouts.size(); i++) {
+            layouts.get(i).setSelected(false);
+        }
+        // Select the layout on given position
+        layouts.get(position).setSelected(true);
     }
 }

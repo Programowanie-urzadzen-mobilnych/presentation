@@ -1,10 +1,13 @@
 package layouteditor;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,7 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroupOverlay;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
@@ -26,12 +32,15 @@ import androidx.appcompat.widget.Toolbar;
 import com.representation.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
+import data.Database;
 import layouts.DataLayout;
+import layouts.LayoutsList;
 
 public class LayoutEditor extends AppCompatActivity {
-    public static DataLayout layout;
-    public static DataBlockAdapter dataBlockAdapter;
+    private DataLayout layout;
+    private int layoutPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +49,25 @@ public class LayoutEditor extends AppCompatActivity {
 
         // Configure action bar
         Toolbar actionbar = findViewById(R.id.layout_editor_action_bar);
-        actionbar.setTitle(R.string.LAYOUT_EDITOR_ACTION_BAR_TITLE);
+        actionbar.setTitle(getResources().getString(R.string.LAYOUT_EDITOR_ACTION_BAR_TITLE));
         setSupportActionBar(actionbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
 
-
-        // Construct the data source
-        layout = new DataLayout("", new ArrayList<DataBlock>());
-        layout.getDataBlocks().add(new DataBlock("Przykładowy tytuł", DataBlock.BlockTypeEnum.CHART));
-        layout.getDataBlocks().add(new DataBlock("Drugi tytuł", DataBlock.BlockTypeEnum.VALUE));
-        layout.getDataBlocks().add(new DataBlock("Trzeci tytuł", DataBlock.BlockTypeEnum.TABLE));
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            // TODO: Replace data collecting method
+            // Collect needed data from DataBase
+            this.layoutPosition = extras.getInt("layoutPosition");
+            this.layout = Database.layouts.get(layoutPosition);
+        } else {
+            this.layout = new DataLayout();
+            this.layoutPosition = -1;
+        }
 
         // Create the adapter to convert the array to views
-        dataBlockAdapter = new DataBlockAdapter(this, layout.getDataBlocks());
+        final DataBlockAdapter dataBlockAdapter = new DataBlockAdapter(this, layout.getDataBlocks());
 
         // Attach the adapter to a ListView
         ListView list = findViewById(R.id.layout_editor_list_view);
@@ -105,9 +118,8 @@ public class LayoutEditor extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     public void displayPopupWindow() {
         // Display Popup and darken the background.
-        // Set listener to remove dark overlay when clicked outside the window.
         final PopupWindow popup = new PopupWindow(this);
-        View layout = getLayoutInflater().inflate(R.layout.save_layout_popup_window, null);
+        final View popupLayout = getLayoutInflater().inflate(R.layout.save_layout_popup_window, null);
 
         ViewGroup root = (ViewGroup) getWindow().getDecorView().getRootView();
         applyDim(root, 0.5f);
@@ -156,7 +168,7 @@ public class LayoutEditor extends AppCompatActivity {
             }
         });
 
-        popup.setContentView(layout);
+        popup.setContentView(popupLayout);
         popup.setOutsideTouchable(true);
         popup.setFocusable(true);
         int popupWidth = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -182,5 +194,29 @@ public class LayoutEditor extends AppCompatActivity {
         // removes dark overlay from background
         ViewGroupOverlay overlay = parent.getOverlay();
         overlay.clear();
+    }
+
+    public void daleteButtonHandler(int position) {
+        layout.getDataBlocks().remove(position);
+    }
+
+    public void moveDownButtonHandler(int position) {
+        if(layout.getDataBlocks().size()>position+1) {
+            Collections.swap(layout.getDataBlocks(), position, position + 1);
+        }
+    }
+
+    public void moveUpButtonHandler(int position) {
+        if(position>0) {
+            Collections.swap(layout.getDataBlocks(), position, position - 1);
+        }
+    }
+
+    public void changeBlockTitle(int itemPosition, String title) {
+        layout.getDataBlocks().get(itemPosition).setBlockTitle(title);
+    }
+
+    public void setBlockType(int itemPosition, DataBlock.BlockTypeEnum type) {
+        layout.getDataBlocks().get(itemPosition).setBlockType(type);
     }
 }

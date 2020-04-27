@@ -15,11 +15,11 @@ import java.util.ArrayList;
 
 import layouteditor.LayoutEditor;
 
-class DataLayoutAdapter extends ArrayAdapter<DataLayout> {
-    private Context context;
+public class DataLayoutAdapter extends ArrayAdapter<DataLayout> {
+    private Context mContext;
     public DataLayoutAdapter(Context context, ArrayList<DataLayout> layouts) {
         super(context, 0, layouts);
-        this.context = context;
+        this.mContext = context;
     }
 
     @Override
@@ -39,8 +39,10 @@ class DataLayoutAdapter extends ArrayAdapter<DataLayout> {
         final Button deleteButton = convertView.findViewById(R.id.delete_layout_button);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                LayoutsList.layouts.remove(position);
-                LayoutsList.dataLayoutAdapter.notifyDataSetChanged();
+                if (mContext instanceof LayoutsList) {
+                    ((LayoutsList)mContext).deleteButtonHandler(position);
+                }
+                notifyDataSetChanged();
             }
         });
 
@@ -48,8 +50,9 @@ class DataLayoutAdapter extends ArrayAdapter<DataLayout> {
         final Button editButton = convertView.findViewById(R.id.edit_layout_button);
         editButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(context, LayoutEditor.class);
-                context.startActivity(i);
+                Intent i = new Intent(mContext, LayoutEditor.class);
+                i.putExtra("layoutPosition", position);
+                mContext.startActivity(i);
             }
         });
 
@@ -58,17 +61,13 @@ class DataLayoutAdapter extends ArrayAdapter<DataLayout> {
         final Button selectButton = convertView.findViewById(R.id.select_layout_button);
         selectButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                deselectAllLayouts();
-                dataLayout.setSelected(true);
+                if (mContext instanceof LayoutsList) {
+                    ((LayoutsList)mContext).selectButtonHandler(position);
+                }
             }
         });
 
         // Return the completed view to render on screen
         return convertView;
-    }
-    public void deselectAllLayouts(){
-        for (int i = 0; i < LayoutsList.layouts.size(); i++) {
-            LayoutsList.layouts.get(i).setSelected(false);
-        }
     }
 }

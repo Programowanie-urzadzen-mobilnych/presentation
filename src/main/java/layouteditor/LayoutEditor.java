@@ -131,6 +131,12 @@ public class LayoutEditor extends AppCompatActivity {
         final CheckBox isDefault = popupLayout.findViewById(R.id.layout_default_checkbox);
         isDefault.setChecked(layout.isDefaultChoice());
 
+        // If layout is default u shouldn't be able to undefault it,
+        // because there won't be any default layouts. In that case checkbox is deactivated.
+        if(layout.isDefaultChoice()){
+            isDefault.setActivated(false);
+        }
+
         final CheckBox isInQuickMenu = popupLayout.findViewById(R.id.layout_quick_select_checkbox);
         isInQuickMenu.setChecked(layout.isQuickMenuElement());
 
@@ -139,9 +145,22 @@ public class LayoutEditor extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Defaultly set newly added layout as selected. Before it deselect all layouts
+                // to prevent situation where there are multiple layouts selected.
                 Database.deselectAllLayouts();
                 layout.setSelected(true);
-                layout.setDefaultChoice(isDefault.isChecked());
+
+                // If newly added layout is selected as default and it wasn't default before
+                // (checkbox is activated.) than all layouts need to be undefaulted before making
+                // this one default. This will prevent multiple default layouts.
+                if(isDefault.isChecked()){
+                    Database.undefaultAllLayouts();
+                    layout.setDefaultChoice(true);
+                } else {
+                    layout.setDefaultChoice(false);
+                }
+
+                // There may be many elements in Quick menu...
                 layout.setQuickMenuElement(isInQuickMenu.isChecked());
                 if(layoutTitle.getText().toString().equals("") || layoutTitle.getText().toString().isEmpty()) {
                     layout.setLayoutTitle(getResources().getString(R.string.DEFAULT_LAYOUT_TITLE));
@@ -149,12 +168,14 @@ public class LayoutEditor extends AppCompatActivity {
                     layout.setLayoutTitle(layoutTitle.getText().toString());
                 }
 
-                // if editing remove edited layout position to prevent duplicates
+                // If in editing mode, remove edited layout and add it back with changes made
+                // (duplicates prevention)
                 if(layoutPosition > -1) {
                     Database.layouts.remove(layoutPosition);
                 }
-
                 Database.layouts.add(layout);
+
+                // Move to LayoutsList activity where new added element should be listed
                 Intent i = new Intent(v.getContext(), LayoutsList.class);
                 v.getContext().startActivity(i);
             }

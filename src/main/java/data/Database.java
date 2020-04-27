@@ -28,4 +28,10 @@ public class Database {
     public Database(ArrayList<DataLayout> layouts) {
         Database.layouts = layouts;
     }
+    public static void deselectAllLayouts(){
+        // Deselect all layouts
+        for (int i = 0; i < layouts.size(); i++) {
+            layouts.get(i).setSelected(false);
+        }
+    }
 }

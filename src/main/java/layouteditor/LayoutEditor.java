@@ -139,6 +139,7 @@ public class LayoutEditor extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Database.deselectAllLayouts();
                 layout.setSelected(true);
                 layout.setDefaultChoice(isDefault.isChecked());
                 layout.setQuickMenuElement(isInQuickMenu.isChecked());

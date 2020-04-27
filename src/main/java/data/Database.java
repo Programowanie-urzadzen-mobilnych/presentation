@@ -18,8 +18,8 @@ public class Database {
         dataBlocks.add(new DataBlock("Blok trzeci", DataBlock.BlockTypeEnum.TABLE));
 
         layouts.add(new DataLayout("Tytuł pierwszy"));
-        layouts.add(new DataLayout("Tytuł drugi", dataBlocks, false, false));
-        layouts.add(new DataLayout("Tytuł trzeci", dataBlocks, true, true, true));
+        layouts.add(new DataLayout("Tytuł drugi", dataBlocks, true, false));
+        layouts.add(new DataLayout("Tytuł trzeci", dataBlocks, false, true, true));
 
         dataBlocks.add(new DataBlock("Blok czwarty", DataBlock.BlockTypeEnum.CHART));
         dataBlocks.add(new DataBlock("Blok piąty", DataBlock.BlockTypeEnum.VALUE));
@@ -39,6 +39,16 @@ public class Database {
         // Undefault all layouts
         for (int i = 0; i < layouts.size(); i++) {
             layouts.get(i).setDefaultChoice(false);
+        }
+    }
+
+    public static void selectDefaultLayout(){
+        deselectAllLayouts();
+        for (int i = 0; i < layouts.size(); i++) {
+            if(layouts.get(i).isDefaultChoice()){
+                layouts.get(i).setSelected(true);
+                return;
+            }
         }
     }
 }

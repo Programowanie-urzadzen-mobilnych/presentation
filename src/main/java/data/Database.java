@@ -34,4 +34,11 @@ public class Database {
             layouts.get(i).setSelected(false);
         }
     }
+
+    public static void undefaultAllLayouts() {
+        // Undefault all layouts
+        for (int i = 0; i < layouts.size(); i++) {
+            layouts.get(i).setDefaultChoice(false);
+        }
+    }
 }

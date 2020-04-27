@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.representation.R;
 
@@ -33,18 +34,26 @@ public class DataLayoutAdapter extends ArrayAdapter<DataLayout> {
 
         final TextView layoutTitle = convertView.findViewById(R.id.layout_title);
         layoutTitle.setText(dataLayout.getLayoutTitle());
-        // TODO: Consider what should happen if Layout is null. Prevent from it being null or define behaviour
 
-        // Bind listener to deleteButton to make it work
+        // Bind listener to deleteButton to make it work.
+        // If layout is default button should be disabled and inform user why it is disabled.
         final Button deleteButton = convertView.findViewById(R.id.delete_layout_button);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (mContext instanceof LayoutsList) {
-                    ((LayoutsList)mContext).deleteButtonHandler(position);
+        if(dataLayout.isDefaultChoice()){
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Toast.makeText(mContext, R.string.CANNOT_DELETE_DEFAULT_LAYOUT, Toast.LENGTH_SHORT).show();
                 }
-                notifyDataSetChanged();
-            }
-        });
+            });
+        } else {
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if (mContext instanceof LayoutsList) {
+                        ((LayoutsList) mContext).deleteButtonHandler(position);
+                    }
+                    notifyDataSetChanged();
+                }
+            });
+        }
 
         // Bind listener to editButton to move to LayoutEditor
         final Button editButton = convertView.findViewById(R.id.edit_layout_button);

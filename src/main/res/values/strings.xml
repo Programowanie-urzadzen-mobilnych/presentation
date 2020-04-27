@@ -15,6 +15,7 @@
     <string name="ADD_TO_QUICK_SELECT_MENU">Dodaj do menu szybkiego wyboru</string>
     <string name="SET_AS_DEFAULT">Ustaw jako domyślny</string>
     <string name="DEFAULT_LAYOUT_TITLE">Układ</string>
+    <string name="CANNOT_DELETE_DEFAULT_LAYOUT">Nie można usunąć układu domyślnego</string>
     <string-array name="BLOCK_TYPE_SPINNER">
         <item>Wartość</item>
         <item>Tabela</item>

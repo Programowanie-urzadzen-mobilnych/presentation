@@ -43,17 +43,33 @@ public class Measurements extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         refreshCurrentlySelectedLayout();
+        refreshCurrentlyDefaultLayout();
+    }
+
+    private void refreshCurrentlyDefaultLayout() {
+        // This method displays all default layouts (there shouldn't be more than one,
+        // so this method will show a bug if there would be one)
+        TextView currentlyDefaultLayoutText = findViewById(R.id.currently_default_layout);
+        String defaultLayoutsTitles = "Default Layouts:\n";
+        for (DataLayout layout: layouts) {
+            if(layout.isDefaultChoice()){
+                defaultLayoutsTitles += layout.getLayoutTitle() + "\n";
+            }
+        }
+        currentlyDefaultLayoutText.setText(defaultLayoutsTitles);
     }
 
     private void refreshCurrentlySelectedLayout() {
-        TextView currentlySelectedLayout = findViewById(R.id.currently_selected_layout);
-        String selectedLayoutsTitles = "";
+        // This method displays all selected layouts (there shouldn't be more than one,
+        // so this method will show a bug if there would be one)
+        TextView currentlySelectedLayoutText = findViewById(R.id.currently_selected_layout);
+        String selectedLayoutsTitles = "Selected Layouts:\n";
         for (DataLayout layout: layouts) {
             if(layout.isSelected()){
                 selectedLayoutsTitles += layout.getLayoutTitle() + "\n";
             }
         }
-        currentlySelectedLayout.setText(selectedLayoutsTitles);
+        currentlySelectedLayoutText.setText(selectedLayoutsTitles);
     }
 
     @Override

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.representation">
 
-    <application>
+    <application android:name="com.representation.ThisApplication">
         <activity android:name="measurements.Measurements"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>

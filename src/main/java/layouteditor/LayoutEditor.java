@@ -65,6 +65,8 @@ public class LayoutEditor extends AppCompatActivity {
             // Collect needed data from DataBase
             this.layoutPosition = extras.getInt("layoutPosition");
             this.layout = Database.layouts.get(layoutPosition);
+            Toast.makeText(getApplicationContext(), "Position: " + layoutPosition, Toast.LENGTH_SHORT).show();
+
         } else {
             this.layout = new DataLayout();
             this.layoutPosition = -1;
@@ -83,8 +85,7 @@ public class LayoutEditor extends AppCompatActivity {
         final Button addButton = findViewById(R.id.add_block_to_layout);
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                layout.getDataBlocks().add(new DataBlock());
-                dataBlockAdapter.notifyDataSetChanged();
+                dataBlockAdapter.add(new DataBlock());
             }
         });
     }
@@ -225,10 +226,6 @@ public class LayoutEditor extends AppCompatActivity {
         // removes dark overlay from background
         ViewGroupOverlay overlay = parent.getOverlay();
         overlay.clear();
-    }
-
-    public void daleteButtonHandler(int position) {
-        layout.getDataBlocks().remove(position);
     }
 
     public void moveDownButtonHandler(int position) {

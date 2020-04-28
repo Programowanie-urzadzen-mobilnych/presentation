@@ -12,12 +12,12 @@ import com.representation.R;
 public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
     private int itemPosition;
     private Context layoutEditorContext;
-    private DataBlockAdapter cos;
+    private DataBlockAdapter dataBlockAdapter;
 
-    public CustomOnItemSelectedListener(int itemPosition, Context layoutEditorContext, DataBlockAdapter context){
+    public CustomOnItemSelectedListener(int itemPosition, Context layoutEditorContext, DataBlockAdapter adapter){
         this.itemPosition = itemPosition;
         this.layoutEditorContext = layoutEditorContext;
-        this.cos = context;
+        this.dataBlockAdapter = adapter;
     }
 
     @Override
@@ -26,18 +26,15 @@ public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedL
             switch(spinnerPosition){
                 case 0:
                     ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, DataBlock.BlockTypeEnum.VALUE);
-                    Log.println(Log.INFO, "check it out: ", "============================");
-                    cos.notifyDataSetChanged();
+                    dataBlockAdapter.notifyDataSetChanged();
                     break;
                 case 1:
                     ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, DataBlock.BlockTypeEnum.TABLE);
-                    Log.println(Log.INFO, "check it out: ", "============================");
-                    cos.notifyDataSetChanged();
+                    dataBlockAdapter.notifyDataSetChanged();
                     break;
                 case 2:
                     ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, DataBlock.BlockTypeEnum.CHART);
-                    Log.println(Log.INFO, "check it out: ", "============================");
-                    cos.notifyDataSetChanged();
+                    dataBlockAdapter.notifyDataSetChanged();
                     break;
             }
         }

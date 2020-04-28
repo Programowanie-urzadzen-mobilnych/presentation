@@ -21,12 +21,9 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
     public DataBlockAdapter(Context context, ArrayList<DataBlock> dataBlocks) {
         super(context, 0, dataBlocks);
         this.mContext = context;
-        Log.println(Log.INFO, "DataBlockAdapter: ", "<<< Adapter created >>>");
     }
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        Log.println(Log.INFO, "DataBlockAdapter: ", "<<< Item created >>>");
         // Get the data item for this position
         final DataBlock dataBlock = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
@@ -38,10 +35,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         final Button deleteButton = convertView.findViewById(R.id.delete_block_button);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (mContext instanceof LayoutEditor) {
-                    ((LayoutEditor)mContext).daleteButtonHandler(position);
-                }
-                notifyDataSetChanged();
+                remove(dataBlock);
             }
         });
 
@@ -112,15 +106,12 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
     private void setProperLayoutBelowSpinner(View convertView, int view_id) {
         RelativeLayout rl = convertView.findViewById(R.id.specific_block_type_content);
 
-        Log.println(Log.INFO, "tagggeerrrrrrr", String.valueOf(rl.getChildCount()));
         LayoutInflater inflater = ((LayoutEditor)mContext).getLayoutInflater();
         View view = inflater.inflate(view_id, null);
 
         rl.removeAllViews();
         rl.addView(view);
     }
-
-
 
     static class ViewHolder {
         EditText editText;

@@ -1,14 +1,17 @@
 package layouteditor;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Debug;
 import android.text.Layout;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +24,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -61,6 +65,8 @@ public class LayoutEditor extends AppCompatActivity {
             // Collect needed data from DataBase
             this.layoutPosition = extras.getInt("layoutPosition");
             this.layout = Database.layouts.get(layoutPosition);
+            Toast.makeText(getApplicationContext(), "Position: " + layoutPosition, Toast.LENGTH_SHORT).show();
+
         } else {
             this.layout = new DataLayout();
             this.layoutPosition = -1;
@@ -68,6 +74,8 @@ public class LayoutEditor extends AppCompatActivity {
 
         // Create the adapter to convert the array to views
         final DataBlockAdapter dataBlockAdapter = new DataBlockAdapter(this, layout.getDataBlocks());
+
+        dataBlockAdapter.setNotifyOnChange(true);
 
         // Attach the adapter to a ListView
         ListView list = findViewById(R.id.layout_editor_list_view);
@@ -77,8 +85,7 @@ public class LayoutEditor extends AppCompatActivity {
         final Button addButton = findViewById(R.id.add_block_to_layout);
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                layout.getDataBlocks().add(new DataBlock());
-                dataBlockAdapter.notifyDataSetChanged();
+                dataBlockAdapter.add(new DataBlock());
             }
         });
     }
@@ -219,10 +226,6 @@ public class LayoutEditor extends AppCompatActivity {
         // removes dark overlay from background
         ViewGroupOverlay overlay = parent.getOverlay();
         overlay.clear();
-    }
-
-    public void daleteButtonHandler(int position) {
-        layout.getDataBlocks().remove(position);
     }
 
     public void moveDownButtonHandler(int position) {

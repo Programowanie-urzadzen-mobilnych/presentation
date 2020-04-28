@@ -71,5 +71,11 @@
             android:entries="@array/BLOCK_TYPE_SPINNER"
             android:padding="5dp" />
 
+        <RelativeLayout
+            android:id="@+id/specific_block_type_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/block_type_spinner" />
+
     </RelativeLayout>
 </RelativeLayout>

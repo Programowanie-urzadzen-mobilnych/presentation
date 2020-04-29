@@ -77,25 +77,22 @@
         </LinearLayout>
 
         <include
-            android:id="@+id/one"
+            android:id="@+id/value_block_content"
             layout="@layout/value_block_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:layout_height="wrap_content" />
 
         <include
-            android:id="@+id/two"
+            android:id="@+id/table_block_content"
             layout="@layout/table_block_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"  />
+            android:layout_height="wrap_content" />
 
         <include
-            android:id="@+id/three"
+            android:id="@+id/chart_block_content"
             layout="@layout/chart_block_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"  />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </LinearLayout>

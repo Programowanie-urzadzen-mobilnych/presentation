@@ -233,12 +233,14 @@ public class LayoutEditor extends AppCompatActivity {
         if(layout.getDataBlocks().size()>position+1) {
             Collections.swap(layout.getDataBlocks(), position, position + 1);
         }
+        dataBlockAdapter.notifyDataSetChanged();
     }
 
     public void moveUpButtonHandler(int position) {
         if(position>0) {
             Collections.swap(layout.getDataBlocks(), position, position - 1);
         }
+        dataBlockAdapter.notifyDataSetChanged();
     }
 
     public void changeBlockTitle(int itemPosition, String title) {
@@ -249,7 +251,7 @@ public class LayoutEditor extends AppCompatActivity {
         layout.getDataBlocks().get(itemPosition).setBlockType(type);
     }
 
-    public void setMagnitude(int position) {
-        layout.getDataBlocks().get(position).setMagnitude(DataBlock.Magnitude.fromId(position+1));
+    public void setMagnitude(int itemPosition, int position) {
+        layout.getDataBlocks().get(itemPosition).setMagnitude(DataBlock.Magnitude.fromId(position));
     }
 }

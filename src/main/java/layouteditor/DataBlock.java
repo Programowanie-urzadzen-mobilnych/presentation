@@ -1,16 +1,19 @@
 package layouteditor;
 
+import com.representation.R;
+
 public class DataBlock {
     private String blockTitle;
     private BlockTypeEnum blockType;
     private Magnitude magnitude;
     private Unit unit;
 
-    public enum Magnitude { UNDEFINED(0), TEMPERATURE(1), HUMIDITY(2), PRESSURE(3), BATTERY_VOLTAGE(4),
-        SOLAR_PANEL_VOLTAGE(5), NODE_VOLTAGE(6), BATTERY_CURRENT(7), SOLAR_PANEL_CURRENT(8), NODE_CURRENT(9);
+    // Never change enum values unless you change strings array items order
+    public enum Magnitude { TEMPERATURE(0), HUMIDITY(1), PRESSURE(2), BATTERY_VOLTAGE(3), SOLAR_PANEL_VOLTAGE(4),
+        NODE_VOLTAGE(5), BATTERY_CURRENT(6), SOLAR_PANEL_CURRENT(7), NODE_CURRENT(8), UNDEFINED(-1);
         private int mValue;
-        Magnitude(int value) { this.mValue = value;} // Constructor
-        public int id(){return mValue;}                  // Return enum index
+        Magnitude(int value) { this.mValue = value; }
+        public int id(){ return mValue; }
 
         public static Magnitude fromId(int value) {
             for(Magnitude magnitude : values()) {
@@ -20,9 +23,39 @@ public class DataBlock {
             }
             return UNDEFINED;
         }}
-    public enum Unit { CELSIUS, KELWIN, FAHRENHEIT, PERCENT, PASCAL, HECTO_PASCAL, KILO_PASCAL,
-        MEGA_PASCAL, BAR, ATMOSPHERE, VOLT, MILLI_VOLT, KILO_VOLT, AMPERE, MILLI_AMPERE, KILO_AMPERE }
-    public enum BlockTypeEnum { VALUE, TABLE, CHART }
+
+    // Never change enum values unless you change strings array items order
+    public enum Unit { CELSIUS(0), KELWIN(1), FAHRENHEIT(2), PERCENT(0),
+        PASCAL(0), HECTO_PASCAL(1), KILO_PASCAL(2), MEGA_PASCAL(3),
+        BAR(4), ATMOSPHERE(5), VOLT(0), MILLI_VOLT(1), KILO_VOLT(2),
+        AMPERE(0), MILLI_AMPERE(1), KILO_AMPERE(2), UNDEFINED(-1);
+        private int mValue;
+        Unit(int value) { this.mValue = value; }
+        public int id(){ return mValue; }
+
+        public static Unit fromId(int value) {
+            for(Unit unit : values()) {
+                if (unit.mValue == value) {
+                    return unit;
+                }
+            }
+            return UNDEFINED;
+        } }
+
+    // Never change enum values unless you change strings array items order
+    public enum BlockTypeEnum { VALUE(0), TABLE(1), CHART(2), UNDEFINED(-1);
+        private int mValue;
+        BlockTypeEnum(int value) { this.mValue = value; }
+        public int id(){ return mValue; }
+
+        public static BlockTypeEnum fromId(int value) {
+            for(BlockTypeEnum blockTypeEnum : values()) {
+                if (blockTypeEnum.mValue == value) {
+                    return blockTypeEnum;
+                }
+            }
+            return UNDEFINED;
+        }}
 
     public DataBlock() {
         this.blockTitle = "";

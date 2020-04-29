@@ -92,7 +92,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
                 viewHolder.valueBlockContent.setVisibility(View.GONE);
                 viewHolder.tableBlockContent.setVisibility(View.VISIBLE);
                 viewHolder.chartBlockContent.setVisibility(View.GONE);
-                //setProperLayoutBelowSpinner(convertView, R.layout.table_block_content, dataBlock, position);
+                configureTableViewControls(dataBlock, position);
                 break;
             case CHART:
                 viewHolder.valueBlockContent.setVisibility(View.GONE);
@@ -170,6 +170,63 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         });
     }
 
+    private void configureTableViewControls(final DataBlock dataBlock, final int itemPosition) {
+        List<String> myArraySpinner = new ArrayList<>();
+
+        if(dataBlock.getMagnitude() != DataBlock.Magnitude.UNDEFINED)
+            viewHolder.tableMagnitudeSpinner.setSelection(dataBlock.getMagnitude().id());
+
+        switch (dataBlock.getMagnitude()) {
+            case TEMPERATURE:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.TEMPERATURE_SPINNER));
+                break;
+            case HUMIDITY:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.HUMIDITY_SPINNER));
+                break;
+            case PRESSURE:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.PRESSURE_SPINNER));
+                break;
+            case BATTERY_VOLTAGE: case SOLAR_PANEL_VOLTAGE: case NODE_VOLTAGE:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.VOLTAGE_SPINNER));
+                break;
+            case BATTERY_CURRENT: case SOLAR_PANEL_CURRENT: case NODE_CURRENT:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.CURRENT_SPINNER));
+                break;
+        }
+
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, myArraySpinner);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        viewHolder.tableUnitSpinner.setAdapter(spinnerArrayAdapter);
+
+        if(dataBlock.getUnit() != DataBlock.Unit.UNDEFINED){
+            viewHolder.tableUnitSpinner.setSelection(dataBlock.getUnit().id());
+        }
+
+        viewHolder.tableMagnitudeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (mContext instanceof LayoutEditor) {
+                    ((LayoutEditor)mContext).setUnit(itemPosition, 0);
+                    ((LayoutEditor)mContext).setMagnitude(itemPosition, pos);
+                    notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+        viewHolder.tableUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (mContext instanceof LayoutEditor) {
+                    ((LayoutEditor)mContext).setUnit(itemPosition, pos);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+    }
+
     static class ViewHolder {
         EditText blockTitleInput;
         Button deleteButton;
@@ -183,6 +240,9 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         Spinner valueMagnitudeSpinner;
         Spinner valueUnitSpinner;
 
+        Spinner tableMagnitudeSpinner;
+        Spinner tableUnitSpinner;
+
         public ViewHolder(View convertView) {
             this.blockTitleInput = convertView.findViewById(R.id.block_title_input);
             this.deleteButton = convertView.findViewById(R.id.delete_block_button);
@@ -195,6 +255,9 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
 
             this.valueMagnitudeSpinner = convertView.findViewById(R.id.value_block_magnitude_spinner);
             this.valueUnitSpinner = convertView.findViewById(R.id.value_block_unit_spinner);
+
+            this.tableMagnitudeSpinner = convertView.findViewById(R.id.table_block_magnitude_spinner);
+            this.tableUnitSpinner = convertView.findViewById(R.id.table_block_unit_spinner);
         }
     }
 }

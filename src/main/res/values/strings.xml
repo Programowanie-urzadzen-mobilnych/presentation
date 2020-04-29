@@ -30,6 +30,10 @@
     <string name="BATTERY_CURRENT">Natężenie na baterii</string>
     <string name="SOLAR_PANEL_CURRENT">Natężenie na panelu słonecznym</string>
     <string name="NODE_CURRENT">Natężenie na węźle pomiarowym</string>
+    <string name="TIME_START">Czas początkowy:</string>
+    <string name="DATE_START">Data początkowa:</string>
+    <string name="TIME_END">Czas końcowy:</string>
+    <string name="DATE_END">Data końcowa:</string>
 
     <!-- Never change arrays item order unless you change enum types values -->
     <string-array name="BLOCK_TYPE_SPINNER">

@@ -5,4 +5,5 @@
     <color name="MENU_ITEM_BACKGROUND">@color/WHITE</color>
     <color name="DATA_BLOCK_CONTENT_BACKGROUND">@color/LIGHT_GREY</color>
     <color name="VALUE_BLOCK_TEXT">@color/BLACK</color>
+    <color name="TIMESTAMP_BLOCK_TEXT">@color/BLACK</color>
 </resources>

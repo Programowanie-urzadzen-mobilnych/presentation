@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="5dp"
+    android:paddingTop="20dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:autofillHints=""
-            android:background="@drawable/textview_border"
+            android:background="@drawable/grey_border"
             android:ems="10"
             android:hint="@string/BLOCK_TITLE"
             android:inputType="textPersonName"
@@ -52,28 +55,37 @@
         android:id="@+id/block_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/DATA_BLOCK_CONTENT_BACKGROUND_COLOR"
+        android:background="@color/DATA_BLOCK_CONTENT_BACKGROUND"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/block_type_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:padding="5dp"
                 android:text="@string/BLOCK_TYPE"
-                android:textSize="16sp" />
+                android:textColor="@color/VALUE_BLOCK_TEXT"
+                android:textSize="20sp" />
 
-            <Spinner
-                android:id="@+id/block_type_spinner"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/BLOCK_TYPE_SPINNER"
-                android:padding="5dp" />
+                android:background="@color/WHITE">
+
+                <Spinner
+                    android:id="@+id/block_type_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/BLOCK_TYPE_SPINNER"
+                    android:padding="5dp" />
+            </RelativeLayout>
         </LinearLayout>
 
         <include

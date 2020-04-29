@@ -2,6 +2,7 @@ package layouteditor;
 
 import android.content.Context;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,12 +138,31 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         viewHolder.valueUnitSpinner.setAdapter(spinnerArrayAdapter);
 
+        if(dataBlock.getUnit() != DataBlock.Unit.UNDEFINED){
+            viewHolder.valueUnitSpinner.setSelection(dataBlock.getUnit().id());
+            Log.println(Log.INFO, "TESTOWANKO", "ID-ViewHolder: " + dataBlock.getUnit().id());
+        }
+
         viewHolder.valueMagnitudeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 if (mContext instanceof LayoutEditor) {
+                    ((LayoutEditor)mContext).setUnit(itemPosition, 0);
                     ((LayoutEditor)mContext).setMagnitude(itemPosition, pos);
                     notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+        Log.println(Log.INFO, "TESTOWANKO", "Dzieje się tooo " + itemPosition);
+
+        viewHolder.valueUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (mContext instanceof LayoutEditor) {
+                    ((LayoutEditor)mContext).setUnit(itemPosition, pos);
                 }
             }
             @Override

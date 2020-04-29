@@ -253,5 +253,12 @@ public class LayoutEditor extends AppCompatActivity {
 
     public void setMagnitude(int itemPosition, int position) {
         layout.getDataBlocks().get(itemPosition).setMagnitude(DataBlock.Magnitude.fromId(position));
+        dataBlockAdapter.notifyDataSetChanged();
+    }
+
+    public void setUnit(int itemPosition, int position) {
+        layout.getDataBlocks().get(itemPosition).setUnit(DataBlock.Unit.fromId(position));
+        Log.println(Log.INFO, "TESTOWANKO", "ID-LayoutEditor: " + DataBlock.Unit.fromId(position).name());
+        //dataBlockAdapter.notifyDataSetChanged();
     }
 }

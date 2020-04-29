@@ -6,15 +6,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import com.representation.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
     private Context mContext;
@@ -84,34 +89,90 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         switch(dataBlock.getBlockType()){
             case VALUE:
                 blockTypeInput.setSelection(0);
-                setProperLayoutBelowSpinner(convertView, R.layout.value_block_content);
+                convertView.findViewById(R.id.two).setVisibility(View.GONE);
+                convertView.findViewById(R.id.three).setVisibility(View.GONE);
+                //setProperLayoutBelowSpinner(convertView, R.layout.value_block_content, dataBlock, position);
                 break;
             case TABLE:
                 blockTypeInput.setSelection(1);
-                setProperLayoutBelowSpinner(convertView, R.layout.table_block_content);
+                convertView.findViewById(R.id.one).setVisibility(View.GONE);
+                convertView.findViewById(R.id.three).setVisibility(View.GONE);
+                //setProperLayoutBelowSpinner(convertView, R.layout.table_block_content, dataBlock, position);
                 break;
             case CHART:
                 blockTypeInput.setSelection(2);
-                setProperLayoutBelowSpinner(convertView, R.layout.chart_block_content);
+                convertView.findViewById(R.id.one).setVisibility(View.GONE);
+                convertView.findViewById(R.id.two).setVisibility(View.GONE);
+                //setProperLayoutBelowSpinner(convertView, R.layout.chart_block_content, dataBlock, position);
                 break;
         }
         // Apply custom OnItemSelectedListener, which will change date in ArrayList connected witch Adapter,
         // when user apply changes to the spinner on the ListView
         blockTypeInput.setOnItemSelectedListener(new CustomOnItemSelectedListener(position, mContext, this));
 
+        Log.println(Log.INFO, "DSADASD", convertView.findViewById(R.id.value_block_magnitude_spinner).toString());
         // Return the completed view to render on screen
         return convertView;
     }
 
-    private void setProperLayoutBelowSpinner(View convertView, int view_id) {
-        RelativeLayout rl = convertView.findViewById(R.id.specific_block_type_content);
+    /*private void setProperLayoutBelowSpinner(View convertView, int view_id, final DataBlock dataBlock, final int itemPosition) {
+        LinearLayout rl = convertView.findViewById(R.id.specific_block_type_content);
 
         LayoutInflater inflater = ((LayoutEditor)mContext).getLayoutInflater();
         View view = inflater.inflate(view_id, null);
 
         rl.removeAllViews();
         rl.addView(view);
-    }
+
+        if(view_id == R.layout.value_block_content) {
+            final Spinner magnitudeSpinner = rl.findViewById(R.id.value_block_magnitude_spinner);
+            final Spinner unitSpinner = rl.findViewById(R.id.value_block_unit_spinner);
+            List<String> myArraySpinner = new ArrayList<>();
+
+            if(dataBlock.getMagnitude() != DataBlock.Magnitude.UNDEFINED)
+                magnitudeSpinner.setSelection(dataBlock.getMagnitude().id()-1);
+
+            switch (dataBlock.getMagnitude()) {
+                case TEMPERATURE:
+                    myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.TEMPERATURE_SPINNER));
+                    break;
+                case HUMIDITY:
+                    myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.HUMIDITY_SPINNER));
+                    break;
+                case PRESSURE:
+                    myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.PRESSURE_SPINNER));
+                    break;
+                case BATTERY_VOLTAGE:
+                case SOLAR_PANEL_VOLTAGE:
+                case NODE_VOLTAGE:
+                    myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.VOLTAGE_SPINNER));
+                    break;
+                case BATTERY_CURRENT:
+                case SOLAR_PANEL_CURRENT:
+                case NODE_CURRENT:
+                    myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.CURRENT_SPINNER));
+                    break;
+            }
+
+            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, myArraySpinner);
+            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            unitSpinner.setAdapter(spinnerArrayAdapter);
+
+            magnitudeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (mContext instanceof LayoutEditor) {
+                        ((LayoutEditor)mContext).setMagnitude(position);
+                    }
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        }
+
+    }*/
 
     static class ViewHolder {
         EditText editText;

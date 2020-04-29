@@ -44,6 +44,7 @@ import layouts.LayoutsList;
 
 public class LayoutEditor extends AppCompatActivity {
     private DataLayout layout;
+    private DataBlockAdapter dataBlockAdapter;
     private int layoutPosition;
 
     @Override
@@ -73,7 +74,7 @@ public class LayoutEditor extends AppCompatActivity {
         }
 
         // Create the adapter to convert the array to views
-        final DataBlockAdapter dataBlockAdapter = new DataBlockAdapter(this, layout.getDataBlocks());
+        dataBlockAdapter = new DataBlockAdapter(this, layout.getDataBlocks());
 
         dataBlockAdapter.setNotifyOnChange(true);
 
@@ -246,5 +247,9 @@ public class LayoutEditor extends AppCompatActivity {
 
     public void setBlockType(int itemPosition, DataBlock.BlockTypeEnum type) {
         layout.getDataBlocks().get(itemPosition).setBlockType(type);
+    }
+
+    public void setMagnitude(int position) {
+        layout.getDataBlocks().get(position).setMagnitude(DataBlock.Magnitude.fromId(position+1));
     }
 }

@@ -1,81 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp">
+    android:padding="5dp"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/delete_block_button"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:foreground="@drawable/ic_close_black_12dp"
-        android:foregroundGravity="center_vertical|center_horizontal"
-        android:freezesText="false"
-        tools:targetApi="m" />
-
-    <Button
-        android:id="@+id/move_block_up_button"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_toEndOf="@id/delete_block_button"
-        android:layout_toRightOf="@id/delete_block_button"
-        android:foreground="@drawable/ic_arrow_upward_black_12dp"
-        android:foregroundGravity="center_vertical|center_horizontal" />
-
-    <Button
-        android:id="@+id/move_block_down_button"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_toEndOf="@id/move_block_up_button"
-        android:layout_toRightOf="@id/move_block_up_button"
-        android:foreground="@drawable/ic_arrow_downward_black_12dp"
-        android:foregroundGravity="center_vertical|center_horizontal" />
-
-    <EditText
-        android:id="@+id/block_title_input"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_toEndOf="@id/move_block_down_button"
-        android:layout_toRightOf="@id/move_block_down_button"
-        android:autofillHints=""
-        android:background="@drawable/textview_border"
-        android:ems="10"
-        android:hint="@string/BLOCK_TITLE"
-        android:inputType="textPersonName"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textSize="15sp" />
-
-    <RelativeLayout
-        android:id="@+id/block_content"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/block_title_input"
-        android:background="@color/DATA_BLOCK_CONTENT_BACKGROUND_COLOR">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/block_type_label"
+        <Button
+            android:id="@+id/delete_block_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:foreground="@drawable/ic_close_black_12dp"
+            android:foregroundGravity="center_vertical|center_horizontal"
+            android:freezesText="false"
+            tools:targetApi="m" />
+
+        <Button
+            android:id="@+id/move_block_up_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:foreground="@drawable/ic_arrow_upward_black_12dp"
+            android:foregroundGravity="center_vertical|center_horizontal" />
+
+        <Button
+            android:id="@+id/move_block_down_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:foreground="@drawable/ic_arrow_downward_black_12dp"
+            android:foregroundGravity="center_vertical|center_horizontal" />
+
+        <EditText
+            android:id="@+id/block_title_input"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="@string/BLOCK_TYPE"
-            android:textSize="16sp" />
+            android:layout_height="35dp"
+            android:autofillHints=""
+            android:background="@drawable/textview_border"
+            android:ems="10"
+            android:hint="@string/BLOCK_TITLE"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="15sp" />
+    </LinearLayout>
 
-        <Spinner
-            android:id="@+id/block_type_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/block_type_label"
-            android:layout_toRightOf="@id/block_type_label"
-            android:entries="@array/BLOCK_TYPE_SPINNER"
-            android:padding="5dp" />
+    <LinearLayout
+        android:id="@+id/block_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/DATA_BLOCK_CONTENT_BACKGROUND_COLOR"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/specific_block_type_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/block_type_spinner" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-    </RelativeLayout>
-</RelativeLayout>
+            <TextView
+                android:id="@+id/block_type_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/BLOCK_TYPE"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/block_type_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/BLOCK_TYPE_SPINNER"
+                android:padding="5dp" />
+        </LinearLayout>
+
+        <include
+            android:id="@+id/one"
+            layout="@layout/value_block_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/two"
+            layout="@layout/table_block_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"  />
+
+        <include
+            android:id="@+id/three"
+            layout="@layout/chart_block_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"  />
+
+    </LinearLayout>
+</LinearLayout>

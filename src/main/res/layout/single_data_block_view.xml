@@ -96,7 +96,7 @@
 
         <include
             android:id="@+id/table_block_content"
-            layout="@layout/table_block_content"
+            layout="@layout/historic_table_block_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

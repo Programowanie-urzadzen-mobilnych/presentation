@@ -1,5 +1,7 @@
 package layouteditor;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -9,14 +11,22 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.representation.R;
+import com.representation.Utils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
     private Context mContext;
@@ -140,14 +150,13 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
 
         if(dataBlock.getUnit() != DataBlock.Unit.UNDEFINED){
             viewHolder.valueUnitSpinner.setSelection(dataBlock.getUnit().id());
-            Log.println(Log.INFO, "TESTOWANKO", "ID-ViewHolder: " + dataBlock.getUnit().id());
         }
 
         viewHolder.valueMagnitudeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 if (mContext instanceof LayoutEditor) {
-                    ((LayoutEditor)mContext).setUnit(itemPosition, 0);
+                    ((LayoutEditor)mContext).setUnit(itemPosition, 0, dataBlock.getMagnitude());
                     ((LayoutEditor)mContext).setMagnitude(itemPosition, pos);
                     notifyDataSetChanged();
                 }
@@ -156,13 +165,11 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
             public void onNothingSelected(AdapterView<?> parent) { }
         });
 
-        Log.println(Log.INFO, "TESTOWANKO", "Dzieje się tooo " + itemPosition);
-
         viewHolder.valueUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 if (mContext instanceof LayoutEditor) {
-                    ((LayoutEditor)mContext).setUnit(itemPosition, pos);
+                    ((LayoutEditor)mContext).setUnit(itemPosition, pos, dataBlock.getMagnitude());
                 }
             }
             @Override
@@ -206,7 +213,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 if (mContext instanceof LayoutEditor) {
-                    ((LayoutEditor)mContext).setUnit(itemPosition, 0);
+                    ((LayoutEditor)mContext).setUnit(itemPosition, 0, dataBlock.getMagnitude());
                     ((LayoutEditor)mContext).setMagnitude(itemPosition, pos);
                     notifyDataSetChanged();
                 }
@@ -219,12 +226,29 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 if (mContext instanceof LayoutEditor) {
-                    ((LayoutEditor)mContext).setUnit(itemPosition, pos);
+                    ((LayoutEditor)mContext).setUnit(itemPosition, pos, dataBlock.getMagnitude());
                 }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
         });
+
+        /*SimpleDateFormat dateFormat = new SimpleDateFormat(Utils.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat(Utils.TIME_FORMAT, Locale.getDefault());
+
+        viewHolder.tableStartDateInput.setText(dateFormat.format(dataBlock.getDateStart()));
+        viewHolder.tableStartTimeInput.setText(timeFormat.format(dataBlock.getDateStart()));
+        viewHolder.tableEndDateInput.setText(dateFormat.format(dataBlock.getDateEnd()));
+        viewHolder.tableEndTimeInput.setText(timeFormat.format(dataBlock.getDateEnd()));
+
+        viewHolder.tableStartTimeInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomDatePickerDialog dialog = new CustomDatePickerDialog(mContext, itemPosition, CustomDatePickerDialog.DialogType.START);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, dialog, Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
+                datePickerDialog.show();
+            }
+        });*/
     }
 
     static class ViewHolder {
@@ -242,6 +266,10 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
 
         Spinner tableMagnitudeSpinner;
         Spinner tableUnitSpinner;
+        EditText tableStartDateInput;
+        EditText tableStartTimeInput;
+        EditText tableEndDateInput;
+        EditText tableEndTimeInput;
 
         public ViewHolder(View convertView) {
             this.blockTitleInput = convertView.findViewById(R.id.block_title_input);
@@ -258,6 +286,10 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
 
             this.tableMagnitudeSpinner = convertView.findViewById(R.id.table_block_magnitude_spinner);
             this.tableUnitSpinner = convertView.findViewById(R.id.table_block_unit_spinner);
+            this.tableStartDateInput = convertView.findViewById(R.id.table_block_start_date_input);
+            this.tableStartTimeInput = convertView.findViewById(R.id.table_block_start_time_input);
+            this.tableEndDateInput = convertView.findViewById(R.id.table_block_end_date_input);
+            this.tableEndTimeInput = convertView.findViewById(R.id.table_block_end_time_input);
         }
     }
 }

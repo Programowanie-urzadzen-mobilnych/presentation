@@ -1,5 +1,7 @@
 package layouts;
 
+import android.util.Log;
+
 import com.representation.R;
 
 import java.util.ArrayList;
@@ -85,5 +87,16 @@ public class DataLayout {
     }
     public void setQuickMenuElement(boolean quickMenuElement) {
         this.quickMenuElement = quickMenuElement;
+    }
+
+    public void displayContent() {
+        Log.println(Log.ERROR, "DataLayout", "content");
+        Log.println(Log.INFO, "DataLayout", "layoutTitle: " + layoutTitle + "\n" +
+                "selected: " + selected + "\n" +
+                "defaultChoice: " + defaultChoice + "\n" +
+                "quickMenuElement: " + quickMenuElement);
+        for (DataBlock dataBlock: dataBlocks) {
+            dataBlock.displayContent();
+        }
     }
 }

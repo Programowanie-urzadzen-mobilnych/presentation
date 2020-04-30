@@ -37,6 +37,7 @@ import com.representation.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 import data.Database;
 import layouts.DataLayout;
@@ -256,9 +257,22 @@ public class LayoutEditor extends AppCompatActivity {
         dataBlockAdapter.notifyDataSetChanged();
     }
 
-    public void setUnit(int itemPosition, int position) {
-        layout.getDataBlocks().get(itemPosition).setUnit(DataBlock.Unit.fromId(position));
-        Log.println(Log.INFO, "TESTOWANKO", "ID-LayoutEditor: " + DataBlock.Unit.fromId(position).name());
-        //dataBlockAdapter.notifyDataSetChanged();
+    public void setUnit(int itemPosition, int position, DataBlock.Magnitude magnitude) {
+        layout.getDataBlocks().get(itemPosition).setUnit(DataBlock.Unit.fromId(position, magnitude));
+        displayLayoutContent();
+    }
+
+    public void setStartDateTimeText(Date date, int itemPosition) {
+        layout.getDataBlocks().get(itemPosition).setDateStart(date);;
+        dataBlockAdapter.notifyDataSetChanged();
+    }
+
+    public void setEndDateTimeText(Date date, int itemPosition) {
+        layout.getDataBlocks().get(itemPosition).setDateEnd(date);
+        dataBlockAdapter.notifyDataSetChanged();
+    }
+
+    public void displayLayoutContent(){
+        layout.displayContent();
     }
 }

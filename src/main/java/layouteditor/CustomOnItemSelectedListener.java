@@ -1,13 +1,10 @@
 package layouteditor;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.RelativeLayout;
 
-import com.representation.R;
+import com.representation.Utils;
 
 public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
     private int itemPosition;
@@ -25,15 +22,15 @@ public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedL
         if (layoutEditorContext instanceof LayoutEditor) {
             switch(spinnerPosition){
                 case 0:
-                    ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, DataBlock.BlockTypeEnum.VALUE);
+                    ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, Utils.BlockTypeEnum.VALUE);
                     dataBlockAdapter.notifyDataSetChanged();
                     break;
                 case 1:
-                    ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, DataBlock.BlockTypeEnum.TABLE);
+                    ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, Utils.BlockTypeEnum.TABLE);
                     dataBlockAdapter.notifyDataSetChanged();
                     break;
                 case 2:
-                    ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, DataBlock.BlockTypeEnum.CHART);
+                    ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, Utils.BlockTypeEnum.CHART);
                     dataBlockAdapter.notifyDataSetChanged();
                     break;
             }

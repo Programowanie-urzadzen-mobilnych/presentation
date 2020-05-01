@@ -2,8 +2,6 @@ package layouts;
 
 import android.util.Log;
 
-import com.representation.R;
-
 import java.util.ArrayList;
 
 import layouteditor.DataBlock;

@@ -1,32 +1,22 @@
 package layouteditor;
 
-import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.representation.R;
 import com.representation.Utils;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
     private Context mContext;
@@ -87,7 +77,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         viewHolder.blockTitleInput.setTag(newWatcher);
         viewHolder.blockTitleInput.addTextChangedListener(newWatcher);
 
-        if(dataBlock.getBlockType() != DataBlock.BlockTypeEnum.UNDEFINED)
+        if(dataBlock.getBlockType() != Utils.BlockTypeEnum.UNDEFINED)
             viewHolder.blockTypeInput.setSelection(dataBlock.getBlockType().id());
 
         // Handle block type spinner. Set values provided to adapter by ArrayList
@@ -123,7 +113,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
     private void configureValueViewControls(final DataBlock dataBlock, final int itemPosition) {
         List<String> myArraySpinner = new ArrayList<>();
 
-        if(dataBlock.getMagnitude() != DataBlock.Magnitude.UNDEFINED)
+        if(dataBlock.getMagnitude() != Utils.Magnitude.UNDEFINED)
             viewHolder.valueMagnitudeSpinner.setSelection(dataBlock.getMagnitude().id());
 
         switch (dataBlock.getMagnitude()) {
@@ -148,7 +138,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         viewHolder.valueUnitSpinner.setAdapter(spinnerArrayAdapter);
 
-        if(dataBlock.getUnit() != DataBlock.Unit.UNDEFINED){
+        if(dataBlock.getUnit() != Utils.Unit.UNDEFINED){
             viewHolder.valueUnitSpinner.setSelection(dataBlock.getUnit().id());
         }
 
@@ -180,7 +170,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
     private void configureTableViewControls(final DataBlock dataBlock, final int itemPosition) {
         List<String> myArraySpinner = new ArrayList<>();
 
-        if(dataBlock.getMagnitude() != DataBlock.Magnitude.UNDEFINED)
+        if(dataBlock.getMagnitude() != Utils.Magnitude.UNDEFINED)
             viewHolder.tableMagnitudeSpinner.setSelection(dataBlock.getMagnitude().id());
 
         switch (dataBlock.getMagnitude()) {
@@ -205,7 +195,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         viewHolder.tableUnitSpinner.setAdapter(spinnerArrayAdapter);
 
-        if(dataBlock.getUnit() != DataBlock.Unit.UNDEFINED){
+        if(dataBlock.getUnit() != Utils.Unit.UNDEFINED){
             viewHolder.tableUnitSpinner.setSelection(dataBlock.getUnit().id());
         }
 

@@ -2,125 +2,38 @@ package layouteditor;
 
 import android.util.Log;
 
-import com.representation.R;
+import com.representation.Utils;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.xml.transform.Templates;
-
 public class DataBlock {
     private String blockTitle;
-    private BlockTypeEnum blockType;
-    private Magnitude magnitude;
-    private Unit unit;
+    private Utils.BlockTypeEnum blockType;
+    private Utils.Magnitude magnitude;
+    private Utils.Unit unit;
     private Date dateStart;
     private Date dateEnd;
 
-
-    // Never change enum values unless you change strings array items order
-    public enum Magnitude { TEMPERATURE(0), HUMIDITY(1), PRESSURE(2), BATTERY_VOLTAGE(3), SOLAR_PANEL_VOLTAGE(4),
-        NODE_VOLTAGE(5), BATTERY_CURRENT(6), SOLAR_PANEL_CURRENT(7), NODE_CURRENT(8), VOLTAGE(9), CURRENT(10), UNDEFINED(-1);
-        private int mValue;
-        Magnitude(int value) { this.mValue = value; }
-        public int id(){ return mValue; }
-
-        public static Magnitude fromId(int value) {
-            for(Magnitude magnitude : values()) {
-                if (magnitude.mValue == value) {
-                    return magnitude;
-                }
-            }
-            return UNDEFINED;
-        }}
-
-    // Never change enum values unless you change strings array items order
-    public enum Unit {
-        CELSIUS(0, Magnitude.TEMPERATURE),
-        KELWIN(1, Magnitude.TEMPERATURE),
-        FAHRENHEIT(2, Magnitude.TEMPERATURE),
-        PERCENT(0, Magnitude.HUMIDITY),
-        PASCAL(0, Magnitude.PRESSURE),
-        HECTO_PASCAL(1, Magnitude.PRESSURE),
-        KILO_PASCAL(2, Magnitude.PRESSURE),
-        MEGA_PASCAL(3, Magnitude.PRESSURE),
-        ATMOSPHERE(4, Magnitude.PRESSURE),
-        BAR(5, Magnitude.PRESSURE),
-        VOLT(0, Magnitude.VOLTAGE),
-        MILLI_VOLT(1, Magnitude.VOLTAGE),
-        KILO_VOLT(2, Magnitude.VOLTAGE),
-        AMPERE(0, Magnitude.CURRENT),
-        MILLI_AMPERE(1, Magnitude.CURRENT),
-        KILO_AMPERE(2, Magnitude.CURRENT),
-        UNDEFINED(-1, Magnitude.UNDEFINED);
-
-        private int mValue;
-        private Magnitude mMagnitude;
-
-        Unit(int value, Magnitude magnitude) {
-            this.mValue = value;
-            this.mMagnitude = magnitude;}
-        public int id(){ return mValue; }
-        public Magnitude magnitude(){ return mMagnitude; }
-
-        public static Unit fromId(int value, Magnitude magnitude) {
-            for(Unit unit : values()) {
-                if (unit.mValue == value) {
-                    Magnitude temp;
-                    if(magnitude == Magnitude.BATTERY_VOLTAGE ||
-                            magnitude == Magnitude.NODE_VOLTAGE ||
-                            magnitude == Magnitude.SOLAR_PANEL_VOLTAGE){
-                        temp = Magnitude.VOLTAGE;
-                    } else if(magnitude == Magnitude.BATTERY_CURRENT ||
-                            magnitude == Magnitude.NODE_CURRENT ||
-                            magnitude == Magnitude.SOLAR_PANEL_CURRENT){
-                        temp = Magnitude.CURRENT;
-                    } else {
-                        temp = magnitude;
-                    }
-                    if(unit.mMagnitude == temp){
-                        return unit;
-                    }
-                }
-            }
-            return UNDEFINED;
-        }
-    }
-
-    // Never change enum values unless you change strings array items order
-    public enum BlockTypeEnum { VALUE(0), TABLE(1), CHART(2), UNDEFINED(-1);
-        private int mValue;
-        BlockTypeEnum(int value) { this.mValue = value; }
-        public int id(){ return mValue; }
-
-        public static BlockTypeEnum fromId(int value) {
-            for(BlockTypeEnum blockTypeEnum : values()) {
-                if (blockTypeEnum.mValue == value) {
-                    return blockTypeEnum;
-                }
-            }
-            return UNDEFINED;
-        }}
-
     public DataBlock() {
         this.blockTitle = "";
-        this.blockType = BlockTypeEnum.VALUE;
-        this.magnitude = Magnitude.TEMPERATURE;
-        this.unit = Unit.CELSIUS;
+        this.blockType = Utils.BlockTypeEnum.VALUE;
+        this.magnitude = Utils.Magnitude.TEMPERATURE;
+        this.unit = Utils.Unit.CELSIUS;
         this.dateStart = Calendar.getInstance().getTime();
         this.dateEnd = Calendar.getInstance().getTime();
     }
 
-    public DataBlock(String blockTitle, BlockTypeEnum blockType) {
+    public DataBlock(String blockTitle, Utils.BlockTypeEnum blockType) {
         this.blockTitle = blockTitle;
         this.blockType = blockType;
-        this.magnitude = Magnitude.TEMPERATURE;
-        this.unit = Unit.CELSIUS;
+        this.magnitude = Utils.Magnitude.TEMPERATURE;
+        this.unit = Utils.Unit.KELWIN;
         this.dateStart = Calendar.getInstance().getTime();
         this.dateEnd = Calendar.getInstance().getTime();
     }
 
-    public DataBlock(String blockTitle, BlockTypeEnum blockType, Magnitude magnitude, Unit unit) {
+    public DataBlock(String blockTitle, Utils.BlockTypeEnum blockType, Utils.Magnitude magnitude, Utils.Unit unit) {
         this.blockTitle = blockTitle;
         this.blockType = blockType;
         this.magnitude = magnitude;
@@ -137,27 +50,27 @@ public class DataBlock {
         this.blockTitle = blockTitle;
     }
 
-    public BlockTypeEnum getBlockType() {
+    public Utils.BlockTypeEnum getBlockType() {
         return blockType;
     }
 
-    public void setBlockType(BlockTypeEnum blockType) {
+    public void setBlockType(Utils.BlockTypeEnum blockType) {
         this.blockType = blockType;
     }
 
-    public Magnitude getMagnitude() {
+    public Utils.Magnitude getMagnitude() {
         return magnitude;
     }
 
-    public void setMagnitude(Magnitude magnitude) {
+    public void setMagnitude(Utils.Magnitude magnitude) {
         this.magnitude = magnitude;
     }
 
-    public Unit getUnit() {
+    public Utils.Unit getUnit() {
         return unit;
     }
 
-    public void setUnit(Unit unit) {
+    public void setUnit(Utils.Unit unit) {
         this.unit = unit;
     }
 

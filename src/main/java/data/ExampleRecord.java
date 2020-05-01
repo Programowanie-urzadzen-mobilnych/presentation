@@ -1,22 +1,22 @@
 package data;
 
-import java.util.Date;
+import com.representation.Utils;
 
-import layouteditor.DataBlock;
+import java.util.Date;
 
 public class ExampleRecord {
     private Date timestamp;
-    private DataBlock.Magnitude magnitude;
-    private DataBlock.Unit unit;
+    private Utils.Magnitude magnitude;
+    private Utils.Unit unit;
     private double value;
 
     public ExampleRecord(){
         this.timestamp = new Date();
-        this.magnitude = DataBlock.Magnitude.TEMPERATURE;
-        this.unit = DataBlock.Unit.CELSIUS;
+        this.magnitude = Utils.Magnitude.TEMPERATURE;
+        this.unit = Utils.Unit.CELSIUS;
         this.value = 0;
     }
-    public ExampleRecord(Date date, DataBlock.Magnitude magnitude, DataBlock.Unit unit, double value) {
+    public ExampleRecord(Date date, Utils.Magnitude magnitude, Utils.Unit unit, double value) {
         this.timestamp = date;
         this.magnitude = magnitude;
         this.unit = unit;
@@ -31,19 +31,19 @@ public class ExampleRecord {
         this.timestamp = timestamp;
     }
 
-    public DataBlock.Magnitude getMagnitude() {
+    public Utils.Magnitude getMagnitude() {
         return magnitude;
     }
 
-    public void setMagnitude(DataBlock.Magnitude magnitude) {
+    public void setMagnitude(Utils.Magnitude magnitude) {
         this.magnitude = magnitude;
     }
 
-    public DataBlock.Unit getUnit() {
+    public Utils.Unit getUnit() {
         return unit;
     }
 
-    public void setUnit(DataBlock.Unit unit) {
+    public void setUnit(Utils.Unit unit) {
         this.unit = unit;
     }
 

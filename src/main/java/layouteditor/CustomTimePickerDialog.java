@@ -2,7 +2,6 @@ package layouteditor;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import com.representation.Utils;

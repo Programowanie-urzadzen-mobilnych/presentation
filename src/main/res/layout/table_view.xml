@@ -23,12 +23,19 @@
             android:background="@drawable/main_view_border"/>
     </LinearLayout>
 
-    <TableLayout
-        android:id="@+id/table_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/block_title_background"  >
+    <HorizontalScrollView
+        android:id="@+id/horizontalView"
+        android:layout_height="match_parent"
+        android:scrollbars="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/block_title_background" >
 
-    </TableLayout>
-
+        <TableLayout
+            android:id="@+id/table_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:background="@color/LIGHT_GREY"
+            android:isScrollContainer="true"/>
+    </HorizontalScrollView>
 </RelativeLayout>

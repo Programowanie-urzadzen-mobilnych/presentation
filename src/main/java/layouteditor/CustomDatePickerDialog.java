@@ -2,9 +2,7 @@ package layouteditor;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.util.Log;
 import android.widget.DatePicker;
-import android.widget.EditText;
 
 import com.representation.Utils;
 

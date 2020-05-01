@@ -25,7 +25,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#E9F1F7"
+        android:background="@color/PALE_GREY"
         android:orientation="vertical"
         android:layout_below="@id/block_title_background" >
         <TextView
@@ -36,6 +36,6 @@
             android:padding="10dp"
             android:text="WYKRESIK :)"
             android:textSize="40sp"
-            android:background="@drawable/main_view_border"/>
+            android:background="@drawable/grey_border"/>
     </LinearLayout>
 </RelativeLayout>

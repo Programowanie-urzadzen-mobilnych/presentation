@@ -44,6 +44,7 @@ import layouts.LayoutsList;
 
 public class LayoutEditor extends AppCompatActivity {
     private DataLayout layout;
+    private DataBlockAdapter dataBlockAdapter;
     private int layoutPosition;
 
     @Override
@@ -73,7 +74,7 @@ public class LayoutEditor extends AppCompatActivity {
         }
 
         // Create the adapter to convert the array to views
-        final DataBlockAdapter dataBlockAdapter = new DataBlockAdapter(this, layout.getDataBlocks());
+        dataBlockAdapter = new DataBlockAdapter(this, layout.getDataBlocks());
 
         dataBlockAdapter.setNotifyOnChange(true);
 
@@ -232,12 +233,14 @@ public class LayoutEditor extends AppCompatActivity {
         if(layout.getDataBlocks().size()>position+1) {
             Collections.swap(layout.getDataBlocks(), position, position + 1);
         }
+        dataBlockAdapter.notifyDataSetChanged();
     }
 
     public void moveUpButtonHandler(int position) {
         if(position>0) {
             Collections.swap(layout.getDataBlocks(), position, position - 1);
         }
+        dataBlockAdapter.notifyDataSetChanged();
     }
 
     public void changeBlockTitle(int itemPosition, String title) {
@@ -246,5 +249,16 @@ public class LayoutEditor extends AppCompatActivity {
 
     public void setBlockType(int itemPosition, DataBlock.BlockTypeEnum type) {
         layout.getDataBlocks().get(itemPosition).setBlockType(type);
+    }
+
+    public void setMagnitude(int itemPosition, int position) {
+        layout.getDataBlocks().get(itemPosition).setMagnitude(DataBlock.Magnitude.fromId(position));
+        dataBlockAdapter.notifyDataSetChanged();
+    }
+
+    public void setUnit(int itemPosition, int position) {
+        layout.getDataBlocks().get(itemPosition).setUnit(DataBlock.Unit.fromId(position));
+        Log.println(Log.INFO, "TESTOWANKO", "ID-LayoutEditor: " + DataBlock.Unit.fromId(position).name());
+        //dataBlockAdapter.notifyDataSetChanged();
     }
 }

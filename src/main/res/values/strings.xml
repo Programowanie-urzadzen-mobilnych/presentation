@@ -16,9 +16,62 @@
     <string name="SET_AS_DEFAULT">Ustaw jako domyślny</string>
     <string name="DEFAULT_LAYOUT_TITLE">Układ</string>
     <string name="CANNOT_DELETE_DEFAULT_LAYOUT">Nie można usunąć układu domyślnego</string>
+    <string name="MAGNITUDE">Wielkość:</string>
+    <string name="UNIT">Jednostka:</string>
+    <string name="VALUE">Wartość</string>
+    <string name="TABLE">Tabela</string>
+    <string name="CHART">Wykres</string>
+    <string name="TEMPERATURE">Temperatura</string>
+    <string name="HUMIDITY">Wilgotność</string>
+    <string name="PRESSURE">Ciśnienie</string>
+    <string name="BATTERY_VOLTAGE">Napięcie na baterii</string>
+    <string name="SOLAR_PANEL_VOLTAGE">Napięcie na panelu słonecznym</string>
+    <string name="NODE_VOLTAGE">Napięcie na węźle pomiarowym</string>
+    <string name="BATTERY_CURRENT">Natężenie na baterii</string>
+    <string name="SOLAR_PANEL_CURRENT">Natężenie na panelu słonecznym</string>
+    <string name="NODE_CURRENT">Natężenie na węźle pomiarowym</string>
+
+    <!-- Never change arrays item order unless you change enum types values -->
     <string-array name="BLOCK_TYPE_SPINNER">
-        <item>Wartość</item>
-        <item>Tabela</item>
-        <item>Wykres</item>
+        <item>@string/VALUE</item>
+        <item>@string/TABLE</item>
+        <item>@string/CHART</item>
+    </string-array>
+    <string-array name="MAGNITUDES_SPINNER">
+        <item>@string/TEMPERATURE</item>
+        <item>@string/HUMIDITY</item>
+        <item>@string/PRESSURE</item>
+        <item>@string/BATTERY_VOLTAGE</item>
+        <item>@string/SOLAR_PANEL_VOLTAGE</item>
+        <item>@string/NODE_VOLTAGE</item>
+        <item>@string/BATTERY_CURRENT</item>
+        <item>@string/SOLAR_PANEL_CURRENT</item>
+        <item>@string/NODE_CURRENT</item>
+    </string-array>
+    <string-array name="TEMPERATURE_SPINNER">
+        <item>°C</item>
+        <item>K</item>
+        <item>°F</item>
+    </string-array>
+    <string-array name="HUMIDITY_SPINNER">
+        <item>%</item>
+    </string-array>
+    <string-array name="PRESSURE_SPINNER">
+        <item>Pa</item>
+        <item>hPa</item>
+        <item>kPa</item>
+        <item>MPa</item>
+        <item>atm</item>
+        <item>bar</item>
+    </string-array>
+    <string-array name="VOLTAGE_SPINNER">
+        <item>V</item>
+        <item>mV</item>
+        <item>kV</item>
+    </string-array>
+    <string-array name="CURRENT_SPINNER">
+        <item>A</item>
+        <item>mA</item>
+        <item>kA</item>
     </string-array>
 </resources>

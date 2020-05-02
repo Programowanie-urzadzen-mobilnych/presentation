@@ -1,13 +1,12 @@
 package measurements;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -25,6 +24,7 @@ import layouts.LayoutsList;
 
 public class Measurements extends AppCompatActivity {
     private ArrayList<DataLayout> layouts;
+    private DataLayout currentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +42,31 @@ public class Measurements extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        refreshCurrentlySelectedLayout();
-        refreshCurrentlyDefaultLayout();
+        setCurrentLayout();
+        //refreshCurrentlySelectedLayout();
+        //refreshCurrentlyDefaultLayout();
+
+        // Display selected layout title
+        TextView layoutTitle = findViewById(R.id.layout_title_text_view);
+        layoutTitle.setText(currentLayout.getLayoutTitle());
+
+        // Create the adapter to convert the array to views
+        DataPresentationAdapter dataPresentationAdapter = new DataPresentationAdapter(this, currentLayout.getDataBlocks());
+
+        // Attach the adapter to a ListView
+        ListView list = findViewById(R.id.data_presentation);
+        list.setAdapter(dataPresentationAdapter);
     }
 
-    private void refreshCurrentlyDefaultLayout() {
+    private void setCurrentLayout() {
+        for (DataLayout layout: layouts) {
+            if(layout.isSelected()){
+                this.currentLayout = layout;
+            }
+        }
+    }
+
+    /*private void refreshCurrentlyDefaultLayout() {
         // This method displays all default layouts (there shouldn't be more than one,
         // so this method will show a bug if there would be one)
         TextView currentlyDefaultLayoutText = findViewById(R.id.currently_default_layout);
@@ -57,9 +77,9 @@ public class Measurements extends AppCompatActivity {
             }
         }
         currentlyDefaultLayoutText.setText(defaultLayoutsTitles);
-    }
+    }*/
 
-    private void refreshCurrentlySelectedLayout() {
+    /*private void refreshCurrentlySelectedLayout() {
         // This method displays all selected layouts (there shouldn't be more than one,
         // so this method will show a bug if there would be one)
         TextView currentlySelectedLayoutText = findViewById(R.id.currently_selected_layout);
@@ -70,7 +90,7 @@ public class Measurements extends AppCompatActivity {
             }
         }
         currentlySelectedLayoutText.setText(selectedLayoutsTitles);
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -117,7 +137,7 @@ public class Measurements extends AppCompatActivity {
                             }
                             // Select the layout on given position
                             layouts.get(finalPosition).setSelected(true);
-                            refreshCurrentlySelectedLayout();
+                            //refreshCurrentlySelectedLayout();
                             return true;
                         }
                     });

@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -20,7 +19,6 @@ import com.representation.R;
 import java.util.ArrayList;
 
 import data.Database;
-import layouteditor.DataBlock;
 import layouteditor.LayoutEditor;
 import measurements.Measurements;
 

@@ -1,81 +1,45 @@
 package layouteditor;
 
-import com.representation.R;
+import android.util.Log;
+
+import com.representation.Utils;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class DataBlock {
     private String blockTitle;
-    private BlockTypeEnum blockType;
-    private Magnitude magnitude;
-    private Unit unit;
-
-    // Never change enum values unless you change strings array items order
-    public enum Magnitude { TEMPERATURE(0), HUMIDITY(1), PRESSURE(2), BATTERY_VOLTAGE(3), SOLAR_PANEL_VOLTAGE(4),
-        NODE_VOLTAGE(5), BATTERY_CURRENT(6), SOLAR_PANEL_CURRENT(7), NODE_CURRENT(8), UNDEFINED(-1);
-        private int mValue;
-        Magnitude(int value) { this.mValue = value; }
-        public int id(){ return mValue; }
-
-        public static Magnitude fromId(int value) {
-            for(Magnitude magnitude : values()) {
-                if (magnitude.mValue == value) {
-                    return magnitude;
-                }
-            }
-            return UNDEFINED;
-        }}
-
-    // Never change enum values unless you change strings array items order
-    public enum Unit { CELSIUS(0), KELWIN(1), FAHRENHEIT(2), PERCENT(0),
-        PASCAL(0), HECTO_PASCAL(1), KILO_PASCAL(2), MEGA_PASCAL(3),
-        BAR(4), ATMOSPHERE(5), VOLT(0), MILLI_VOLT(1), KILO_VOLT(2),
-        AMPERE(0), MILLI_AMPERE(1), KILO_AMPERE(2), UNDEFINED(-1);
-        private int mValue;
-        Unit(int value) { this.mValue = value; }
-        public int id(){ return mValue; }
-
-        public static Unit fromId(int value) {
-            for(Unit unit : values()) {
-                if (unit.mValue == value) {
-                    return unit;
-                }
-            }
-            return UNDEFINED;
-        } }
-
-    // Never change enum values unless you change strings array items order
-    public enum BlockTypeEnum { VALUE(0), TABLE(1), CHART(2), UNDEFINED(-1);
-        private int mValue;
-        BlockTypeEnum(int value) { this.mValue = value; }
-        public int id(){ return mValue; }
-
-        public static BlockTypeEnum fromId(int value) {
-            for(BlockTypeEnum blockTypeEnum : values()) {
-                if (blockTypeEnum.mValue == value) {
-                    return blockTypeEnum;
-                }
-            }
-            return UNDEFINED;
-        }}
+    private Utils.BlockTypeEnum blockType;
+    private Utils.Magnitude magnitude;
+    private Utils.Unit unit;
+    private Date dateStart;
+    private Date dateEnd;
 
     public DataBlock() {
         this.blockTitle = "";
-        this.blockType = BlockTypeEnum.VALUE;
-        this.magnitude = Magnitude.TEMPERATURE;
-        this.unit = Unit.CELSIUS;
+        this.blockType = Utils.BlockTypeEnum.VALUE;
+        this.magnitude = Utils.Magnitude.TEMPERATURE;
+        this.unit = Utils.Unit.CELSIUS;
+        this.dateStart = Calendar.getInstance().getTime();
+        this.dateEnd = Calendar.getInstance().getTime();
     }
 
-    public DataBlock(String blockTitle, BlockTypeEnum blockType) {
+    public DataBlock(String blockTitle, Utils.BlockTypeEnum blockType) {
         this.blockTitle = blockTitle;
         this.blockType = blockType;
-        this.magnitude = Magnitude.TEMPERATURE;
-        this.unit = Unit.CELSIUS;
+        this.magnitude = Utils.Magnitude.TEMPERATURE;
+        this.unit = Utils.Unit.KELWIN;
+        this.dateStart = Calendar.getInstance().getTime();
+        this.dateEnd = Calendar.getInstance().getTime();
     }
 
-    public DataBlock(String blockTitle, BlockTypeEnum blockType, Magnitude magnitude, Unit unit) {
+    public DataBlock(String blockTitle, Utils.BlockTypeEnum blockType, Utils.Magnitude magnitude, Utils.Unit unit) {
         this.blockTitle = blockTitle;
         this.blockType = blockType;
         this.magnitude = magnitude;
         this.unit = unit;
+        this.dateStart = Calendar.getInstance().getTime();
+        this.dateEnd = Calendar.getInstance().getTime();
     }
 
     public String getBlockTitle() {
@@ -86,27 +50,53 @@ public class DataBlock {
         this.blockTitle = blockTitle;
     }
 
-    public BlockTypeEnum getBlockType() {
+    public Utils.BlockTypeEnum getBlockType() {
         return blockType;
     }
 
-    public void setBlockType(BlockTypeEnum blockType) {
+    public void setBlockType(Utils.BlockTypeEnum blockType) {
         this.blockType = blockType;
     }
 
-    public Magnitude getMagnitude() {
+    public Utils.Magnitude getMagnitude() {
         return magnitude;
     }
 
-    public void setMagnitude(Magnitude magnitude) {
+    public void setMagnitude(Utils.Magnitude magnitude) {
         this.magnitude = magnitude;
     }
 
-    public Unit getUnit() {
+    public Utils.Unit getUnit() {
         return unit;
     }
 
-    public void setUnit(Unit unit) {
+    public void setUnit(Utils.Unit unit) {
         this.unit = unit;
+    }
+
+    public Date getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public Date getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public void displayContent() {
+        Log.println(Log.ERROR, "DataBlock", "content");
+        Log.println(Log.INFO, "DataBlock", "blockTitle: " + blockTitle + "\n" +
+                "blockType: " + blockType.name() + "\n" +
+                "magnitude: " + magnitude.name() + "\n" +
+                "unit: " + unit.name() + "\n" +
+                "dateStart: " + dateStart.toString() + "\n" +
+                "dateEnd: " + dateEnd.toString());
     }
 }

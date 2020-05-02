@@ -1,30 +1,23 @@
 package layouteditor;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Debug;
-import android.text.Layout;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroupOverlay;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,9 +27,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.representation.R;
+import com.representation.Utils;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 import data.Database;
 import layouts.DataLayout;
@@ -247,18 +241,31 @@ public class LayoutEditor extends AppCompatActivity {
         layout.getDataBlocks().get(itemPosition).setBlockTitle(title);
     }
 
-    public void setBlockType(int itemPosition, DataBlock.BlockTypeEnum type) {
+    public void setBlockType(int itemPosition, Utils.BlockTypeEnum type) {
         layout.getDataBlocks().get(itemPosition).setBlockType(type);
     }
 
     public void setMagnitude(int itemPosition, int position) {
-        layout.getDataBlocks().get(itemPosition).setMagnitude(DataBlock.Magnitude.fromId(position));
+        layout.getDataBlocks().get(itemPosition).setMagnitude(Utils.Magnitude.fromId(position));
         dataBlockAdapter.notifyDataSetChanged();
     }
 
-    public void setUnit(int itemPosition, int position) {
-        layout.getDataBlocks().get(itemPosition).setUnit(DataBlock.Unit.fromId(position));
-        Log.println(Log.INFO, "TESTOWANKO", "ID-LayoutEditor: " + DataBlock.Unit.fromId(position).name());
-        //dataBlockAdapter.notifyDataSetChanged();
+    public void setUnit(int itemPosition, int position, Utils.Magnitude magnitude) {
+        layout.getDataBlocks().get(itemPosition).setUnit(Utils.Unit.fromId(position, magnitude));
+        displayLayoutContent();
+    }
+
+    public void setStartDateTimeText(Date date, int itemPosition) {
+        layout.getDataBlocks().get(itemPosition).setDateStart(date);;
+        dataBlockAdapter.notifyDataSetChanged();
+    }
+
+    public void setEndDateTimeText(Date date, int itemPosition) {
+        layout.getDataBlocks().get(itemPosition).setDateEnd(date);
+        dataBlockAdapter.notifyDataSetChanged();
+    }
+
+    public void displayLayoutContent(){
+        layout.displayContent();
     }
 }

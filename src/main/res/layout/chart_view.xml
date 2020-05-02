@@ -22,20 +22,19 @@
             android:textColor="@color/BLACK"
             android:background="@drawable/main_view_border"/>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
+        android:layout_below="@id/block_title_background"
         android:background="@color/PALE_GREY"
-        android:orientation="vertical"
-        android:layout_below="@id/block_title_background" >
-        <TextView
-            android:id="@+id/value_text_view"
+        android:orientation="vertical">
+
+        <charts.ChartBar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="WYKRESIK :)"
-            android:textSize="40sp"
-            android:background="@drawable/grey_border"/>
+            android:layout_height="match_parent"
+            android:layout_marginStart="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="1dp" />
     </LinearLayout>
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package layouteditor;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -14,9 +16,12 @@ import android.widget.Spinner;
 import com.representation.R;
 import com.representation.Utils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
     private Context mContext;
@@ -223,7 +228,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
             public void onNothingSelected(AdapterView<?> parent) { }
         });
 
-        /*SimpleDateFormat dateFormat = new SimpleDateFormat(Utils.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Utils.DATE_FORMAT, Locale.getDefault());
         SimpleDateFormat timeFormat = new SimpleDateFormat(Utils.TIME_FORMAT, Locale.getDefault());
 
         viewHolder.tableStartDateInput.setText(dateFormat.format(dataBlock.getDateStart()));
@@ -231,14 +236,41 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         viewHolder.tableEndDateInput.setText(dateFormat.format(dataBlock.getDateEnd()));
         viewHolder.tableEndTimeInput.setText(timeFormat.format(dataBlock.getDateEnd()));
 
-        viewHolder.tableStartTimeInput.setOnClickListener(new View.OnClickListener() {
+        viewHolder.tableStartDateInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CustomDatePickerDialog dialog = new CustomDatePickerDialog(mContext, itemPosition, CustomDatePickerDialog.DialogType.START);
                 DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, dialog, Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
                 datePickerDialog.show();
             }
-        });*/
+        });
+
+        viewHolder.tableEndDateInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomDatePickerDialog dialog = new CustomDatePickerDialog(mContext, itemPosition, CustomDatePickerDialog.DialogType.START);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, dialog, Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
+                datePickerDialog.show();
+            }
+        });
+
+        viewHolder.tableStartTimeInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomTimePickerDialog dialog = new CustomTimePickerDialog(mContext, itemPosition, CustomTimePickerDialog.DialogType.END);
+                TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, dialog, Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
+                timePickerDialog.show();
+            }
+        });
+
+        viewHolder.tableEndTimeInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomTimePickerDialog dialog = new CustomTimePickerDialog(mContext, itemPosition, CustomTimePickerDialog.DialogType.END);
+                TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, dialog, Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
+                timePickerDialog.show();
+            }
+        });
     }
 
     static class ViewHolder {

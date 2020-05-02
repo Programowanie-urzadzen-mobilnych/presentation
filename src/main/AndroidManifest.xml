@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.representation">
 
-    <application android:name="com.representation.ThisApplication">
-        <activity android:name="measurements.Measurements"></activity>
-        <activity android:name="com.representation.MainActivity">
+    <application android:name=".ThisApplication">
+        <activity android:name="measurements.Measurements" />
+        <activity android:name="charts.TestActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

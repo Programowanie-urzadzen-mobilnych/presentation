@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.representation">
 
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application android:name="com.representation.ThisApplication">
         <activity android:name="measurements.Measurements"></activity>
         <activity android:name="com.representation.MainActivity">
@@ -17,6 +21,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name="layouts.LayoutsList" />
+
     </application>
 
 </manifest>

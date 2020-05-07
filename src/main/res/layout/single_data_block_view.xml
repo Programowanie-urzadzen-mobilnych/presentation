@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="5dp"
+    android:paddingTop="20dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/delete_block_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:foreground="@drawable/ic_close_black_12dp"
+            android:foregroundGravity="center_vertical|center_horizontal"
+            android:freezesText="false"
+            tools:targetApi="m" />
+
+        <Button
+            android:id="@+id/move_block_up_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:foreground="@drawable/ic_arrow_upward_black_12dp"
+            android:foregroundGravity="center_vertical|center_horizontal" />
+
+        <Button
+            android:id="@+id/move_block_down_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:foreground="@drawable/ic_arrow_downward_black_12dp"
+            android:foregroundGravity="center_vertical|center_horizontal" />
+
+        <EditText
+            android:id="@+id/block_title_input"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:autofillHints=""
+            android:background="@drawable/grey_border"
+            android:ems="10"
+            android:hint="@string/BLOCK_TITLE"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/block_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/DATA_BLOCK_CONTENT_BACKGROUND"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/block_type_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                android:text="@string/BLOCK_TYPE"
+                android:textColor="@color/VALUE_BLOCK_TEXT"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/WHITE">
+
+                <Spinner
+                    android:id="@+id/block_type_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/BLOCK_TYPE_SPINNER"
+                    android:padding="5dp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <include
+            android:id="@+id/value_block_content"
+            layout="@layout/value_block_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <include
+            android:id="@+id/table_block_content"
+            layout="@layout/table_block_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <include
+            android:id="@+id/chart_block_content"
+            layout="@layout/chart_block_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</LinearLayout>

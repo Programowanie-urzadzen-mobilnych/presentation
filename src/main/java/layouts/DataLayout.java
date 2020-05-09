@@ -1,12 +1,24 @@
 package layouts;
 
+import android.content.Context;
+import android.text.Editable;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import layouteditor.DataBlock;
 
-public class DataLayout {
+public class DataLayout implements Serializable {
     private String layoutTitle;
     private ArrayList<DataBlock> dataBlocks;
     private boolean selected;
@@ -95,6 +107,29 @@ public class DataLayout {
                 "quickMenuElement: " + quickMenuElement);
         for (DataBlock dataBlock: dataBlocks) {
             dataBlock.displayContent();
+        }
+    }
+
+    public void saveToFile(Context mContext, String pathText, String pathFileName) {
+        String path = pathText+"/"+pathFileName+".ssf";
+        //path = "/storage/emulated/0/saves/test.txt";
+        System.out.println(pathText+" + "+pathFileName);
+
+        try {
+            File filePath = new File(pathText,pathFileName);
+            FileWriter out = new FileWriter(filePath);
+            out.write(layoutTitle);
+            out.write('\n');
+
+            for (DataBlock db: dataBlocks) {
+                out.write(db.toString());
+                out.write('\n');
+            }
+
+            out.close();
+
+        } catch (Exception e) {
+            Log.e("main", "error "+e.toString());
         }
     }
 }

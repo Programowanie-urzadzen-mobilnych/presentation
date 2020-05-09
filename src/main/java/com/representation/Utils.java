@@ -7,6 +7,7 @@ public class Utils {
     public static final String DATE_FORMAT = "dd.MM.yyyy";
     public static final String TIME_FORMAT = "HH:mm:ss";
     public static final String DATETIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
+    public static final int FOLDERPICKER_CODE = 9998;
 
     // Never change enum values unless you change strings array items order
     public enum Magnitude {

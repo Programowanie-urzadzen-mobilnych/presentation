@@ -35,6 +35,8 @@
     <string name="DATE_START">Data początkowa:</string>
     <string name="TIME_END">Czas końcowy:</string>
     <string name="DATE_END">Data końcowa:</string>
+    <string name="SAVE_LAYOUT_IN_STORAGE">Zapisz układ w pamięci</string>
+    <string name="CHOOSE_PATH">Wybierz ścieżkę</string>
 
     <!-- Never change arrays item order unless you change enum types values -->
     <string-array name="BLOCK_TYPE_SPINNER">

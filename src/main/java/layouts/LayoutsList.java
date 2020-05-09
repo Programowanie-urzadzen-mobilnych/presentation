@@ -77,13 +77,6 @@ public class LayoutsList extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
-        // define what happens when back button pressed (the button on the bottom left corner)
-        Intent i = new Intent(this, Measurements.class);
-        this.startActivity(i);
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
         // TODO: Replace data pushing method

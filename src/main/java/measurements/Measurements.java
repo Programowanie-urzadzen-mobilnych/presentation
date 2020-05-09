@@ -95,7 +95,9 @@ public class Measurements extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-        if (itemId == R.id.measurements_add_new_layout) {
+        if (itemId == android.R.id.home) {
+            finish();
+        } else if (itemId == R.id.measurements_add_new_layout) {
             Intent i = new Intent(this, LayoutEditor.class);
             this.startActivity(i);
         } else if (itemId == R.id.measurements_show_layouts_list) {

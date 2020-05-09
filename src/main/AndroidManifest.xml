@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application android:name="com.representation.ThisApplication">
-        <activity android:name="measurements.Measurements"></activity>
+        <activity android:name="measurements.Measurements" />
         <activity android:name="com.representation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,9 +18,13 @@
         <activity android:name="layouteditor.LayoutEditor">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="layouts.LayoutsList" />
         </activity>
-        <activity android:name="layouts.LayoutsList" />
+        <activity android:name="layouts.LayoutsList" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="measurements.Measurements" />
+        </activity>
 
     </application>
 

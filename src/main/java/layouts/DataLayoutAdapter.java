@@ -1,42 +1,24 @@
 package layouts;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Debug;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroupOverlay;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.PopupWindow;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.representation.R;
 
 import java.util.ArrayList;
 
-import SaveData.PathPicker;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import data.Database;
-import layouteditor.DataBlockAdapter;
 import layouteditor.LayoutEditor;
-import lib.folderpicker.FolderPicker;
-
-import static com.representation.Utils.FOLDERPICKER_CODE;
 
 public class DataLayoutAdapter extends ArrayAdapter<DataLayout> {
     private Context mContext;

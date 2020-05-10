@@ -273,7 +273,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         });
     }
 
-    static class ViewHolder {
+    public static class ViewHolder {
         EditText blockTitleInput;
         Button deleteButton;
         Button moveDownButton;

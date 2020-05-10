@@ -25,7 +25,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/PALE_GREY"
+        android:background="@color/GREY_93"
         android:orientation="vertical"
         android:layout_below="@id/block_title_background" >
         <TextView

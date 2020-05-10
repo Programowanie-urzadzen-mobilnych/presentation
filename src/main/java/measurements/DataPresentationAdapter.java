@@ -142,7 +142,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         // Construct cell one
         LinearLayout cell1 = new LinearLayout(mContext);
 
-        cell1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.PALE_GREY));
+        cell1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GREY_93));
         cell1.setLayoutParams(cellLayoutParams);
 
         TextView timestamp = new TextView(mContext);
@@ -155,7 +155,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         // Construct cell two
         LinearLayout cell2 = new LinearLayout(mContext);
 
-        cell2.setBackgroundColor(ContextCompat.getColor(mContext, R.color.PALE_GREY));
+        cell2.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GREY_93));
         cell2.setLayoutParams(cellLayoutParams);
 
 
@@ -187,7 +187,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         // Header cell one
         LinearLayout headerCellOne = new LinearLayout(mContext);
 
-        headerCellOne.setBackgroundColor(ContextCompat.getColor(mContext, R.color.PALE_GREY));
+        headerCellOne.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GREY_93));
         headerCellOne.setLayoutParams(headerCellLayoutParams);
 
         TextView timestampHeader = new TextView(mContext);
@@ -201,7 +201,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         // Header cell two
         LinearLayout headerCellTwo = new LinearLayout(mContext);
 
-        headerCellTwo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.PALE_GREY));
+        headerCellTwo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GREY_93));
         headerCellTwo.setLayoutParams(headerCellLayoutParams);
 
         TextView valueHeader = new TextView(mContext);

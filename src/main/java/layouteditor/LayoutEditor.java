@@ -60,8 +60,6 @@ public class LayoutEditor extends AppCompatActivity {
             // Collect needed data from DataBase
             this.layoutPosition = extras.getInt("layoutPosition");
             this.layout = Database.layouts.get(layoutPosition);
-            Toast.makeText(getApplicationContext(), "Position: " + layoutPosition, Toast.LENGTH_SHORT).show();
-
         } else {
             this.layout = new DataLayout();
             this.layoutPosition = -1;
@@ -124,7 +122,7 @@ public class LayoutEditor extends AppCompatActivity {
         final View popupLayout = getLayoutInflater().inflate(R.layout.save_layout_popup_window, null);
 
         ViewGroup root = (ViewGroup) getWindow().getDecorView().getRootView();
-        applyDim(root, 0.5f);
+        Utils.applyDim(root, 0.5f);
 
         // Collect controls from popup form and fill with data (if there is some data)
         final EditText layoutTitle = popupLayout.findViewById(R.id.layout_title_input);
@@ -190,7 +188,7 @@ public class LayoutEditor extends AppCompatActivity {
             @Override
             public void onDismiss() {
                 ViewGroup root = (ViewGroup) getWindow().getDecorView().getRootView();
-                clearDim(root);
+                Utils.clearDim(root);
             }
         });
 
@@ -203,24 +201,6 @@ public class LayoutEditor extends AppCompatActivity {
         popup.setWidth(popupWidth);
         popup.setHeight(popupHeight);
         popup.showAtLocation(popupLayout, Gravity.CENTER, 0, 0);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static void applyDim(@NonNull ViewGroup parent, float dimAmount){
-        // Applies dark overlay to the background of given view
-        Drawable dim = new ColorDrawable(Color.BLACK);
-        dim.setBounds(0, 0, parent.getWidth(), parent.getHeight());
-        dim.setAlpha((int) (255 * dimAmount));
-
-        ViewGroupOverlay overlay = parent.getOverlay();
-        overlay.add(dim);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static void clearDim(@NonNull ViewGroup parent) {
-        // removes dark overlay from background
-        ViewGroupOverlay overlay = parent.getOverlay();
-        overlay.clear();
     }
 
     public void moveDownButtonHandler(int position) {

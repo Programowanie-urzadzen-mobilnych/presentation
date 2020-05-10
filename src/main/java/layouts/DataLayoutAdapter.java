@@ -57,9 +57,8 @@ public class DataLayoutAdapter extends ArrayAdapter<DataLayout> {
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     if (mContext instanceof LayoutsList) {
-                        ((LayoutsList) mContext).deleteButtonHandler(position);
+                        ((LayoutsList) mContext).displayDeletionPopup(position);
                     }
-                    notifyDataSetChanged();
                 }
             });
         }
@@ -86,13 +85,11 @@ public class DataLayoutAdapter extends ArrayAdapter<DataLayout> {
         });
 
         // Bind listener to saveOnDeviceButton to save selected layout on device
-        final ViewGroup parentGroup = parent;
         final Button saveOnDeviceButton = convertView.findViewById(R.id.save_layout_as_file_button);
         saveOnDeviceButton.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
             public void onClick(View v){
-                Log.d("SAVING","guzik klik");
-                ((LayoutsList) mContext).displayPopupWindow(parentGroup,position);
+                ((LayoutsList) mContext).displayPopupWindow(position);
             }
         });
 

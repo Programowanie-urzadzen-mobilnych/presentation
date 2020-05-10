@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="@string/LAYOUT_DELETION"
+            android:text="@string/LEAVING_LAYOUT_EDITOR"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="22sp" />
 
@@ -38,22 +38,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            android:text="@string/LAYOUT_DELETION_WARNING_MESSAGE" />
+            android:text="@string/DO_YOU_WANT_TO_SAVE_CHANGES" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
             <Button
-                android:id="@+id/decline_button"
+                android:id="@+id/leave_without_saving_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/KEEP_LAYOUT"
+                android:text="@string/LEAVE_WITHOUT_SAVING"
                 android:layout_weight="1"/>
             <Button
-                android:id="@+id/confirm_button"
+                android:id="@+id/save_changes_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/CONFIRM_DELETION"
+                android:text="@string/SAVE_CHANGES"
                 android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>

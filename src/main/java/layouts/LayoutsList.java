@@ -108,6 +108,7 @@ public class LayoutsList extends AppCompatActivity {
         // TODO: Replace data collecting method
         // Collect needed data from DataBase
         this.layouts = Database.layouts;
+        this.dataLayoutAdapter.notifyDataSetChanged();
     }
 
     public void deleteButtonHandler(int position) {
@@ -126,6 +127,7 @@ public class LayoutsList extends AppCompatActivity {
                 layouts.get(position).getLayoutTitle(), Toast.LENGTH_SHORT).show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     public void displayDeletionPopup(final int position) {
         // Display Popup and darken the background.
         final PopupWindow popup = new PopupWindow(this);

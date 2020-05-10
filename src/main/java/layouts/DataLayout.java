@@ -27,28 +27,28 @@ public class DataLayout implements Serializable {
 
     public DataLayout(String layoutTitle, ArrayList<DataBlock> dataBlocks, boolean selected, boolean defaultChoice, boolean quickMenuElement) {
         this.layoutTitle = layoutTitle;
-        this.dataBlocks = dataBlocks;
+        this.dataBlocks = new ArrayList<>(dataBlocks);
         this.selected = selected;
         this.defaultChoice = defaultChoice;
         this.quickMenuElement = quickMenuElement;
     }
     public DataLayout(String layoutTitle, ArrayList<DataBlock> dataBlocks, boolean selected, boolean defaultChoice) {
         this.layoutTitle = layoutTitle;
-        this.dataBlocks = dataBlocks;
+        this.dataBlocks = new ArrayList<>(dataBlocks);
         this.selected = selected;
         this.defaultChoice = defaultChoice;
         this.quickMenuElement = false;
     }
     public DataLayout(String layoutTitle, ArrayList<DataBlock> dataBlocks, boolean selected) {
         this.layoutTitle = layoutTitle;
-        this.dataBlocks = dataBlocks;
+        this.dataBlocks = new ArrayList<>(dataBlocks);
         this.selected = selected;
         this.defaultChoice = false;
         this.quickMenuElement = false;
     }
     public DataLayout(String layoutTitle, ArrayList<DataBlock> dataBlocks) {
         this.layoutTitle = layoutTitle;
-        this.dataBlocks = dataBlocks;
+        this.dataBlocks = new ArrayList<>(dataBlocks);
         this.selected = false;
         this.defaultChoice = false;
         this.quickMenuElement = false;
@@ -66,6 +66,14 @@ public class DataLayout implements Serializable {
         this.selected = false;
         this.defaultChoice = false;
         this.quickMenuElement = false;
+    }
+
+    public DataLayout(DataLayout dataLayout) {
+        this.layoutTitle = dataLayout.layoutTitle;
+        this.dataBlocks = dataLayout.dataBlocks;
+        this.selected = dataLayout.selected;
+        this.defaultChoice = dataLayout.defaultChoice;
+        this.quickMenuElement = dataLayout.quickMenuElement;
     }
 
     public String getLayoutTitle() {

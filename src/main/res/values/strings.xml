@@ -43,6 +43,10 @@
     <string name="CONFIRM_DELETION">Potwierdź usunięcie</string>
     <string name="LAYOUT_HAS_BEEN_CHOSEN">Układ został wybrany! - </string>
     <string name="LAYOUT_HAS_BEEN_SAVED">Układ został zapisany!</string>
+    <string name="LEAVING_LAYOUT_EDITOR">Opuszczanie edytora układów</string>
+    <string name="DO_YOU_WANT_TO_SAVE_CHANGES">Jeśli opuścisz edytor bez zapisania zmian, to stracisz je bezpowrotnie. Czy chcesz zapisać wprowadzone zmiany?</string>
+    <string name="LEAVE_WITHOUT_SAVING">Opuść bez zapisywania zmian</string>
+    <string name="SAVE_CHANGES">Zapisz wprowadzone zmiany</string>
 
     <!-- Never change arrays item order unless you change enum types values -->
     <string-array name="BLOCK_TYPE_SPINNER">

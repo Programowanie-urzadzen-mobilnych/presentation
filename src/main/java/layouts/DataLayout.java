@@ -70,7 +70,7 @@ public class DataLayout implements Serializable {
 
     public DataLayout(DataLayout dataLayout) {
         this.layoutTitle = dataLayout.layoutTitle;
-        this.dataBlocks = dataLayout.dataBlocks;
+        this.dataBlocks = new ArrayList<>(dataLayout.dataBlocks);
         this.selected = dataLayout.selected;
         this.defaultChoice = dataLayout.defaultChoice;
         this.quickMenuElement = dataLayout.quickMenuElement;

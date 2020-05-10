@@ -1,11 +1,10 @@
 package com.representation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 
-import data.Database;
+import androidx.appcompat.app.AppCompatActivity;
+
 import measurements.Measurements;
 
 public class MainActivity extends AppCompatActivity {

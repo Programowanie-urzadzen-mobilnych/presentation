@@ -8,6 +8,9 @@ public class Utils {
     public static final String TIME_FORMAT = "HH:mm:ss";
     public static final String DATETIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
     public static final int FOLDERPICKER_CODE = 9998;
+    public static final int PICKFILE_RESULT_CODE = 9997;
+    public static final int WRITE_EXTERNAL_STORAGE_STATUS = 0;
+    public static final int READ_EXTERNAL_STORAGE_STATUS = 0;
 
     // Never change enum values unless you change strings array items order
     public enum Magnitude {
@@ -30,6 +33,36 @@ public class Utils {
         Magnitude(int value) {
             this.mValue = value;
         }
+
+        public static Magnitude fromString(String text) {
+            switch(text){
+                case "TEMPERATURE":
+                    return TEMPERATURE;
+                case "HUMIDITY":
+                    return HUMIDITY;
+                case "PRESSURE":
+                    return PRESSURE;
+                case "BATTERY_VOLTAGE":
+                    return BATTERY_VOLTAGE;
+                case "SOLAR_PANEL_VOLTAGE":
+                    return SOLAR_PANEL_VOLTAGE;
+                case "NODE_VOLTAGE":
+                    return NODE_VOLTAGE;
+                case "BATTERY_CURRENT":
+                    return BATTERY_CURRENT;
+                case "SOLAR_PANEL_CURRENT":
+                    return SOLAR_PANEL_CURRENT;
+                case "NODE_CURRENT":
+                    return NODE_CURRENT;
+                case "VOLTAGE":
+                    return VOLTAGE;
+                case "CURRENT":
+                    return CURRENT;
+            }
+            return UNDEFINED;
+
+        }
+
         public int id(){
             return mValue;
         }
@@ -102,6 +135,45 @@ public class Utils {
             }
             return UNDEFINED;
         }
+
+        public static Unit fromString(String text){
+            switch(text){
+                case "CELSIUS":
+                    return CELSIUS;
+                case "KELWIN":
+                    return KELWIN;
+                case "FAHRENHEIT":
+                    return FAHRENHEIT;
+                case "PERCENT":
+                    return PERCENT;
+                case "HECTO_PASCAL":
+                    return HECTO_PASCAL;
+                case "PASCAL":
+                    return PASCAL;
+                case "KILO_PASCAL":
+                    return KILO_PASCAL;
+                case "MEGA_PASCAL":
+                    return MEGA_PASCAL;
+                case "ATMOSPHERE":
+                    return ATMOSPHERE;
+                case "BAR":
+                    return BAR;
+                case "VOLT":
+                    return VOLT;
+                case "MILLI_VOLT":
+                    return MILLI_VOLT;
+                case "KILO_VOLT":
+                    return KILO_VOLT;
+                case "AMPERE":
+                    return AMPERE;
+                case "MILLI_AMPERE":
+                    return MILLI_AMPERE;
+                case "KILO_AMPERE":
+                    return KILO_AMPERE;
+            }
+            return UNDEFINED;
+        }
+
         public static String getName(Context con, Unit u){
             String[] array;
             switch (u.magnitude()) {
@@ -137,6 +209,18 @@ public class Utils {
                 if (blockTypeEnum.mValue == value) {
                     return blockTypeEnum;
                 }
+            }
+            return UNDEFINED;
+        }
+
+        public static BlockTypeEnum fromString(String text){
+            switch(text){
+                case "VALUE":
+                    return VALUE;
+                case "TABLE":
+                    return TABLE;
+                case "CHART":
+                    return CHART;
             }
             return UNDEFINED;
         }

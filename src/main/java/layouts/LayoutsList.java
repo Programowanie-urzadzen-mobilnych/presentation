@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,23 +32,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.representation.R;
+import com.representation.Utils;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 
 import data.Database;
+import layouteditor.DataBlock;
 import layouteditor.LayoutEditor;
 import lib.folderpicker.FolderPicker;
 import measurements.Measurements;
 
 import static com.representation.Utils.FOLDERPICKER_CODE;
+import static com.representation.Utils.PICKFILE_RESULT_CODE;
 
 public class LayoutsList extends AppCompatActivity {
     private ArrayList<DataLayout> layouts;
@@ -55,6 +62,7 @@ public class LayoutsList extends AppCompatActivity {
     private final Context mContext = this;
     private EditText pathText;
     private EditText pathFileName;
+    private DataLayoutAdapter dataLayoutAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +81,7 @@ public class LayoutsList extends AppCompatActivity {
         this.layouts = Database.layouts;
 
         // Create the adapter to convert the array to views
-        DataLayoutAdapter dataLayoutAdapter = new DataLayoutAdapter(this, layouts);
+        dataLayoutAdapter = new DataLayoutAdapter(this, layouts);
 
         // Attach the adapter to a ListView
         ListView list = findViewById(R.id.layout_list_list_view);
@@ -95,6 +103,12 @@ public class LayoutsList extends AppCompatActivity {
         if (itemId == R.id.layouts_list_add_new_layout) {
             Intent i = new Intent(this, LayoutEditor.class);
             this.startActivity(i);
+        }
+        if(itemId == R.id.layouts_list_save_layout_on_device){
+            //filepicker
+            Intent intent = new Intent(this, FolderPicker.class);
+            intent.putExtra("pickFiles", true);
+            startActivityForResult(intent, PICKFILE_RESULT_CODE);
         }
 
         return super.onOptionsItemSelected(item);
@@ -166,8 +180,10 @@ public class LayoutsList extends AppCompatActivity {
             public void onClick(View view) {
                 //actual saving finally jesus christ
                 dl.saveToFile(mContext,pathText.getText().toString(),pathFileName.getText().toString());
+                popup.dismiss();
             }
         });
+
 
         popup.setContentView(popupLayout);
         popup.setOutsideTouchable(true);
@@ -184,22 +200,61 @@ public class LayoutsList extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("SAVING","pls result");
-        if(resultCode != RESULT_CANCELED){
-            if(data!= null){
-                if (requestCode == FOLDERPICKER_CODE && resultCode == Activity.RESULT_OK) {
+        switch (requestCode) {
+            case PICKFILE_RESULT_CODE:
+                Log.d("LOADING","pls result");
+                if (resultCode == -1) {
+                    String path = data.getExtras().getString("data");
+                    Log.d("LOADING","pls path"+path);
+                    LoadDataLayoutFromDisk(path);
+                }
+
+                break;
+
+            case FOLDERPICKER_CODE:
+                Log.d("SAVING","pls result");
+                if(data!= null && resultCode == Activity.RESULT_OK){
                     String path = data.getExtras().getString("data");
                     Log.d("SAVING","pls path"+path);
                     pathText.setText(path);
-                    /*if(dl!=null){
-                        LayoutSaver.SaveLayout(dl,path);
-                    }*/
                 }
-            }else{
-                Log.i("error","Failed to provide with URI - no data");
+                break;
+        }
+
+    }
+
+    private void LoadDataLayoutFromDisk(String path) {
+        DataLayout dl = new DataLayout();
+        ArrayList<DataBlock> dbs = new ArrayList<>();
+
+        try {
+            File file = new File(path);
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+
+            //1st line - datalayout name
+            dl.setLayoutTitle(br.readLine());
+
+            //rest are blocks
+            while ((line = br.readLine()) != null) {
+                String[] temp = line.split(";");
+                dbs.add(new DataBlock(temp[0],
+                        Utils.BlockTypeEnum.fromString(temp[1]),
+                        Utils.Magnitude.fromString(temp[2]),
+                        Utils.Unit.fromString(temp[3]),
+                        new Date(temp[4]),
+                        new Date(temp[5])
+                        ));
             }
-        }else{
-            Log.i("error","Request cancelled");
+            br.close();
+            dl.setDataBlocks(dbs);
+            //layouts.add(dl);
+            Database.layouts.add(dl);
+            dataLayoutAdapter.notifyDataSetInvalidated();
+        }
+        catch (Exception e) {
+            //You'll need to add proper error handling here
+            //Abrasie*
         }
     }
 }

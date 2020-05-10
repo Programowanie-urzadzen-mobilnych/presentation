@@ -8,4 +8,10 @@
         android:id="@+id/layouts_list_add_new_layout"
         android:title="@string/ADD_NEW_LAYOUT"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/layouts_list_save_layout_on_device"
+        android:title="Wczytaj układ z dysku"
+        app:showAsAction="never"/>
+
 </menu>

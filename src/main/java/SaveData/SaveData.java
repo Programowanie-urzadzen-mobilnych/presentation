@@ -28,6 +28,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import lib.folderpicker.FolderPicker;
 
+import static com.representation.Utils.WRITE_EXTERNAL_STORAGE_STATUS;
+
 /*
 	Export results to a PDF / XML file with an ability to choose save location#41
 	Client want to be able to create export files. We are going to let him do it.
@@ -38,7 +40,6 @@ import lib.folderpicker.FolderPicker;
 
 public class SaveData extends Activity {
 
-    private static final int WRITE_EXTERNAL_STORAGE_STATUS = 0;
     private static final int FOLDERPICKER_CODE = 9998;
 
     ArrayList<ExportData> exportDataArrayList = new ArrayList<ExportData>();
@@ -118,27 +119,10 @@ public class SaveData extends Activity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void createFile(String filePath)  {
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-            } else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        WRITE_EXTERNAL_STORAGE_STATUS);
-            }
-        }
-
         String temp = String.valueOf(WRITE_EXTERNAL_STORAGE_STATUS);
         if(WRITE_EXTERNAL_STORAGE_STATUS==0){
             Log.i("Test","Write external storage status: "+temp);
             createPdf(filePath);
-        }else{
-            //createFile(filePath); //nie jestem pewny czy to bezpieczne będzie :D
         }
     }
 

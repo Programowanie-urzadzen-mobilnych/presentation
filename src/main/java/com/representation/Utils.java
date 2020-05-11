@@ -1,7 +1,16 @@
 package com.representation;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.view.ViewGroupOverlay;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 public class Utils {
     public static final String DATE_FORMAT = "dd.MM.yyyy";
@@ -224,5 +233,23 @@ public class Utils {
             }
             return UNDEFINED;
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    public static void applyDim(@NonNull ViewGroup parent, float dimAmount){
+        // Applies dark overlay to the background of given view
+        Drawable dim = new ColorDrawable(Color.BLACK);
+        dim.setBounds(0, 0, parent.getWidth(), parent.getHeight());
+        dim.setAlpha((int) (255 * dimAmount));
+
+        ViewGroupOverlay overlay = parent.getOverlay();
+        overlay.add(dim);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    public static void clearDim(@NonNull ViewGroup parent) {
+        // removes dark overlay from background
+        ViewGroupOverlay overlay = parent.getOverlay();
+        overlay.clear();
     }
 }

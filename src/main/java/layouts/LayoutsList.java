@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -81,11 +81,11 @@ public class LayoutsList extends AppCompatActivity {
         this.layouts = Database.layouts;
 
         // Create the adapter to convert the array to views
-        dataLayoutAdapter = new DataLayoutAdapter(this, layouts);
+        this.dataLayoutAdapter = new DataLayoutAdapter(this, layouts);
 
         // Attach the adapter to a ListView
         ListView list = findViewById(R.id.layout_list_list_view);
-        list.setAdapter(dataLayoutAdapter);
+        list.setAdapter(this.dataLayoutAdapter);
 
         // define action for addNewLayoutButton. It moves user to LayoutEditor.
         final Button addNewLayoutButton = findViewById(R.id.add_new_layout_button);
@@ -135,6 +135,7 @@ public class LayoutsList extends AppCompatActivity {
         // TODO: Replace data collecting method
         // Collect needed data from DataBase
         this.layouts = Database.layouts;
+        this.dataLayoutAdapter.notifyDataSetChanged();
     }
 
     public void deleteButtonHandler(int position) {
@@ -149,13 +150,68 @@ public class LayoutsList extends AppCompatActivity {
         }
         // Select the layout on given position
         layouts.get(position).setSelected(true);
+        Toast.makeText(getApplicationContext(), getResources().getString(R.string.LAYOUT_HAS_BEEN_CHOSEN) +
+                layouts.get(position).getLayoutTitle(), Toast.LENGTH_SHORT).show();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public void displayPopupWindow(final ViewGroup parentGroup, int itemId) {
+    public void displayDeletionPopup(final int position) {
         // Display Popup and darken the background.
         final PopupWindow popup = new PopupWindow(this);
-        final View popupLayout = LayoutInflater.from(this).inflate(R.layout.save_on_device_popup_window,parentGroup,false);
+        final View popupLayout = getLayoutInflater().inflate(R.layout.ensure_deletion_of_layout_popup, null);
+
+        final ViewGroup root = (ViewGroup) getWindow().getDecorView().getRootView();
+        Utils.applyDim(root, 0.5f);
+
+        TextView popupTitle = popupLayout.findViewById(R.id.popup_title);
+        String updatedTitle = getResources().getString(R.string.LAYOUT_DELETION) + ": " + layouts.get(position).getLayoutTitle();
+        popupTitle.setText(updatedTitle);
+
+        Button confirmDeletion = popupLayout.findViewById(R.id.confirm_button);
+        confirmDeletion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteButtonHandler(position);
+                dataLayoutAdapter.notifyDataSetChanged();
+                popup.dismiss();
+            }
+        });
+
+        Button declineDeletion = popupLayout.findViewById(R.id.decline_button);
+        declineDeletion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup.dismiss();
+            }
+        });
+
+        // Set listener to remove dark overlay when clicked outside the window.
+        popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                Utils.clearDim(root);
+            }
+        });
+
+        popup.setContentView(popupLayout);
+        popup.setOutsideTouchable(true);
+        popup.setFocusable(true);
+
+        int popupWidth = ViewGroup.LayoutParams.WRAP_CONTENT;
+        int popupHeight = ViewGroup.LayoutParams.WRAP_CONTENT;
+        popup.setWidth(popupWidth);
+        popup.setHeight(popupHeight);
+        popup.showAtLocation(popupLayout, Gravity.CENTER, 0, 0);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    public void displayPopupWindow(int itemId) {
+        // Display Popup and darken the background.
+        final PopupWindow popup = new PopupWindow(this);
+        final View popupLayout = getLayoutInflater().inflate(R.layout.save_on_device_popup_window, null);
+
+        final ViewGroup root = (ViewGroup) getWindow().getDecorView().getRootView();
+        Utils.applyDim(root, 0.5f);
 
         final DataLayout dl = layouts.get(itemId);
 
@@ -179,8 +235,17 @@ public class LayoutsList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //actual saving finally jesus christ
-                dl.saveToFile(mContext,pathText.getText().toString(),pathFileName.getText().toString());
+                dl.saveToFile(mContext, pathText.getText().toString(), pathFileName.getText().toString());
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.LAYOUT_HAS_BEEN_SAVED), Toast.LENGTH_SHORT).show();
                 popup.dismiss();
+            }
+        });
+
+        // Set listener to remove dark overlay when clicked outside the window.
+        popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                Utils.clearDim(root);
             }
         });
 

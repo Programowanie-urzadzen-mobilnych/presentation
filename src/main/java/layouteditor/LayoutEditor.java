@@ -108,6 +108,7 @@ public class LayoutEditor extends AppCompatActivity {
         leaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                popup.dismiss();
                 finish();
             }
         });
@@ -220,6 +221,7 @@ public class LayoutEditor extends AppCompatActivity {
                 Database.layouts.add(layout);
 
                 // Move to LayoutsList activity where new added element should be listed
+                popup.dismiss();
                 finish();
             }
         });

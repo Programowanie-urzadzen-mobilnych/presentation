@@ -20,8 +20,9 @@ public class ThisApplication extends Application {
         super.onCreate();
         // TODO: replace Database class calls with real database calls
         // This code is executed only once, when app is starting.
-        //ask for permissions
-        askForPermissions();
+
+        // ask for permissions
+        // askForPermissions();
 
         Database.initalizeDatabase();
         Database.selectDefaultLayout();

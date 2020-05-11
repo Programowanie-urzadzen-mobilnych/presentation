@@ -44,6 +44,15 @@ public class DataBlock {
         this.dateEnd = Calendar.getInstance().getTime();
     }
 
+    public DataBlock(String blockTitle, Utils.BlockTypeEnum blockType, Utils.Magnitude magnitude, Utils.Unit unit, Date dateStart, Date dateEnd) {
+        this.blockTitle = blockTitle;
+        this.blockType = blockType;
+        this.magnitude = magnitude;
+        this.unit = unit;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+    }
+
     @NonNull
     @Override
     public String toString() {

@@ -30,7 +30,7 @@
         android:background="@color/PALE_GREY"
         android:orientation="vertical">
 
-        <charts.ChartBar
+        <charts.ChartView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="1dp"

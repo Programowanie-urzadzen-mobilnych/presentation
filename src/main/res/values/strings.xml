@@ -35,6 +35,9 @@
     <string name="TIME_END">Czas końcowy:</string>
     <string name="DATE_END">Data końcowa:</string>
 
+    <!-- strings for charts -->
+    <string name="NO_DATA">Brak danych do wyświetlenia</string>
+
     <!-- Never change arrays item order unless you change enum types values -->
     <string-array name="BLOCK_TYPE_SPINNER">
         <item>@string/VALUE</item>

@@ -1,9 +1,7 @@
 package charts;
 
-import android.graphics.Color;
 import android.util.Log;
 
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
@@ -16,66 +14,62 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("WeakerAccess")
 public class ChartObj {
-    private List<BarEntry> entries;
     private ArrayList<Float> valuesX;
     private ArrayList<Float> valuesY;
-    private String FirstDate;
-    private String lastDate;
+    private String firstDateRaw;
+    private String lastDateRaw;
+    private String firstDateFormatted;
+    private String lastDateFormatted;
     private String unitX;
     private String unitY;
-    private String description;
     private int type;
     private ArrayList<Date> dates;
+    private ArrayList<String> datesToString;
+    private ArrayList<Float> XAxisFloatNumbers;
+
     //type 1 - bar Y-values, X-time
     //type 2 - bar Y-values, X-values
     //type 3 - line Y-values, X-time
     //type 4 - line Y-values, X-values
 
-
     //type false - bar
     //type true - line
-    ChartObj(ArrayList<Float> values, String FirstDate, String lastDate, String unit, String description, boolean type) {
-        if (type) {
-            this.type = 1;
-        } else this.type = 3;
-
-        this.dates = getIntervals(FirstDate, lastDate, values.size());
-//        for (int i = 0; i < dates.size(); i++) {
-//            long tempX = dates.get(i).getTime() / 1000L;
-//            this.valuesX.add(tempX);
-//        }
-        this.valuesY = values;
-        this.unitY = unit;
-        this.description = description;
+    ChartObj(ArrayList<Float> values, String firstDate, String lastDate, String unit, boolean type) {
+        if (type) this.type = 1;
+        else this.type = 3;
+        firstDateRaw = firstDate;
+        lastDateRaw = lastDate;
+        firstDateFormatted = ParseDateToString(ParseStringToDate(firstDate));
+        lastDateFormatted = ParseDateToString(ParseStringToDate(lastDate));
+        dates = getTimeline(ParseStringToDate(firstDate), ParseStringToDate(lastDate), values.size());
+        XAxisFloatNumbers = getXAxisFloatNumbers(dates);
+        datesToString = getTimelineToString(dates);
+        valuesY = values;
+        unitY = unit;
     }
 
-    ChartObj(ArrayList<Float> valuesX, ArrayList<Float> valuesY, String unitX, String unitY, String description, boolean type) {
-        if (type) {
-            this.type = 2;
-        } else this.type = 4;
-
+    ChartObj(ArrayList<Float> valuesY, ArrayList<Float> valuesX, String unitX, String unitY, boolean type) {
+        if (type) this.type = 2;
+        else this.type = 4;
         this.valuesX = valuesX;
         this.valuesY = valuesY;
         this.unitX = unitX;
         this.unitY = unitY;
-        this.description = description;
     }
-
 
     BarDataSet getBarData() {
         //type 1 - bar Y-values, X-time
-        if(type == 1){
+        if (type == 1) {
             if (!getDates().isEmpty() && !getValuesY().isEmpty() && getDates().size() == getValuesY().size()) {
                 List<BarEntry> entries = new ArrayList<>();
                 for (int i = 0; i < getDates().size(); i++) {
-                    long tempX = getDates().get(i).getTime() / 1000L;
+                    float tempX = XAxisFloatNumbers.get(i);
                     float tempY = valuesY.get(i);
                     entries.add(new BarEntry(tempX, tempY));
                 }
-                BarDataSet set = new BarDataSet(entries, getUnitY());
-                set.setColors(ColorTemplate.COLORFUL_COLORS);
-                return set;
+                return new BarDataSet(entries, getUnitY() + "   Okres: " + getFirstDate() + " - " + getLastDate());
             } else return null;
         }
         //type 2 - bar Y-values, X-values
@@ -87,41 +81,25 @@ public class ChartObj {
                     float tempY = valuesY.get(i);
                     entries.add(new BarEntry(tempX, tempY));
                 }
-                BarDataSet set = new BarDataSet(entries, "Y: " + getUnitY() + "X: " + getUnitX());
-                set.setColors(ColorTemplate.COLORFUL_COLORS);
-                return set;
+                return new BarDataSet(entries, "Y: " + getUnitY() + "  X: " + getUnitX());
             } else return null;
-        }
-        else return null;
+        } else return null;
     }
 
     LineDataSet getLineData() {
-        //type 1 - bar Y-values, X-time
-        if(type == 3){
+        //type 3 - line Y-values, X-time
+        if (type == 3) {
             if (!getDates().isEmpty() && !getValuesY().isEmpty() && getDates().size() == getValuesY().size()) {
                 List<Entry> entries = new ArrayList<>();
                 for (int i = 0; i < getDates().size(); i++) {
-                    long tempX = getDates().get(i).getTime() / 1000L;
+                    float tempX = XAxisFloatNumbers.get(i);
                     float tempY = valuesY.get(i);
                     entries.add(new Entry(tempX, tempY));
                 }
-                LineDataSet set = new LineDataSet(entries, getUnitY());
-                set.setColors(ColorTemplate.COLORFUL_COLORS);
-//                set.setAxisDependency(YAxis.AxisDependency.LEFT);
-//                set.setHighlightEnabled(true);
-//                set.setLineWidth(2);
-//                set.setColor(Color.BLUE);
-//                set.setCircleColor(Color.CYAN);
-//                set.setCircleRadius(6);
-//                set.setCircleHoleRadius(3);
-//                set.setDrawHighlightIndicators(true);
-//                set.setHighLightColor(Color.RED);
-//                set.setValueTextSize(12);
-//                set.setValueTextColor(Color.BLACK);
-                return set;
+                return new LineDataSet(entries, getUnitY() + "      Okres: " + getFirstDate() + "  --  " + getLastDate());
             } else return null;
         }
-        //type 2 - bar Y-values, X-values
+        //type 4 - line Y-values, X-values
         else if (type == 4) {
             if (!getValuesX().isEmpty() && !getValuesY().isEmpty() && getValuesX().size() == getValuesY().size()) {
                 List<Entry> entries = new ArrayList<>();
@@ -130,61 +108,79 @@ public class ChartObj {
                     float tempY = valuesY.get(i);
                     entries.add(new Entry(tempX, tempY));
                 }
-                LineDataSet set = new LineDataSet(entries, "Y: " + getUnitY() + "X: " + getUnitX());
-                set.setColors(ColorTemplate.COLORFUL_COLORS);
-                return set;
+                return new LineDataSet(entries, "Y: " + getUnitY() + " /  X: " + getUnitX());
             } else return null;
-        }
-        else return null;
+        } else return null;
     }
 
+    String ParseDateToString(Date input) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm  dd.MM.yyyy");
+        try {
+            return simpleDateFormat.format(input);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-    private ArrayList<Date> getIntervals(String date1, String date2, int numberOfElements) {
+    Date ParseStringToDate(String input) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        Date output;
+        try {
+            output = simpleDateFormat.parse(input);
+            return output;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    ArrayList<Date> getTimeline(Date DateTime1, Date DateTime2, int numberOfElements) {
         if (numberOfElements != 0) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            Date DateTime1 = new Date();
-            Date DateTime2 = new Date();
-            ArrayList<Date> dates = new ArrayList<Date>();
-            {
-                try {
-                    DateTime1 = simpleDateFormat.parse(date1);
-                    DateTime2 = simpleDateFormat.parse(date2);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
+            ArrayList<Date> dates = new ArrayList<>();
             if (DateTime1 != null && DateTime2 != null) {
                 dates.add(DateTime1);
                 if (numberOfElements > 1) {
-                    long dateTimeDiff = DateTime2.getTime() / 1000L - DateTime1.getTime() / 1000L;
+                    long dateTimeDiff = DateTime2.getTime() - DateTime1.getTime();
                     Long singlePer = dateTimeDiff / (numberOfElements - 1);
-                    Long temp = DateTime1.getTime() / 1000L;
+                    Long temp = DateTime1.getTime();
                     for (int x = 2; x <= numberOfElements; x++) {
                         if (x == numberOfElements) {
                             dates.add(DateTime2);
                         } else {
                             temp = temp + singlePer;
-                            dates.add(new java.util.Date((long) temp * 1000));
+                            dates.add(new Date(temp));
                         }
                     }
-                }
-
-                ArrayList<Long> dates2 = new ArrayList<>();
-                for (int i = 0; i < dates.size(); i++) {
-                    dates2.add(dates.get(i).getTime() / 100000L - DateTime1.getTime() / 100000L);
-                }
-                for (int i = 0; i < dates2.size(); i++) {
-                    Log.d("TestActivity", "" + dates2.get(i));
                 }
             }
             return dates;
         } else return null;
     }
 
+    ArrayList<String> getTimelineToString(ArrayList<Date> dates) {
+        if (dates.size() != 0) {
+            ArrayList<String> datesToString = new ArrayList<>();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+            for (int i = 0; i < dates.size(); i++) {
+                datesToString.add(simpleDateFormat.format(dates.get(i)));
+            }
+            return datesToString;
+        } else return null;
+    }
 
+    ArrayList<Float> getXAxisFloatNumbers(ArrayList<Date> dates) {
+        ArrayList<Float> temp = new ArrayList<>();
+        if (dates.size() != 0) {
+            for (int x = 0; x < dates.size(); x++) {
+                temp.add((float) x);
+            }
+            return temp;
+        } else return null;
+    }
 
-   List<BarEntry> getEntries() {
-        return entries;
+    ArrayList<String> getDatesToString() {
+        return datesToString;
     }
 
     ArrayList<Float> getValuesX() {
@@ -196,11 +192,11 @@ public class ChartObj {
     }
 
     String getFirstDate() {
-        return FirstDate;
+        return firstDateFormatted;
     }
 
     String getLastDate() {
-        return lastDate;
+        return lastDateFormatted;
     }
 
     String getUnitX() {
@@ -211,10 +207,6 @@ public class ChartObj {
         return unitY;
     }
 
-    String getDescription() {
-        return description;
-    }
-
     int getType() {
         return type;
     }
@@ -222,5 +214,4 @@ public class ChartObj {
     ArrayList<Date> getDates() {
         return dates;
     }
-
 }

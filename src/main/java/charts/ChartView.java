@@ -58,12 +58,25 @@ public class ChartView extends FrameLayout {
             if (barSet != null) {
                 layoutInflater.inflate(R.layout.chart_bar, this);
                 BarChart chart = findViewById(R.id.chartBar);
+                chart.setTouchEnabled(true);
+                chart.setPinchZoom(true);
+                chart.getDescription().setEnabled(false);
+                chart.getAxisRight().setEnabled(false);
+                chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+                chart.setExtraBottomOffset(10);
+                barSet.setColors(ColorTemplate.MATERIAL_COLORS);
+
                 BarData data = new BarData(barSet);
+
+                if (chartObj.getType() == 1) {
+                    chart.getXAxis().setGranularityEnabled(true);
+                    chart.getXAxis().setGranularity(1.0f);
+                    chart.getXAxis().setLabelCount(data.getEntryCount());
+                    ArrayList<String> labels = chartObj.getDatesToString();
+                    chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
+                }
+
                 chart.setData(data);
-                Description description = new Description();
-                description.setTextColor(ColorTemplate.VORDIPLOM_COLORS[2]);
-                description.setText(chartObj.getDescription());
-                chart.setDescription(description);
                 chart.animateXY(2000, 2000);
                 chart.invalidate();
             } else {
@@ -74,43 +87,37 @@ public class ChartView extends FrameLayout {
         } else if (chartObj.getType() == 3 || chartObj.getType() == 4) {
             LineDataSet lineSet = chartObj.getLineData();
             if (lineSet != null) {
-
                 layoutInflater.inflate(R.layout.chart_line, this);
                 LineChart chart = findViewById(R.id.chartLine);
-
                 chart.setTouchEnabled(true);
                 chart.setPinchZoom(true);
+                chart.getDescription().setEnabled(false);
+                chart.getAxisRight().setEnabled(false);
+                chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+                chart.setExtraBottomOffset(10);
+
+                lineSet.setColors(ColorTemplate.LIBERTY_COLORS);
+                lineSet.setHighlightEnabled(true);
+                lineSet.setLineWidth(2);
+                lineSet.setColor(Color.BLUE);
+                lineSet.setCircleColor(Color.CYAN);
+                lineSet.setCircleRadius(6);
+                lineSet.setCircleHoleRadius(3);
+                lineSet.setDrawHighlightIndicators(true);
+                lineSet.setHighLightColor(Color.RED);
+                lineSet.setValueTextSize(12);
+                lineSet.setValueTextColor(Color.BLACK);
                 LineData lineData = new LineData(lineSet);
 
+                if (chartObj.getType() == 3) {
+                    chart.getXAxis().setGranularityEnabled(true);
+                    chart.getXAxis().setGranularity(1.0f);
+                    chart.getXAxis().setLabelCount(lineData.getEntryCount());
+                    ArrayList<String> labels = chartObj.getDatesToString();
+                    chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
+                }
 
-                Description description = new Description();
-                description.setTextColor(ColorTemplate.VORDIPLOM_COLORS[3]);
-                description.setText(chartObj.getDescription());
-                description.setTextSize(12);
-                chart.setDescription(description);
-
-
-                YAxis rightYAxis = chart.getAxisRight();
-                rightYAxis.setEnabled(false);
-                XAxis topXAxis = chart.getXAxis();
-                topXAxis.setEnabled(false);
-
-                chart.setDrawMarkers(true);
-                chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-                chart.getXAxis().setGranularityEnabled(true);
-                chart.getXAxis().setGranularity(1.0f);
-                chart.getXAxis().setLabelCount(lineData.getEntryCount());
                 chart.setData(lineData);
-
-                            ArrayList<String> labels = new ArrayList<String>();
-            labels.add("JAN");
-            labels.add("FEB");
-            labels.add("MAR");
-            labels.add("APR");
-            labels.add("MAY");
-            labels.add("JUN");
-            chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
-
                 chart.animateY(2000);
                 chart.invalidate();
             } else {
@@ -119,45 +126,3 @@ public class ChartView extends FrameLayout {
         }
     }
 }
-
-
-//            ArrayList<String> labels = new ArrayList<String>();
-//            labels.add("JAN");
-//            labels.add("FEB");
-//            labels.add("MAR");
-//            labels.add("APR");
-//            labels.add("MAY");
-//            labels.add("JUN");
-//            chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
-
-
-//            //limitline
-//            LimitLine ll1 = new LimitLine(150f, "Upper Limit");
-//            ll1.setLineWidth(4f);
-//            ll1.enableDashedLine(10f, 10f, 0f);
-//            ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
-//            ll1.setTextSize(10f);
-//
-//            YAxis leftAxis = barChart.getAxisLeft();
-//            leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
-//            leftAxis.addLimitLine(ll1);
-//
-//            barChart.getAxisLeft().setAxisMinimum(0);
-//            barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTH_SIDED);
-//
-
-//            ArrayList<String> labels = new ArrayList<String>();
-//            labels.add("JAN");
-//            labels.add("FEB");
-//            labels.add("MAR");
-//            labels.add("APR");
-//            labels.add("MAY");
-//            labels.add("JUN");
-//            barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
-//
-//            barChart.animateY(1000);
-//
-//            barChart.getXAxis().setGranularityEnabled(true);
-//            barChart.getXAxis().setGranularity(1.0f);
-//            barChart.getXAxis().setLabelCount(barDataSet.getEntryCount());
-//

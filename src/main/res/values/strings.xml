@@ -8,7 +8,8 @@
     <string name="BLOCK_TYPE">Typ bloku:</string>
     <string name="LAYOUT_LIST_ACTION_BAR_TTLE">Lista układów</string>
     <string name="ADD_NEW_LAYOUT">Dodaj nowy układ</string>
-    <string name="MEASUREMENTS_ACTION_BAR_TITLE">Pomiary</string>
+    <string name="MEASUREMENTS">Pomiary</string>
+    <string name="MEASUREMENTS_ACTION_BAR_TITLE">@string/MEASUREMENTS</string>
     <string name="SHOW_LAYOUTS_LIST">Pokaż listę układów</string>
     <string name="LAYOUT_TITLE">Nazwa układu...</string>
     <string name="SAVE">Zapisz</string>
@@ -16,9 +17,78 @@
     <string name="SET_AS_DEFAULT">Ustaw jako domyślny</string>
     <string name="DEFAULT_LAYOUT_TITLE">Układ</string>
     <string name="CANNOT_DELETE_DEFAULT_LAYOUT">Nie można usunąć układu domyślnego</string>
+    <string name="MAGNITUDE">Wielkość:</string>
+    <string name="UNIT">Jednostka:</string>
+    <string name="VALUE">Wartość</string>
+    <string name="TABLE">Tabela</string>
+    <string name="CHART">Wykres</string>
+    <string name="TEMPERATURE">Temperatura</string>
+    <string name="HUMIDITY">Wilgotność</string>
+    <string name="PRESSURE">Ciśnienie</string>
+    <string name="BATTERY_VOLTAGE">Napięcie na baterii</string>
+    <string name="SOLAR_PANEL_VOLTAGE">Napięcie na panelu słonecznym</string>
+    <string name="NODE_VOLTAGE">Napięcie na węźle pomiarowym</string>
+    <string name="BATTERY_CURRENT">Natężenie na baterii</string>
+    <string name="SOLAR_PANEL_CURRENT">Natężenie na panelu słonecznym</string>
+    <string name="NODE_CURRENT">Natężenie na węźle pomiarowym</string>
+    <string name="TIME_START">Czas początkowy:</string>
+    <string name="DATE_START">Data początkowa:</string>
+    <string name="TIME_END">Czas końcowy:</string>
+    <string name="DATE_END">Data końcowa:</string>
+    <string name="SAVE_LAYOUT_IN_STORAGE">Zapisz układ w pamięci</string>
+    <string name="CHOOSE_PATH">Wybierz ścieżkę</string>
+    <string name="LAYOUT_DELETION_WARNING_MESSAGE">Jesteś pewny, że chcesz usunąć ten układ? Usunięcie układu jest nieodwracalne.</string>
+    <string name="LAYOUT_DELETION">Usuwanie układu</string>
+    <string name="KEEP_LAYOUT">Zachowaj układ</string>
+    <string name="CONFIRM_DELETION">Potwierdź usunięcie</string>
+    <string name="LAYOUT_HAS_BEEN_CHOSEN">Układ został wybrany! - </string>
+    <string name="LAYOUT_HAS_BEEN_SAVED">Układ został zapisany!</string>
+    <string name="LEAVING_LAYOUT_EDITOR">Opuszczanie edytora układów</string>
+    <string name="DO_YOU_WANT_TO_SAVE_CHANGES">Jeśli opuścisz edytor bez zapisania zmian, to stracisz je bezpowrotnie. Czy chcesz zapisać wprowadzone zmiany?</string>
+    <string name="LEAVE_WITHOUT_SAVING">Opuść bez zapisywania zmian</string>
+    <string name="SAVE_CHANGES">Zapisz wprowadzone zmiany</string>
+
+    <!-- Never change arrays item order unless you change enum types values -->
     <string-array name="BLOCK_TYPE_SPINNER">
-        <item>Wartość</item>
-        <item>Tabela</item>
-        <item>Wykres</item>
+        <item>@string/VALUE</item>
+        <item>@string/TABLE</item>
+        <item>@string/CHART</item>
+    </string-array>
+    <string-array name="MAGNITUDES_SPINNER">
+        <item>@string/TEMPERATURE</item>
+        <item>@string/HUMIDITY</item>
+        <item>@string/PRESSURE</item>
+        <item>@string/BATTERY_VOLTAGE</item>
+        <item>@string/SOLAR_PANEL_VOLTAGE</item>
+        <item>@string/NODE_VOLTAGE</item>
+        <item>@string/BATTERY_CURRENT</item>
+        <item>@string/SOLAR_PANEL_CURRENT</item>
+        <item>@string/NODE_CURRENT</item>
+    </string-array>
+    <string-array name="TEMPERATURE_SPINNER">
+        <item>°C</item>
+        <item>K</item>
+        <item>°F</item>
+    </string-array>
+    <string-array name="HUMIDITY_SPINNER">
+        <item>%</item>
+    </string-array>
+    <string-array name="PRESSURE_SPINNER">
+        <item>hPa</item>
+        <item>Pa</item>
+        <item>kPa</item>
+        <item>MPa</item>
+        <item>atm</item>
+        <item>bar</item>
+    </string-array>
+    <string-array name="VOLTAGE_SPINNER">
+        <item>V</item>
+        <item>mV</item>
+        <item>kV</item>
+    </string-array>
+    <string-array name="CURRENT_SPINNER">
+        <item>A</item>
+        <item>mA</item>
+        <item>kA</item>
     </string-array>
 </resources>

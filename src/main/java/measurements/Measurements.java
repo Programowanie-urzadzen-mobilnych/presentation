@@ -1,13 +1,15 @@
 package measurements;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -19,12 +21,17 @@ import com.representation.R;
 import java.util.ArrayList;
 
 import data.Database;
+import layouteditor.DataBlock;
 import layouteditor.LayoutEditor;
 import layouts.DataLayout;
 import layouts.LayoutsList;
 
 public class Measurements extends AppCompatActivity {
     private ArrayList<DataLayout> layouts;
+    private DataLayout currentLayout;
+    private TextView layoutTitle;
+    private DataPresentationAdapter dataPresentationAdapter;
+    private ArrayList<DataBlock> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,40 +49,47 @@ public class Measurements extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        refreshCurrentlySelectedLayout();
-        refreshCurrentlyDefaultLayout();
+        // change currentLayout value to the layout which is currently selected (selected = true)
+        setCurrentLayout();
+
+        // Display selected layout title
+        this.layoutTitle = findViewById(R.id.layout_title_text_view);
+        this.layoutTitle.setText(currentLayout.getLayoutTitle());
+
+        this.data = new ArrayList<>();
+        this.data.addAll(this.currentLayout.getDataBlocks());
+        // Create the adapter to convert the array to views
+        this.dataPresentationAdapter = new DataPresentationAdapter(this, data);
+
+        // Attach the adapter to a ListView
+        ListView list = findViewById(R.id.data_presentation);
+        list.setAdapter(dataPresentationAdapter);
     }
 
-    private void refreshCurrentlyDefaultLayout() {
-        // This method displays all default layouts (there shouldn't be more than one,
-        // so this method will show a bug if there would be one)
-        TextView currentlyDefaultLayoutText = findViewById(R.id.currently_default_layout);
-        String defaultLayoutsTitles = "Default Layouts:\n";
-        for (DataLayout layout: layouts) {
-            if(layout.isDefaultChoice()){
-                defaultLayoutsTitles += layout.getLayoutTitle() + "\n";
+    private void setCurrentLayout() {
+        for (DataLayout layout : layouts) {
+            if (layout.isSelected()) {
+                this.currentLayout = new DataLayout(layout);
             }
         }
-        currentlyDefaultLayoutText.setText(defaultLayoutsTitles);
     }
 
-    private void refreshCurrentlySelectedLayout() {
-        // This method displays all selected layouts (there shouldn't be more than one,
-        // so this method will show a bug if there would be one)
-        TextView currentlySelectedLayoutText = findViewById(R.id.currently_selected_layout);
-        String selectedLayoutsTitles = "Selected Layouts:\n";
-        for (DataLayout layout: layouts) {
-            if(layout.isSelected()){
-                selectedLayoutsTitles += layout.getLayoutTitle() + "\n";
-            }
-        }
-        currentlySelectedLayoutText.setText(selectedLayoutsTitles);
+    private void displayCurrentLayout(){
+        // Display selected layout title
+        this.layoutTitle.setText(currentLayout.getLayoutTitle());
+
+        // Select current DataBlocks
+        this.data.removeAll(this.data);
+        this.data.addAll(currentLayout.getDataBlocks());
+        this.dataPresentationAdapter.notifyDataSetChanged();
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-        if (itemId == R.id.measurements_add_new_layout) {
+        if (itemId == android.R.id.home) {
+            finish();
+        } else if (itemId == R.id.measurements_add_new_layout) {
             Intent i = new Intent(this, LayoutEditor.class);
             this.startActivity(i);
         } else if (itemId == R.id.measurements_show_layouts_list) {
@@ -117,7 +131,8 @@ public class Measurements extends AppCompatActivity {
                             }
                             // Select the layout on given position
                             layouts.get(finalPosition).setSelected(true);
-                            refreshCurrentlySelectedLayout();
+                            setCurrentLayout();
+                            displayCurrentLayout();
                             return true;
                         }
                     });

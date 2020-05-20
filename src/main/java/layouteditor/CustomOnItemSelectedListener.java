@@ -4,31 +4,39 @@ import android.content.Context;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.representation.Utils;
+
 public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
     private int itemPosition;
-    private Context mContext;
+    private Context layoutEditorContext;
+    private DataBlockAdapter dataBlockAdapter;
 
-    public CustomOnItemSelectedListener(int itemPosition, Context context){
+    public CustomOnItemSelectedListener(int itemPosition, Context layoutEditorContext, DataBlockAdapter adapter){
         this.itemPosition = itemPosition;
-        this.mContext = context;
+        this.layoutEditorContext = layoutEditorContext;
+        this.dataBlockAdapter = adapter;
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int spinnerPosition, long id) {
-        if (mContext instanceof LayoutEditor) {
+        if (layoutEditorContext instanceof LayoutEditor) {
             switch(spinnerPosition){
                 case 0:
-                    ((LayoutEditor)mContext).setBlockType(itemPosition, DataBlock.BlockTypeEnum.VALUE);
+                    ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, Utils.BlockTypeEnum.VALUE);
+                    dataBlockAdapter.notifyDataSetChanged();
                     break;
                 case 1:
-                    ((LayoutEditor)mContext).setBlockType(itemPosition, DataBlock.BlockTypeEnum.TABLE);
+                    ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, Utils.BlockTypeEnum.TABLE);
+                    dataBlockAdapter.notifyDataSetChanged();
                     break;
                 case 2:
-                    ((LayoutEditor)mContext).setBlockType(itemPosition, DataBlock.BlockTypeEnum.CHART);
+                    ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, Utils.BlockTypeEnum.CHART);
+                    dataBlockAdapter.notifyDataSetChanged();
                     break;
             }
         }
     }
+
     @Override
     public void onNothingSelected(AdapterView<?> parentView) { }
 }

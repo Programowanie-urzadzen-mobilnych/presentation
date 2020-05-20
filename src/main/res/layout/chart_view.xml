@@ -39,5 +39,5 @@
             android:text="WYKRESIK :)"
             android:textSize="40sp"
             android:background="@drawable/grey_border"/>
-    </LinearLayout>
+    </FrameLayout>
 </RelativeLayout>

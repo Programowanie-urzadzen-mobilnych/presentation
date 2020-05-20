@@ -13,5 +13,5 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent i = new Intent(this, Measurements.class);
         startActivity(i);
-    }
+}
 }

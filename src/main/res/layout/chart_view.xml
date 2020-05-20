@@ -2,27 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingVertical="10dp" >
+    android:paddingVertical="10dp">
 
     <LinearLayout
         android:id="@+id/block_title_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#E9F1F7"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/block_title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Whatever testing"
+            android:background="@drawable/main_view_border"
             android:paddingHorizontal="10dp"
             android:paddingVertical="5dp"
-            android:textSize="16sp"
+            android:text="Whatever testing"
             android:textColor="@color/BLACK"
-            android:background="@drawable/main_view_border"/>
+            android:textSize="16sp" />
     </LinearLayout>
-    <LinearLayout
+
+    <FrameLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/GREY_93"

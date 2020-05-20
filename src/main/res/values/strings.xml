@@ -48,6 +48,9 @@
     <string name="LEAVE_WITHOUT_SAVING">Opuść bez zapisywania zmian</string>
     <string name="SAVE_CHANGES">Zapisz wprowadzone zmiany</string>
 
+    <!-- strings for charts -->
+    <string name="NO_DATA">Brak danych do wyświetlenia</string>
+
     <!-- Never change arrays item order unless you change enum types values -->
     <string-array name="BLOCK_TYPE_SPINNER">
         <item>@string/VALUE</item>

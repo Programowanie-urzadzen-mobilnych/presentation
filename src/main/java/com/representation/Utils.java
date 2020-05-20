@@ -1,12 +1,25 @@
 package com.representation;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.view.ViewGroupOverlay;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 public class Utils {
     public static final String DATE_FORMAT = "dd.MM.yyyy";
     public static final String TIME_FORMAT = "HH:mm:ss";
     public static final String DATETIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
+    public static final int FOLDERPICKER_CODE = 9998;
+    public static final int PICKFILE_RESULT_CODE = 9997;
+    public static final int WRITE_EXTERNAL_STORAGE_STATUS = 0;
+    public static final int READ_EXTERNAL_STORAGE_STATUS = 0;
 
     // Never change enum values unless you change strings array items order
     public enum Magnitude {
@@ -29,6 +42,36 @@ public class Utils {
         Magnitude(int value) {
             this.mValue = value;
         }
+
+        public static Magnitude fromString(String text) {
+            switch(text){
+                case "TEMPERATURE":
+                    return TEMPERATURE;
+                case "HUMIDITY":
+                    return HUMIDITY;
+                case "PRESSURE":
+                    return PRESSURE;
+                case "BATTERY_VOLTAGE":
+                    return BATTERY_VOLTAGE;
+                case "SOLAR_PANEL_VOLTAGE":
+                    return SOLAR_PANEL_VOLTAGE;
+                case "NODE_VOLTAGE":
+                    return NODE_VOLTAGE;
+                case "BATTERY_CURRENT":
+                    return BATTERY_CURRENT;
+                case "SOLAR_PANEL_CURRENT":
+                    return SOLAR_PANEL_CURRENT;
+                case "NODE_CURRENT":
+                    return NODE_CURRENT;
+                case "VOLTAGE":
+                    return VOLTAGE;
+                case "CURRENT":
+                    return CURRENT;
+            }
+            return UNDEFINED;
+
+        }
+
         public int id(){
             return mValue;
         }
@@ -101,6 +144,45 @@ public class Utils {
             }
             return UNDEFINED;
         }
+
+        public static Unit fromString(String text){
+            switch(text){
+                case "CELSIUS":
+                    return CELSIUS;
+                case "KELWIN":
+                    return KELWIN;
+                case "FAHRENHEIT":
+                    return FAHRENHEIT;
+                case "PERCENT":
+                    return PERCENT;
+                case "HECTO_PASCAL":
+                    return HECTO_PASCAL;
+                case "PASCAL":
+                    return PASCAL;
+                case "KILO_PASCAL":
+                    return KILO_PASCAL;
+                case "MEGA_PASCAL":
+                    return MEGA_PASCAL;
+                case "ATMOSPHERE":
+                    return ATMOSPHERE;
+                case "BAR":
+                    return BAR;
+                case "VOLT":
+                    return VOLT;
+                case "MILLI_VOLT":
+                    return MILLI_VOLT;
+                case "KILO_VOLT":
+                    return KILO_VOLT;
+                case "AMPERE":
+                    return AMPERE;
+                case "MILLI_AMPERE":
+                    return MILLI_AMPERE;
+                case "KILO_AMPERE":
+                    return KILO_AMPERE;
+            }
+            return UNDEFINED;
+        }
+
         public static String getName(Context con, Unit u){
             String[] array;
             switch (u.magnitude()) {
@@ -139,5 +221,35 @@ public class Utils {
             }
             return UNDEFINED;
         }
+
+        public static BlockTypeEnum fromString(String text){
+            switch(text){
+                case "VALUE":
+                    return VALUE;
+                case "TABLE":
+                    return TABLE;
+                case "CHART":
+                    return CHART;
+            }
+            return UNDEFINED;
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    public static void applyDim(@NonNull ViewGroup parent, float dimAmount){
+        // Applies dark overlay to the background of given view
+        Drawable dim = new ColorDrawable(Color.BLACK);
+        dim.setBounds(0, 0, parent.getWidth(), parent.getHeight());
+        dim.setAlpha((int) (255 * dimAmount));
+
+        ViewGroupOverlay overlay = parent.getOverlay();
+        overlay.add(dim);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    public static void clearDim(@NonNull ViewGroup parent) {
+        // removes dark overlay from background
+        ViewGroupOverlay overlay = parent.getOverlay();
+        overlay.clear();
     }
 }

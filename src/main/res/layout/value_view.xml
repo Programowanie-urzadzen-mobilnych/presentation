@@ -39,7 +39,7 @@
                 android:padding="10dp"
                 android:text="20°C"
                 android:textSize="40sp"
-                android:background="@color/PALE_GREY"
+                android:background="@color/GREY_93"
                 android:layout_margin="2dp" >
                 <TableRow
                     android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                 android:padding="10dp"
                 android:text="20 [°C]"
                 android:textSize="40sp"
-                android:background="@color/PALE_GREY"
+                android:background="@color/GREY_93"
                 android:layout_margin="2dp" />
         </TableRow>
     </TableLayout>

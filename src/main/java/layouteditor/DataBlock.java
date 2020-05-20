@@ -7,6 +7,8 @@ import com.representation.Utils;
 import java.util.Calendar;
 import java.util.Date;
 
+import androidx.annotation.NonNull;
+
 public class DataBlock {
     private String blockTitle;
     private Utils.BlockTypeEnum blockType;
@@ -40,6 +42,21 @@ public class DataBlock {
         this.unit = unit;
         this.dateStart = Calendar.getInstance().getTime();
         this.dateEnd = Calendar.getInstance().getTime();
+    }
+
+    public DataBlock(String blockTitle, Utils.BlockTypeEnum blockType, Utils.Magnitude magnitude, Utils.Unit unit, Date dateStart, Date dateEnd) {
+        this.blockTitle = blockTitle;
+        this.blockType = blockType;
+        this.magnitude = magnitude;
+        this.unit = unit;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return blockTitle+";"+blockType.toString()+";"+magnitude.toString()+";"+unit.toString()+";"+dateStart.toString()+";"+dateEnd.toString();
     }
 
     public String getBlockTitle() {

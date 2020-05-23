@@ -36,7 +36,7 @@ public class ChartObj {
 
     //type false - bar
     //type true - line
-    ChartObj(ArrayList<Float> values, String firstDate, String lastDate, String unit, boolean type) {
+    public ChartObj(ArrayList<Float> values, String firstDate, String lastDate, String unit, boolean type) {
         if (type) this.type = 1;
         else this.type = 3;
         firstDateRaw = firstDate;
@@ -50,7 +50,7 @@ public class ChartObj {
         unitY = unit;
     }
 
-    ChartObj(ArrayList<Float> valuesY, ArrayList<Float> valuesX, String unitX, String unitY, boolean type) {
+    public ChartObj(ArrayList<Float> valuesY, ArrayList<Float> valuesX, String unitX, String unitY, boolean type) {
         if (type) this.type = 2;
         else this.type = 4;
         this.valuesX = valuesX;

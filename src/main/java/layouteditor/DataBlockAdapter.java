@@ -91,19 +91,29 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
                 viewHolder.valueBlockContent.setVisibility(View.VISIBLE);
                 viewHolder.tableBlockContent.setVisibility(View.GONE);
                 viewHolder.chartBlockContent.setVisibility(View.GONE);
+                viewHolder.chartTwoBlockContent.setVisibility(View.GONE);
                 configureValueViewControls(dataBlock, position);
                 break;
             case TABLE:
                 viewHolder.valueBlockContent.setVisibility(View.GONE);
                 viewHolder.tableBlockContent.setVisibility(View.VISIBLE);
                 viewHolder.chartBlockContent.setVisibility(View.GONE);
+                viewHolder.chartTwoBlockContent.setVisibility(View.GONE);
                 configureTableViewControls(dataBlock, position);
                 break;
             case CHART:
                 viewHolder.valueBlockContent.setVisibility(View.GONE);
                 viewHolder.tableBlockContent.setVisibility(View.GONE);
                 viewHolder.chartBlockContent.setVisibility(View.VISIBLE);
-                //setProperLayoutBelowSpinner(convertView, R.layout.chart_block_content, dataBlock, position);
+                viewHolder.chartTwoBlockContent.setVisibility(View.GONE);
+                configureChartViewControls(dataBlock, position);
+                break;
+            case CHARTTWO:
+                viewHolder.valueBlockContent.setVisibility(View.GONE);
+                viewHolder.tableBlockContent.setVisibility(View.GONE);
+                viewHolder.chartBlockContent.setVisibility(View.GONE);
+                viewHolder.chartTwoBlockContent.setVisibility(View.VISIBLE);
+                configureChartTwoViewControls(dataBlock, position);
                 break;
         }
 
@@ -273,6 +283,167 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         });
     }
 
+    private void configureChartViewControls(final DataBlock dataBlock, final int itemPosition) {
+        List<String> myArraySpinner = new ArrayList<>();
+
+        if(dataBlock.getMagnitude() != Utils.Magnitude.UNDEFINED)
+            viewHolder.chartMagnitudeSpinner.setSelection(dataBlock.getMagnitude().id());
+
+        switch (dataBlock.getMagnitude()) {
+            case TEMPERATURE:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.TEMPERATURE_SPINNER));
+                break;
+            case HUMIDITY:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.HUMIDITY_SPINNER));
+                break;
+            case PRESSURE:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.PRESSURE_SPINNER));
+                break;
+            case BATTERY_VOLTAGE: case SOLAR_PANEL_VOLTAGE: case NODE_VOLTAGE:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.VOLTAGE_SPINNER));
+                break;
+            case BATTERY_CURRENT: case SOLAR_PANEL_CURRENT: case NODE_CURRENT:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.CURRENT_SPINNER));
+                break;
+        }
+
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, myArraySpinner);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        viewHolder.chartUnitSpinner.setAdapter(spinnerArrayAdapter);
+
+        if(dataBlock.getUnit() != Utils.Unit.UNDEFINED){
+            viewHolder.chartUnitSpinner.setSelection(dataBlock.getUnit().id());
+        }
+
+        viewHolder.chartMagnitudeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (mContext instanceof LayoutEditor) {
+                    ((LayoutEditor)mContext).setUnit(itemPosition, 0, dataBlock.getMagnitude());
+                    ((LayoutEditor)mContext).setMagnitude(itemPosition, pos);
+                    notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+        viewHolder.chartUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (mContext instanceof LayoutEditor) {
+                    ((LayoutEditor)mContext).setUnit(itemPosition, pos, dataBlock.getMagnitude());
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Utils.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat(Utils.TIME_FORMAT, Locale.getDefault());
+
+        viewHolder.chartStartDateInput.setText(dateFormat.format(dataBlock.getDateStart()));
+        viewHolder.chartStartTimeInput.setText(timeFormat.format(dataBlock.getDateStart()));
+        viewHolder.chartEndDateInput.setText(dateFormat.format(dataBlock.getDateEnd()));
+        viewHolder.chartEndTimeInput.setText(timeFormat.format(dataBlock.getDateEnd()));
+
+        viewHolder.chartStartDateInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomDatePickerDialog dialog = new CustomDatePickerDialog(mContext, itemPosition, CustomDatePickerDialog.DialogType.START);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, dialog, Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
+                datePickerDialog.show();
+            }
+        });
+
+        viewHolder.chartEndDateInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomDatePickerDialog dialog = new CustomDatePickerDialog(mContext, itemPosition, CustomDatePickerDialog.DialogType.START);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, dialog, Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
+                datePickerDialog.show();
+            }
+        });
+
+        viewHolder.chartStartTimeInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomTimePickerDialog dialog = new CustomTimePickerDialog(mContext, itemPosition, CustomTimePickerDialog.DialogType.END);
+                TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, dialog, Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
+                timePickerDialog.show();
+            }
+        });
+
+        viewHolder.chartEndTimeInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomTimePickerDialog dialog = new CustomTimePickerDialog(mContext, itemPosition, CustomTimePickerDialog.DialogType.END);
+                TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, dialog, Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
+                timePickerDialog.show();
+            }
+        });
+    }
+
+    private void configureChartTwoViewControls(final DataBlock dataBlock, final int itemPosition) {
+        List<String> myArraySpinner = new ArrayList<>();
+
+        if(dataBlock.getMagnitude() != Utils.Magnitude.UNDEFINED)
+            viewHolder.chartTwoXMagnitudeSpinner.setSelection(dataBlock.getMagnitude().id());
+
+        switch (dataBlock.getMagnitude()) {
+            case TEMPERATURE:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.TEMPERATURE_SPINNER));
+                break;
+            case HUMIDITY:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.HUMIDITY_SPINNER));
+                break;
+            case PRESSURE:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.PRESSURE_SPINNER));
+                break;
+            case BATTERY_VOLTAGE: case SOLAR_PANEL_VOLTAGE: case NODE_VOLTAGE:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.VOLTAGE_SPINNER));
+                break;
+            case BATTERY_CURRENT: case SOLAR_PANEL_CURRENT: case NODE_CURRENT:
+                myArraySpinner = Arrays.asList(mContext.getResources().getStringArray(R.array.CURRENT_SPINNER));
+                break;
+        }
+
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, myArraySpinner);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        viewHolder.chartTwoXUnitSpinner.setAdapter(spinnerArrayAdapter);
+
+        if(dataBlock.getUnit() != Utils.Unit.UNDEFINED){
+            viewHolder.chartTwoXUnitSpinner.setSelection(dataBlock.getUnit().id());
+        }
+
+        viewHolder.chartTwoXMagnitudeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (mContext instanceof LayoutEditor) {
+                    ((LayoutEditor)mContext).setUnit(itemPosition, 0, dataBlock.getMagnitude());
+                    ((LayoutEditor)mContext).setMagnitude(itemPosition, pos);
+                    notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+        viewHolder.chartTwoXUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                if (mContext instanceof LayoutEditor) {
+                    ((LayoutEditor)mContext).setUnit(itemPosition, pos, dataBlock.getMagnitude());
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+
+    }
+
+
     public static class ViewHolder {
         EditText blockTitleInput;
         Button deleteButton;
@@ -282,6 +453,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         View valueBlockContent;
         View tableBlockContent;
         View chartBlockContent;
+        View chartTwoBlockContent;
 
         Spinner valueMagnitudeSpinner;
         Spinner valueUnitSpinner;
@@ -293,6 +465,21 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         EditText tableEndDateInput;
         EditText tableEndTimeInput;
 
+        Spinner chartTypeSpinner;
+        Spinner chartMagnitudeSpinner;
+        Spinner chartUnitSpinner;
+        EditText chartStartDateInput;
+        EditText chartStartTimeInput;
+        EditText chartEndDateInput;
+        EditText chartEndTimeInput;
+
+        Spinner chartTwoTypeSpinner;
+        Spinner chartTwoXMagnitudeSpinner;
+        Spinner chartTwoXUnitSpinner;
+        Spinner chartTwoYMagnitudeSpinner;
+        Spinner chartTwoYUnitSpinner;
+
+
         public ViewHolder(View convertView) {
             this.blockTitleInput = convertView.findViewById(R.id.block_title_input);
             this.deleteButton = convertView.findViewById(R.id.delete_block_button);
@@ -302,6 +489,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
             this.valueBlockContent = convertView.findViewById(R.id.value_block_content);
             this.tableBlockContent = convertView.findViewById(R.id.table_block_content);
             this.chartBlockContent = convertView.findViewById(R.id.chart_block_content);
+            this.chartTwoBlockContent = convertView.findViewById(R.id.chart_two_block_content);
 
             this.valueMagnitudeSpinner = convertView.findViewById(R.id.value_block_magnitude_spinner);
             this.valueUnitSpinner = convertView.findViewById(R.id.value_block_unit_spinner);
@@ -312,6 +500,21 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
             this.tableStartTimeInput = convertView.findViewById(R.id.table_block_start_time_input);
             this.tableEndDateInput = convertView.findViewById(R.id.table_block_end_date_input);
             this.tableEndTimeInput = convertView.findViewById(R.id.table_block_end_time_input);
+
+            this.chartTypeSpinner = convertView.findViewById(R.id.chart_block_type_spinner);
+            this.chartMagnitudeSpinner = convertView.findViewById(R.id.chart_block_magnitude_spinner);
+            this.chartUnitSpinner = convertView.findViewById(R.id.chart_block_unit_spinner);
+            this.chartStartDateInput = convertView.findViewById(R.id.chart_block_start_date_input);
+            this.chartStartTimeInput = convertView.findViewById(R.id.chart_block_start_time_input);
+            this.chartEndDateInput = convertView.findViewById(R.id.chart_block_end_date_input);
+            this.chartEndTimeInput = convertView.findViewById(R.id.chart_block_end_time_input);
+
+            this.chartTwoTypeSpinner = convertView.findViewById(R.id.chart_two_block_type_spinner);
+            this.chartTwoXMagnitudeSpinner = convertView.findViewById(R.id.chart_two_block_x_magnitude_spinner);
+            this.chartTwoXUnitSpinner = convertView.findViewById(R.id.chart_two_block_x_unit_spinner);
+            this.chartTwoYMagnitudeSpinner = convertView.findViewById(R.id.chart_two_block_y_magnitude_spinner);
+            this.chartTwoYUnitSpinner = convertView.findViewById(R.id.chart_two_block_y_unit_spinner);
+
         }
     }
 }

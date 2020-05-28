@@ -388,7 +388,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         List<String> myArraySpinner = new ArrayList<>();
 
         if(dataBlock.getMagnitude() != Utils.Magnitude.UNDEFINED)
-            viewHolder.chartTwoXMagnitudeSpinner.setSelection(dataBlock.getMagnitude().id());
+            viewHolder.chartTwoMagnitudeSpinner.setSelection(dataBlock.getMagnitude().id());
 
         switch (dataBlock.getMagnitude()) {
             case TEMPERATURE:
@@ -410,13 +410,13 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, myArraySpinner);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        viewHolder.chartTwoXUnitSpinner.setAdapter(spinnerArrayAdapter);
+        viewHolder.chartUnitSpinner.setAdapter(spinnerArrayAdapter);
 
         if(dataBlock.getUnit() != Utils.Unit.UNDEFINED){
-            viewHolder.chartTwoXUnitSpinner.setSelection(dataBlock.getUnit().id());
+            viewHolder.chartTwoUnitSpinner.setSelection(dataBlock.getUnit().id());
         }
 
-        viewHolder.chartTwoXMagnitudeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        viewHolder.chartTwoMagnitudeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 if (mContext instanceof LayoutEditor) {
@@ -429,7 +429,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
             public void onNothingSelected(AdapterView<?> parent) { }
         });
 
-        viewHolder.chartTwoXUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        viewHolder.chartTwoUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 if (mContext instanceof LayoutEditor) {
@@ -440,7 +440,49 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
             public void onNothingSelected(AdapterView<?> parent) { }
         });
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Utils.DATE_FORMAT, Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat(Utils.TIME_FORMAT, Locale.getDefault());
 
+        viewHolder.chartTwoStartDateInput.setText(dateFormat.format(dataBlock.getDateStart()));
+        viewHolder.chartTwoStartTimeInput.setText(timeFormat.format(dataBlock.getDateStart()));
+        viewHolder.chartTwoEndDateInput.setText(dateFormat.format(dataBlock.getDateEnd()));
+        viewHolder.chartTwoEndTimeInput.setText(timeFormat.format(dataBlock.getDateEnd()));
+
+        viewHolder.chartTwoStartDateInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomDatePickerDialog dialog = new CustomDatePickerDialog(mContext, itemPosition, CustomDatePickerDialog.DialogType.START);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, dialog, Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
+                datePickerDialog.show();
+            }
+        });
+
+        viewHolder.chartTwoEndDateInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomDatePickerDialog dialog = new CustomDatePickerDialog(mContext, itemPosition, CustomDatePickerDialog.DialogType.START);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, dialog, Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
+                datePickerDialog.show();
+            }
+        });
+
+        viewHolder.chartTwoStartTimeInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomTimePickerDialog dialog = new CustomTimePickerDialog(mContext, itemPosition, CustomTimePickerDialog.DialogType.END);
+                TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, dialog, Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
+                timePickerDialog.show();
+            }
+        });
+
+        viewHolder.chartTwoEndTimeInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomTimePickerDialog dialog = new CustomTimePickerDialog(mContext, itemPosition, CustomTimePickerDialog.DialogType.END);
+                TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, dialog, Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
+                timePickerDialog.show();
+            }
+        });
     }
 
 
@@ -465,7 +507,6 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         EditText tableEndDateInput;
         EditText tableEndTimeInput;
 
-        Spinner chartTypeSpinner;
         Spinner chartMagnitudeSpinner;
         Spinner chartUnitSpinner;
         EditText chartStartDateInput;
@@ -473,11 +514,12 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         EditText chartEndDateInput;
         EditText chartEndTimeInput;
 
-        Spinner chartTwoTypeSpinner;
-        Spinner chartTwoXMagnitudeSpinner;
-        Spinner chartTwoXUnitSpinner;
-        Spinner chartTwoYMagnitudeSpinner;
-        Spinner chartTwoYUnitSpinner;
+        Spinner chartTwoMagnitudeSpinner;
+        Spinner chartTwoUnitSpinner;
+        EditText chartTwoStartDateInput;
+        EditText chartTwoStartTimeInput;
+        EditText chartTwoEndDateInput;
+        EditText chartTwoEndTimeInput;
 
 
         public ViewHolder(View convertView) {
@@ -501,7 +543,6 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
             this.tableEndDateInput = convertView.findViewById(R.id.table_block_end_date_input);
             this.tableEndTimeInput = convertView.findViewById(R.id.table_block_end_time_input);
 
-            this.chartTypeSpinner = convertView.findViewById(R.id.chart_block_type_spinner);
             this.chartMagnitudeSpinner = convertView.findViewById(R.id.chart_block_magnitude_spinner);
             this.chartUnitSpinner = convertView.findViewById(R.id.chart_block_unit_spinner);
             this.chartStartDateInput = convertView.findViewById(R.id.chart_block_start_date_input);
@@ -509,11 +550,12 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
             this.chartEndDateInput = convertView.findViewById(R.id.chart_block_end_date_input);
             this.chartEndTimeInput = convertView.findViewById(R.id.chart_block_end_time_input);
 
-            this.chartTwoTypeSpinner = convertView.findViewById(R.id.chart_two_block_type_spinner);
-            this.chartTwoXMagnitudeSpinner = convertView.findViewById(R.id.chart_two_block_x_magnitude_spinner);
-            this.chartTwoXUnitSpinner = convertView.findViewById(R.id.chart_two_block_x_unit_spinner);
-            this.chartTwoYMagnitudeSpinner = convertView.findViewById(R.id.chart_two_block_y_magnitude_spinner);
-            this.chartTwoYUnitSpinner = convertView.findViewById(R.id.chart_two_block_y_unit_spinner);
+            this.chartTwoMagnitudeSpinner = convertView.findViewById(R.id.chart_two_block_magnitude_spinner);
+            this.chartTwoUnitSpinner = convertView.findViewById(R.id.chart_two_block_unit_spinner);
+            this.chartTwoStartDateInput = convertView.findViewById(R.id.chart_two_block_start_date_input);
+            this.chartTwoStartTimeInput = convertView.findViewById(R.id.chart_two_block_start_time_input);
+            this.chartTwoEndDateInput = convertView.findViewById(R.id.chart_two_block_end_date_input);
+            this.chartTwoEndTimeInput = convertView.findViewById(R.id.chart_two_block_end_time_input);
 
         }
     }

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/chart_two_block_content"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:id="@+id/chart_two_block_content">
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/chart_two_block_type_text_view2"
+            android:id="@+id/chart_two_block_magnitude_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
             android:paddingTop="15dp"
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
-            android:text="@string/TYPE"
+            android:text="@string/MAGNITUDE"
             android:textColor="@color/VALUE_BLOCK_TEXT"
             android:textSize="18sp" />
 
@@ -30,43 +30,7 @@
             android:background="@color/WHITE">
 
             <Spinner
-                android:id="@+id/chart_two_block_type_spinner"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:entries="@array/CHART_TYPE_SPINNER" />
-
-        </RelativeLayout>
-
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/chart_two_block_x_magnitude_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-            android:paddingTop="5dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="5dp"
-            android:text="@string/MAGNITUDE"
-            android:textColor="@color/VALUE_BLOCK_TEXT"
-            android:textSize="18sp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="5dp"
-            android:background="@color/WHITE">
-
-            <Spinner
-                android:id="@+id/chart_two_block_x_magnitude_spinner"
+                android:id="@+id/chart_two_block_magnitude_spinner"
                 android:layout_width="160dp"
                 android:layout_height="match_parent"
                 android:entries="@array/MAGNITUDES_SPINNER" />
@@ -78,7 +42,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/chart_two_block_x_unit_text_view"
+            android:id="@+id/chart_two_block_unit_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
@@ -99,7 +63,7 @@
             android:background="@color/WHITE">
 
             <Spinner
-                android:id="@+id/chart_two_block_x_unit_spinner"
+                android:id="@+id/chart_two_block_unit_spinner"
                 android:layout_width="160dp"
                 android:layout_height="match_parent" />
         </RelativeLayout>
@@ -110,15 +74,15 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/chart_two_block_y_magnitude_text_view"
+            android:id="@+id/chart_two_block_start_date_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
             android:paddingTop="5dp"
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
-            android:text="@string/MAGNITUDE"
-            android:textColor="@color/VALUE_BLOCK_TEXT"
+            android:text="@string/DATE_START"
+            android:textColor="@color/TIMESTAMP_BLOCK_TEXT"
             android:textSize="18sp" />
 
         <RelativeLayout
@@ -130,11 +94,53 @@
             android:layout_marginBottom="5dp"
             android:background="@color/WHITE">
 
-            <Spinner
-                android:id="@+id/chart_two_block_y_magnitude_spinner"
+            <EditText
+                android:id="@+id/chart_two_block_start_date_input"
                 android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:entries="@array/MAGNITUDES_SPINNER" />
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:longClickable="false" />
+
+        </RelativeLayout>
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/chart_two_block_start_time_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:text="@string/TIME_START"
+            android:textColor="@color/TIMESTAMP_BLOCK_TEXT"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/WHITE">
+            <EditText
+                android:id="@+id/chart_two_block_start_time_input"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:longClickable="false" />
         </RelativeLayout>
     </TableRow>
 
@@ -143,15 +149,54 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/chart_two_block_y_unit_text_view"
+            android:id="@+id/chart_two_block_end_date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="5dp"
+            android:text="@string/DATE_END"
+            android:textColor="@color/TIMESTAMP_BLOCK_TEXT"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/WHITE">
+
+            <EditText
+                android:id="@+id/chart_two_block_end_date_input"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:longClickable="false" />
+
+        </RelativeLayout>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/chart_two_block_end_time_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
             android:paddingTop="5dp"
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
-            android:text="@string/UNIT"
-            android:textColor="@color/VALUE_BLOCK_TEXT"
+            android:text="@string/TIME_END"
+            android:textColor="@color/TIMESTAMP_BLOCK_TEXT"
             android:textSize="18sp" />
 
         <RelativeLayout
@@ -163,10 +208,16 @@
             android:layout_marginBottom="15dp"
             android:background="@color/WHITE">
 
-            <Spinner
-                android:id="@+id/chart_two_block_y_unit_spinner"
+            <EditText
+                android:id="@+id/chart_two_block_end_time_input"
                 android:layout_width="160dp"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:longClickable="false" />
         </RelativeLayout>
     </TableRow>
 </TableLayout>

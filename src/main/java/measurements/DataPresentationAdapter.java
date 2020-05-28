@@ -20,6 +20,7 @@ import com.representation.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 import charts.ChartObj;
@@ -128,26 +129,18 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         } else if(type == 2) {
             if(convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.chart_view, parent, false);
-
                 ArrayList<Float> values = new ArrayList<>();
-                values.add(0.9F);
-                values.add(1.1F);
-                values.add(1.2F);
-                values.add(1.3F);
+                ArrayList<ExampleRecord> data = Database.getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
+                for (ExampleRecord rec : data) {
+                    values.add((float)rec.getValue());
+                }
+                // TODO: Title not working
+                // Set title
+                //chartViewHolder.blockTitle.setText(dataBlock.getBlockTitle());
 
-                ArrayList<Float> values2 = new ArrayList<>();
-                values2.add(0F);
-                values2.add(1F);
-                values2.add(2F);
-                values2.add(3F);
-
-                //x(t)
-                ChartObj obj = new ChartObj(values, "2020-01-29T09:00:00Z", "2020-01-31T09:00:00Z", "Napięcie [V]", false);
-                //x(y)
-                ChartObj obj2 = new ChartObj(values, values2, "Napięcie [V]", "Napięcie [V]", true);
-
+                ChartObj obj = new ChartObj(values, dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getUnit().toString(), false);
                 FrameLayout frameLayoutSubParent = convertView.findViewById(R.id.frameLayout);
-                ChartView chart = new ChartView(mContext, obj2);
+                ChartView chart = new ChartView(mContext, obj);
                 frameLayoutSubParent.addView(chart);
 
                 chartViewHolder = new ChartViewHolder(convertView);
@@ -166,26 +159,18 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.chart_view, parent, false);
             ArrayList<Float> values = new ArrayList<>();
-            values.add(0.9F);
-            values.add(1.1F);
-            values.add(1.2F);
-            values.add(1.3F);
+            ArrayList<ExampleRecord> data = Database.getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
+            for (ExampleRecord rec : data) {
+                values.add((float)rec.getValue());
+            }
+            // TODO: Title not working
+            // Set title
+            //chartTwoViewHolder.blockTitle.setText(dataBlock.getBlockTitle());
 
-            ArrayList<Float> values2 = new ArrayList<>();
-            values2.add(0F);
-            values2.add(1F);
-            values2.add(2F);
-            values2.add(3F);
-
-            //x(t)
-            ChartObj obj = new ChartObj(values, "2020-01-29T09:00:00Z", "2020-01-31T09:00:00Z", "Napięcie [V]", false);
-            //x(y)
-            ChartObj obj2 = new ChartObj(values, values2, "Napięcie [V]", "Napięcie [V]", true);
-
+            ChartObj obj = new ChartObj(values, dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getUnit().toString(), false);
             FrameLayout frameLayoutSubParent = convertView.findViewById(R.id.frameLayout);
-            ChartView chart = new ChartView(mContext, obj2);
+            ChartView chart = new ChartView(mContext, obj);
             frameLayoutSubParent.addView(chart);
-
             chartTwoViewHolder = new ChartTwoViewHolder(convertView);
             convertView.setTag(chartTwoViewHolder);
         } else {
@@ -198,8 +183,6 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         // TODO: Chart View Case
         // Get Data from DB...
     }
-
-
         // Return the completed view to render on screen
         return convertView;
     }

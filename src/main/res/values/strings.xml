@@ -21,8 +21,8 @@
     <string name="UNIT">Jednostka:</string>
     <string name="VALUE">Wartość</string>
     <string name="TABLE">Tabela</string>
-    <string name="CHART">Wykres x(t)</string>
-    <string name="CHARTTWO">Wykres x(y)</string>
+    <string name="CHART">Wykres liniowy</string>
+    <string name="CHARTTWO">Wykres słupkowy</string>
     <string name="TYPE">Typ wykresu</string>
     <string name="TYPELINE">Liniowy</string>
     <string name="TYPEBAR">Słupkowy</string>
@@ -57,10 +57,6 @@
     <string name="NO_DATA">Brak danych do wyświetlenia</string>
 
     <!-- Never change arrays item order unless you change enum types values -->
-    <string-array name="CHART_TYPE_SPINNER">
-        <item>Liniowy</item>
-        <item>Słupkowy</item>
-    </string-array>
     <string-array name="BLOCK_TYPE_SPINNER">
         <item>@string/VALUE</item>
         <item>@string/TABLE</item>

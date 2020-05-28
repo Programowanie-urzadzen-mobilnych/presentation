@@ -18,8 +18,8 @@ import java.util.List;
 public class ChartObj {
     private ArrayList<Float> valuesX;
     private ArrayList<Float> valuesY;
-    private Date firstDate;
-    private Date lastDate;
+//    private Date firstDate;
+//    private Date lastDate;
     private String firstDateFormatted;
     private String lastDateFormatted;
     private String unitX;
@@ -39,8 +39,8 @@ public class ChartObj {
     public ChartObj(ArrayList<Float> values, Date firstDate, Date lastDate, String unit, boolean type) {
         if (type) this.type = 1;
         else this.type = 3;
-        this.firstDate = firstDate;
-        this.lastDate = lastDate;
+//        this.firstDate = firstDate;
+//        this.lastDate = lastDate;
         firstDateFormatted = ParseDateToString(firstDate);
         lastDateFormatted = ParseDateToString(lastDate);
         dates = getTimeline(firstDate, lastDate, values.size());

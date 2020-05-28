@@ -2,6 +2,7 @@ package measurements;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import com.representation.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 import charts.ChartObj;
@@ -134,9 +134,6 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
                 for (ExampleRecord rec : data) {
                     values.add((float)rec.getValue());
                 }
-                // TODO: Title not working
-                // Set title
-                //chartViewHolder.blockTitle.setText(dataBlock.getBlockTitle());
 
                 ChartObj obj = new ChartObj(values, dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getUnit().toString(), false);
                 FrameLayout frameLayoutSubParent = convertView.findViewById(R.id.frameLayout);
@@ -163,9 +160,6 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
             for (ExampleRecord rec : data) {
                 values.add((float)rec.getValue());
             }
-            // TODO: Title not working
-            // Set title
-            //chartTwoViewHolder.blockTitle.setText(dataBlock.getBlockTitle());
 
             ChartObj obj = new ChartObj(values, dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getUnit().toString(), false);
             FrameLayout frameLayoutSubParent = convertView.findViewById(R.id.frameLayout);

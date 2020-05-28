@@ -410,7 +410,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, myArraySpinner);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        viewHolder.chartUnitSpinner.setAdapter(spinnerArrayAdapter);
+        viewHolder.chartTwoUnitSpinner.setAdapter(spinnerArrayAdapter);
 
         if(dataBlock.getUnit() != Utils.Unit.UNDEFINED){
             viewHolder.chartTwoUnitSpinner.setSelection(dataBlock.getUnit().id());

@@ -161,7 +161,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
                 values.add((float)rec.getValue());
             }
 
-            ChartObj obj = new ChartObj(values, dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getUnit().toString(), false);
+            ChartObj obj = new ChartObj(values, dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getUnit().toString(), true);
             FrameLayout frameLayoutSubParent = convertView.findViewById(R.id.frameLayout);
             ChartView chart = new ChartView(mContext, obj);
             frameLayoutSubParent.addView(chart);

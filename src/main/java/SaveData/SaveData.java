@@ -27,6 +27,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import lib.folderpicker.FolderPicker;
+import pl.grupa33inf.watchdog.exceptions.ELayoutName;
 
 import static com.representation.Utils.WRITE_EXTERNAL_STORAGE_STATUS;
 
@@ -183,7 +184,18 @@ public class SaveData extends Activity {
             file.mkdirs();
         }
         String targetPdf = directory_path;
-        File filePath = new File(targetPdf,"test-2.pdf");
+
+        String filename = "Test-2";
+        String extension = "pdf";
+
+        String fixedPath = "";
+
+        File filePath = new File(targetPdf,filename);
+        if(filePath.exists()){
+            Log.d("Saving","File already Exists");
+            fixedPath = ELayoutName.getNewPath(directory_path,filename,extension);
+            filePath = new File(fixedPath);
+        }
         try {
             document.writeTo(new FileOutputStream(filePath));
             Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();

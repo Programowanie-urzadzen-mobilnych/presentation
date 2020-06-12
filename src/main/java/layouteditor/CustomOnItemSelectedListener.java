@@ -33,6 +33,10 @@ public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedL
                     ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, Utils.BlockTypeEnum.CHART);
                     dataBlockAdapter.notifyDataSetChanged();
                     break;
+                case 3:
+                    ((LayoutEditor)layoutEditorContext).setBlockType(itemPosition, Utils.BlockTypeEnum.CHARTTWO);
+                    dataBlockAdapter.notifyDataSetChanged();
+                    break;
             }
         }
     }

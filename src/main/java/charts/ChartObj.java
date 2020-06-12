@@ -18,8 +18,8 @@ import java.util.List;
 public class ChartObj {
     private ArrayList<Float> valuesX;
     private ArrayList<Float> valuesY;
-    private String firstDateRaw;
-    private String lastDateRaw;
+//    private Date firstDate;
+//    private Date lastDate;
     private String firstDateFormatted;
     private String lastDateFormatted;
     private String unitX;
@@ -36,21 +36,21 @@ public class ChartObj {
 
     //type false - bar
     //type true - line
-    ChartObj(ArrayList<Float> values, String firstDate, String lastDate, String unit, boolean type) {
+    public ChartObj(ArrayList<Float> values, Date firstDate, Date lastDate, String unit, boolean type) {
         if (type) this.type = 1;
         else this.type = 3;
-        firstDateRaw = firstDate;
-        lastDateRaw = lastDate;
-        firstDateFormatted = ParseDateToString(ParseStringToDate(firstDate));
-        lastDateFormatted = ParseDateToString(ParseStringToDate(lastDate));
-        dates = getTimeline(ParseStringToDate(firstDate), ParseStringToDate(lastDate), values.size());
+//        this.firstDate = firstDate;
+//        this.lastDate = lastDate;
+        firstDateFormatted = ParseDateToString(firstDate);
+        lastDateFormatted = ParseDateToString(lastDate);
+        dates = getTimeline(firstDate, lastDate, values.size());
         XAxisFloatNumbers = getXAxisFloatNumbers(dates);
         datesToString = getTimelineToString(dates);
         valuesY = values;
         unitY = unit;
     }
 
-    ChartObj(ArrayList<Float> valuesY, ArrayList<Float> valuesX, String unitX, String unitY, boolean type) {
+    public ChartObj(ArrayList<Float> valuesY, ArrayList<Float> valuesX, String unitX, String unitY, boolean type) {
         if (type) this.type = 2;
         else this.type = 4;
         this.valuesX = valuesX;

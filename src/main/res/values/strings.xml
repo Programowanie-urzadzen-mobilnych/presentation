@@ -21,7 +21,12 @@
     <string name="UNIT">Jednostka:</string>
     <string name="VALUE">Wartość</string>
     <string name="TABLE">Tabela</string>
-    <string name="CHART">Wykres</string>
+    <string name="CHART">Wykres liniowy</string>
+    <string name="CHARTTWO">Wykres słupkowy</string>
+    <string name="TYPE">Typ wykresu</string>
+    <string name="TYPELINE">Liniowy</string>
+    <string name="TYPEBAR">Słupkowy</string>
+
     <string name="TEMPERATURE">Temperatura</string>
     <string name="HUMIDITY">Wilgotność</string>
     <string name="PRESSURE">Ciśnienie</string>
@@ -56,6 +61,7 @@
         <item>@string/VALUE</item>
         <item>@string/TABLE</item>
         <item>@string/CHART</item>
+        <item>@string/CHARTTWO</item>
     </string-array>
     <string-array name="MAGNITUDES_SPINNER">
         <item>@string/TEMPERATURE</item>

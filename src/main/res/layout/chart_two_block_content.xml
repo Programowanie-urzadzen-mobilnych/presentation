@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ECECEC"
-    android:layout_marginTop="5dp"
-    android:foreground="@drawable/grey_border" >
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:id="@+id/chart_two_block_content">
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/table_block_magnitude_text_view"
+            android:id="@+id/chart_two_block_magnitude_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
@@ -32,7 +30,7 @@
             android:background="@color/WHITE">
 
             <Spinner
-                android:id="@+id/table_block_magnitude_spinner"
+                android:id="@+id/chart_two_block_magnitude_spinner"
                 android:layout_width="160dp"
                 android:layout_height="match_parent"
                 android:entries="@array/MAGNITUDES_SPINNER" />
@@ -44,7 +42,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/table_block_unit_text_view"
+            android:id="@+id/chart_two_block_unit_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
@@ -65,7 +63,7 @@
             android:background="@color/WHITE">
 
             <Spinner
-                android:id="@+id/table_block_unit_spinner"
+                android:id="@+id/chart_two_block_unit_spinner"
                 android:layout_width="160dp"
                 android:layout_height="match_parent" />
         </RelativeLayout>
@@ -76,7 +74,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/table_block_start_date_text_view"
+            android:id="@+id/chart_two_block_start_date_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
@@ -97,7 +95,7 @@
             android:background="@color/WHITE">
 
             <EditText
-                android:id="@+id/table_block_start_date_input"
+                android:id="@+id/chart_two_block_start_date_input"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
@@ -114,7 +112,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/table_block_start_time_text_view"
+            android:id="@+id/chart_two_block_start_time_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
@@ -134,7 +132,7 @@
             android:layout_marginBottom="5dp"
             android:background="@color/WHITE">
             <EditText
-                android:id="@+id/table_block_start_time_input"
+                android:id="@+id/chart_two_block_start_time_input"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
@@ -151,7 +149,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/table_block_end_date_text_view"
+            android:id="@+id/chart_two_block_end_date_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
@@ -172,7 +170,7 @@
             android:background="@color/WHITE">
 
             <EditText
-                android:id="@+id/table_block_end_date_input"
+                android:id="@+id/chart_two_block_end_date_input"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
@@ -190,7 +188,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/table_block_end_time_text_view"
+            android:id="@+id/chart_two_block_end_time_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
@@ -211,7 +209,7 @@
             android:background="@color/WHITE">
 
             <EditText
-                android:id="@+id/table_block_end_time_input"
+                android:id="@+id/chart_two_block_end_time_input"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:background="#00000000"

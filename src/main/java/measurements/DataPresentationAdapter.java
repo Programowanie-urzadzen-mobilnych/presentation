@@ -1,15 +1,19 @@
 package measurements;
 
 import android.content.Context;
+import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import com.representation.R;
@@ -19,6 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import charts.ChartObj;
+import charts.ChartView;
 import data.Database;
 import data.ExampleRecord;
 import layouteditor.DataBlock;
@@ -29,6 +35,8 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
     private ValueViewHolder valueViewHolder;
     private TableViewHolder tableViewHolder;
     private ChartViewHolder chartViewHolder;
+    private ChartTwoViewHolder chartTwoViewHolder;
+
 
     public DataPresentationAdapter(Context context, ArrayList<DataBlock> dataBlocks) {
         super(context, 0, dataBlocks);
@@ -45,6 +53,8 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
                 return 1;
             case CHART:
                 return 2;
+            case CHARTTWO:
+                return 3;
             default:
                 return -1;
         }
@@ -52,9 +62,10 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
 
     @Override
     public int getViewTypeCount() {
-        return 3;
+        return 4;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
@@ -118,6 +129,17 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         } else if(type == 2) {
             if(convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.chart_view, parent, false);
+                ArrayList<Float> values = new ArrayList<>();
+                ArrayList<ExampleRecord> data = Database.getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
+                for (ExampleRecord rec : data) {
+                    values.add((float)rec.getValue());
+                }
+
+                ChartObj obj = new ChartObj(values, dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getUnit().toString(), false);
+                FrameLayout frameLayoutSubParent = convertView.findViewById(R.id.frameLayout);
+                ChartView chart = new ChartView(mContext, obj);
+                frameLayoutSubParent.addView(chart);
+
                 chartViewHolder = new ChartViewHolder(convertView);
                 convertView.setTag(chartViewHolder);
             } else {
@@ -130,7 +152,31 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
             // TODO: Chart View Case
             // Get Data from DB...
         }
+     else if(type == 3) {
+        if(convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.chart_view, parent, false);
+            ArrayList<Float> values = new ArrayList<>();
+            ArrayList<ExampleRecord> data = Database.getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
+            for (ExampleRecord rec : data) {
+                values.add((float)rec.getValue());
+            }
 
+            ChartObj obj = new ChartObj(values, dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getUnit().toString(), true);
+            FrameLayout frameLayoutSubParent = convertView.findViewById(R.id.frameLayout);
+            ChartView chart = new ChartView(mContext, obj);
+            frameLayoutSubParent.addView(chart);
+            chartTwoViewHolder = new ChartTwoViewHolder(convertView);
+            convertView.setTag(chartTwoViewHolder);
+        } else {
+            chartTwoViewHolder = (ChartTwoViewHolder) convertView.getTag();
+        }
+
+        // Set title
+        chartTwoViewHolder.blockTitle.setText(dataBlock.getBlockTitle());
+
+        // TODO: Chart View Case
+        // Get Data from DB...
+    }
         // Return the completed view to render on screen
         return convertView;
     }
@@ -249,6 +295,13 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
     protected class ChartViewHolder {
         TextView blockTitle;
         public ChartViewHolder(View convertView) {
+            blockTitle = convertView.findViewById(R.id.block_title_text_view);
+        }
+    }
+
+    protected class ChartTwoViewHolder {
+        TextView blockTitle;
+        public ChartTwoViewHolder(View convertView) {
             blockTitle = convertView.findViewById(R.id.block_title_text_view);
         }
     }

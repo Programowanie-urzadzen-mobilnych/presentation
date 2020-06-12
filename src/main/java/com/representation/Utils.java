@@ -208,7 +208,7 @@ public class Utils {
     }
 
     // Never change enum values unless you change strings array items order
-    public enum BlockTypeEnum { VALUE(0), TABLE(1), CHART(2), UNDEFINED(-1);
+    public enum BlockTypeEnum { VALUE(0), TABLE(1), CHART(2), CHARTTWO(3), UNDEFINED(-1);
         private int mValue;
         BlockTypeEnum(int value) { this.mValue = value; }
         public int id(){ return mValue; }
@@ -230,6 +230,8 @@ public class Utils {
                     return TABLE;
                 case "CHART":
                     return CHART;
+                case "CHARTTWO":
+                    return CHARTTWO;
             }
             return UNDEFINED;
         }

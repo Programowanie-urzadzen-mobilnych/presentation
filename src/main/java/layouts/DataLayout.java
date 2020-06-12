@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import layouteditor.DataBlock;
+import pl.grupa33inf.watchdog.exceptions.ELayoutName;
 
 public class DataLayout implements Serializable {
     private String layoutTitle;
@@ -123,8 +124,21 @@ public class DataLayout implements Serializable {
         //path = "/storage/emulated/0/saves/test.txt";
         System.out.println(pathText+" + "+pathFileName);
 
+
+        File filePath = new File(path);
+
+        if(filePath.exists()){
+            System.out.println("File already Exists");
+            String fixedPath = ELayoutName.getNewPath(pathText,pathFileName,"ssf");
+            System.out.println("New File path "+fixedPath);
+
+            filePath = new File(fixedPath);
+            if(!filePath.exists()){
+                System.out.println("What th efuck?");
+            }
+        }
+
         try {
-            File filePath = new File(pathText,pathFileName);
             FileWriter out = new FileWriter(filePath);
             out.write(layoutTitle);
             out.write('\n');

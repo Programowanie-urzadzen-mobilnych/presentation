@@ -282,13 +282,23 @@ public class LayoutEditor extends AppCompatActivity {
         // displayLayoutContent();
     }
 
-    public void setStartDateTimeText(Date date, int itemPosition) {
-        layout.getDataBlocks().get(itemPosition).setDateStart(date);
+    public void setStartTimeText(Date date, int itemPosition) {
+        layout.getDataBlocks().get(itemPosition).setDateStart(date, false);
         dataBlockAdapter.notifyDataSetChanged();
     }
 
-    public void setEndDateTimeText(Date date, int itemPosition) {
-        layout.getDataBlocks().get(itemPosition).setDateEnd(date);
+    public void setStartDateText(Date date, int itemPosition) {
+        layout.getDataBlocks().get(itemPosition).setDateStart(date, true);
+        dataBlockAdapter.notifyDataSetChanged();
+    }
+
+    public void setEndTimeText(Date date, int itemPosition) {
+        layout.getDataBlocks().get(itemPosition).setDateEnd(date, false);
+        dataBlockAdapter.notifyDataSetChanged();
+    }
+
+    public void setEndDateText(Date date, int itemPosition) {
+        layout.getDataBlocks().get(itemPosition).setDateEnd(date, true);
         dataBlockAdapter.notifyDataSetChanged();
     }
 

@@ -111,13 +111,19 @@ public class DataBlock {
 
     public void setDateStart(Date dateStart) {
         Calendar newCalendar = Calendar.getInstance();
+        newCalendar.setTime(dateStart);
+        this.dateStart = newCalendar.getTime();
+    }
+
+    public void setDateStart(Date dateStart, boolean isDate) {
+        Calendar newCalendar = Calendar.getInstance();
         Calendar oldCalendar = Calendar.getInstance();
 
         newCalendar.setTime(dateStart);
         oldCalendar.setTime(this.dateStart);
 
-        if(newCalendar.get(Calendar.YEAR) == 0){
-            // Log.println(Log.INFO, "setDateStart", "Year is 0");
+        if(isDate){
+            Log.println(Log.INFO, "setDateStart", "isDate = true");
             newCalendar.set(newCalendar.get(Calendar.YEAR),
                     newCalendar.get(Calendar.MONTH),
                     newCalendar.get(Calendar.DAY_OF_MONTH),
@@ -125,7 +131,7 @@ public class DataBlock {
                     oldCalendar.get(Calendar.MINUTE),
                     oldCalendar.get(Calendar.SECOND));
         } else {
-            // Log.println(Log.INFO, "setDateStart", "Year is not 0");
+            Log.println(Log.INFO, "setDateStart", "isDate = false");
             newCalendar.set(oldCalendar.get(Calendar.YEAR),
                     oldCalendar.get(Calendar.MONTH),
                     oldCalendar.get(Calendar.DAY_OF_MONTH),
@@ -133,13 +139,26 @@ public class DataBlock {
                     newCalendar.get(Calendar.MINUTE),
                     newCalendar.get(Calendar.SECOND));
         }
+
+        Log.println(Log.ERROR, "setDateStart", "date = " + newCalendar.getTime());
         this.dateStart = newCalendar.getTime();
     }
 
     public void setDateStart(String dateStart) {
         try {
             Date date = new SimpleDateFormat(Utils.DATETIME_FORMAT, Locale.getDefault()).parse(dateStart);
+            Log.println(Log.ERROR, "Error", "date Start: " + dateStart);
             setDateStart(date);
+        } catch (ParseException e) {
+            Log.println(Log.ERROR, "setDateStart", "Error while parsing date string");
+        }
+    }
+
+    public void setDateStart(String dateStart, boolean isDate) {
+        try {
+            Date date = new SimpleDateFormat(Utils.DATETIME_FORMAT, Locale.getDefault()).parse(dateStart);
+            Log.println(Log.ERROR, "Error", "date Start: " + dateStart);
+            setDateStart(date, isDate);
         } catch (ParseException e) {
             Log.println(Log.ERROR, "setDateStart", "Error while parsing date string");
         }
@@ -151,13 +170,19 @@ public class DataBlock {
 
     public void setDateEnd(Date dateEnd) {
         Calendar newCalendar = Calendar.getInstance();
+        newCalendar.setTime(dateEnd);
+        this.dateEnd = newCalendar.getTime();
+    }
+
+    public void setDateEnd(Date dateEnd, boolean isDate) {
+        Calendar newCalendar = Calendar.getInstance();
         Calendar oldCalendar = Calendar.getInstance();
 
         newCalendar.setTime(dateEnd);
         oldCalendar.setTime(this.dateEnd);
 
-        if (newCalendar.get(Calendar.YEAR) == 0){
-            //Log.println(Log.INFO, "setDateEnd", "Year is 0");
+        if (isDate){
+            Log.println(Log.INFO, "setDateEnd", "isDate = true");
             newCalendar.set(newCalendar.get(Calendar.YEAR),
                     newCalendar.get(Calendar.MONTH),
                     newCalendar.get(Calendar.DAY_OF_MONTH),
@@ -165,7 +190,7 @@ public class DataBlock {
                     oldCalendar.get(Calendar.MINUTE),
                     oldCalendar.get(Calendar.SECOND));
         } else {
-            //Log.println(Log.INFO, "setDateEnd", "Year is not 0");
+            Log.println(Log.INFO, "setDateEnd", "isDate = false");
             newCalendar.set(oldCalendar.get(Calendar.YEAR),
                     oldCalendar.get(Calendar.MONTH),
                     oldCalendar.get(Calendar.DAY_OF_MONTH),
@@ -173,7 +198,18 @@ public class DataBlock {
                     newCalendar.get(Calendar.MINUTE),
                     newCalendar.get(Calendar.SECOND));
         }
+
+        Log.println(Log.ERROR, "setDateStart", "date = " + newCalendar.getTime());
         this.dateEnd = newCalendar.getTime();
+    }
+
+    public void setDateEnd(String dateEnd, boolean isDate) {
+        try {
+            Date date = new SimpleDateFormat(Utils.DATETIME_FORMAT, Locale.getDefault()).parse(dateEnd);
+            setDateEnd(date, isDate);
+        } catch (ParseException e) {
+            Log.println(Log.ERROR, "setDateEnd", "Error while parsing date string");
+        }
     }
 
     public void setDateEnd(String dateEnd) {

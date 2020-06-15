@@ -28,12 +28,12 @@ public class CustomTimePickerDialog implements TimePickerDialog.OnTimeSetListene
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         if (layoutEditorContext instanceof LayoutEditor) {
             try {
-                SimpleDateFormat timeFormat = new SimpleDateFormat(Utils.TIME_FORMAT, Locale.getDefault());
-                Date date = timeFormat.parse(hourOfDay + ":" + minute + ":" + 0);
+                SimpleDateFormat timeFormat = new SimpleDateFormat(Utils.DATETIME_FORMAT, Locale.getDefault());
+                Date date = timeFormat.parse(1 + "." + 1 + "." + 1899 + " " + hourOfDay + ":" + minute + ":" + 0);
                 if(dialogType == DialogType.START)
-                    ((LayoutEditor) layoutEditorContext).setStartDateTimeText(date, itemPosition);
+                    ((LayoutEditor) layoutEditorContext).setStartTimeText(date, itemPosition);
                 else if (dialogType == DialogType.END)
-                    ((LayoutEditor) layoutEditorContext).setEndDateTimeText(date, itemPosition);
+                    ((LayoutEditor) layoutEditorContext).setEndTimeText(date, itemPosition);
             } catch (ParseException e) {
                 e.printStackTrace();
             }

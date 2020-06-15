@@ -93,7 +93,7 @@ public class LayoutsXml {
                     serializer.endTag(null, "dateStart");
 
                     serializer.startTag(null, "dateEnd");
-                    serializer.text(simpleDateFormat.format(block.getDateStart()));
+                    serializer.text(simpleDateFormat.format(block.getDateEnd()));
                     serializer.endTag(null, "dateEnd");
                 }
 

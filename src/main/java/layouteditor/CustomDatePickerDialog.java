@@ -2,6 +2,7 @@ package layouteditor;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.util.Log;
 import android.widget.DatePicker;
 
 import com.representation.Utils;
@@ -28,12 +29,13 @@ public class CustomDatePickerDialog implements DatePickerDialog.OnDateSetListene
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         if (layoutEditorContext instanceof LayoutEditor) {
             try {
-                    SimpleDateFormat dateFormat = new SimpleDateFormat(Utils.DATE_FORMAT, Locale.getDefault());
-                    Date date = dateFormat.parse(dayOfMonth + "." + month + "." + year);
-                    if(dialogType == DialogType.START)
-                        ((LayoutEditor) layoutEditorContext).setStartDateTimeText(date, itemPosition);
-                    else if (dialogType == DialogType.END)
-                        ((LayoutEditor) layoutEditorContext).setEndDateTimeText(date, itemPosition);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat(Utils.DATETIME_FORMAT, Locale.getDefault());
+                    Date date = dateFormat.parse(dayOfMonth + "." + month + "." + year + " " + 0 + ":" + 0 + ":" + 0);
+                    if(dialogType == DialogType.START) {
+                        ((LayoutEditor) layoutEditorContext).setStartDateText(date, itemPosition);
+                    } else if (dialogType == DialogType.END) {
+                        ((LayoutEditor) layoutEditorContext).setEndDateText(date, itemPosition);
+                    }
             } catch (ParseException e) {
                 e.printStackTrace();
             }

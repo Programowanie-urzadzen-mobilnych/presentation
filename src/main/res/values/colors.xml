@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="WHITE">#FFFFFF</color>
-    <color name="LIGHT_GREY">#D7D7D7</color>
-    <color name="GREY_93">#EDEDED</color>
+    <color name="LIGHT_GRAY">#D7D7D7</color>
+    <color name="GRAY_93">#EDEDED</color>
     <color name="BLACK">#000000</color>
     <color name="BRIGHT_PURPLE">#8367C7</color>
+    <color name="DAVY_GRAY">#555555</color>
+    <color name="ALICE_BLUE">#E9F1F7</color>
+    <color name="PURPLE_HEART">#673AB7</color>
+    <color name="ULTRAMARINE">#3700B3</color>
+    <color name="ROBIN_EGG_BLUE">#03DAC5</color>
+    <color name="VERY_LIGHT_GRAY">#C8C8C8</color>
+    <color name="BRIGHT_GRAY">#ECECEC</color>
+    <color name="GRAY_98">#FAFAFA</color>
+    <color name="VULCAN">#37393e</color>
+    <color name="BUNKER">#292B2E</color>
+    <color name="STORM_GRAY">#747881</color>
+    <color name="EBONY">#313235</color>
+    <color name="PAYNE_GRAY">#3F4045</color>
 </resources>

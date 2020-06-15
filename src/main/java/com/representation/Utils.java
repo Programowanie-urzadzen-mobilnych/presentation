@@ -16,6 +16,8 @@ public class Utils {
     public static final String DATE_FORMAT = "dd.MM.yyyy";
     public static final String TIME_FORMAT = "HH:mm:ss";
     public static final String DATETIME_FORMAT = "dd.MM.yyyy HH:mm:ss";
+    public static boolean isDark = false;
+    public static final String KEY = "SOME_CRAZY_KEY_123";
     public static final int FOLDERPICKER_CODE = 9998;
     public static final int PICKFILE_RESULT_CODE = 9997;
     public static final int WRITE_EXTERNAL_STORAGE_STATUS = 0;

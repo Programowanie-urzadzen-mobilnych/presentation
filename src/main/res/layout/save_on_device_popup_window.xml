@@ -3,13 +3,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
-    android:background="@android:color/background_light"
+    android:background="?attr/POPUP_BACKGROUND_COLOR"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#C8C8C8"
+        android:background="?attr/POPUP_TOP_BAR_COLOR"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
@@ -22,7 +22,8 @@
             android:padding="5dp"
             android:text="@string/SAVE_LAYOUT_IN_STORAGE"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR" />
 
     </LinearLayout>
 
@@ -38,7 +39,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/LAYOUT_TITLE"
             android:inputType="text"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR" />
 
         <EditText
             android:id="@+id/layout_path"
@@ -49,19 +51,26 @@
             android:enabled="false"
             android:hint="@string/LAYOUT_TITLE"
             android:importantForAutofill="no"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"/>
 
         <Button
             android:id="@+id/choose_path"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/CHOOSE_PATH" />
+            android:text="@string/CHOOSE_PATH"
+            android:background="?attr/BUTTON_BACKGROUND_COLOR"
+            android:textColor="?attr/BUTTON_TEXT_COLOR"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/save_layout_in_storage_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/SAVE" />
+            android:text="@string/SAVE"
+            android:background="?attr/BUTTON_BACKGROUND_COLOR"
+            android:textColor="?attr/BUTTON_TEXT_COLOR"
+            android:layout_margin="5dp" />
     </LinearLayout>
 
 </LinearLayout>

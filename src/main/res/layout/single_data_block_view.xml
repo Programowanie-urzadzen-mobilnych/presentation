@@ -18,24 +18,33 @@
             android:id="@+id/delete_block_button"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:foreground="@drawable/ic_close_black_12dp"
+            android:foreground="?attr/CLOSE_ICON"
             android:foregroundGravity="center_vertical|center_horizontal"
             android:freezesText="false"
-            tools:targetApi="m" />
+            tools:targetApi="m"
+            android:background="?attr/BUTTON_BACKGROUND_COLOR"
+            android:textColor="?attr/BUTTON_TEXT_COLOR"
+            android:layout_margin="5dp"  />
 
         <Button
             android:id="@+id/move_block_up_button"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:foreground="@drawable/ic_arrow_upward_black_12dp"
-            android:foregroundGravity="center_vertical|center_horizontal" />
+            android:foreground="?attr/ARROW_UPWARD_ICON"
+            android:foregroundGravity="center_vertical|center_horizontal"
+            android:background="?attr/BUTTON_BACKGROUND_COLOR"
+            android:textColor="?attr/BUTTON_TEXT_COLOR"
+            android:layout_margin="5dp"  />
 
         <Button
             android:id="@+id/move_block_down_button"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:foreground="@drawable/ic_arrow_downward_black_12dp"
-            android:foregroundGravity="center_vertical|center_horizontal" />
+            android:foreground="?attr/ARROW_DOWNWARD_ICON"
+            android:foregroundGravity="center_vertical|center_horizontal"
+            android:background="?attr/BUTTON_BACKGROUND_COLOR"
+            android:textColor="?attr/BUTTON_TEXT_COLOR"
+            android:layout_margin="5dp"  />
 
         <EditText
             android:id="@+id/block_title_input"
@@ -48,14 +57,16 @@
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/block_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/DATA_BLOCK_CONTENT_BACKGROUND"
+        android:background="?attr/DATA_BLOCK_CONTENT_BACKGROUND"
         android:orientation="vertical">
 
         <LinearLayout
@@ -71,13 +82,13 @@
                 android:layout_marginRight="10dp"
                 android:padding="5dp"
                 android:text="@string/BLOCK_TYPE"
-                android:textColor="@color/VALUE_BLOCK_TEXT"
+                android:textColor="?attr/DEFAULT_TEXT_COLOR"
                 android:textSize="20sp" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/WHITE">
+                android:background="?attr/SPINNER_BACKGROUND">
 
                 <Spinner
                     android:id="@+id/block_type_spinner"

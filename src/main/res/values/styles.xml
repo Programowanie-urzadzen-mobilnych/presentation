@@ -2,11 +2,81 @@
 <resources>
     <style name="CustomActionBarStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@color/ACTION_BAR_BACKGROUND</item>
-        <item name="android:label">Pomiary</item>
+        <item name="android:label">@string/MEASUREMENTS</item>
     </style>
     <style name="CustomPopupStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@color/MENU_ITEM_BACKGROUND</item>
         <item name="overlapAnchor">false</item>
         <item name="android:dropDownVerticalOffset">-4dp</item>
+    </style>
+    <style name="LightTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="ACTION_BAR_TITLE">@color/WHITE</item>
+        <item name="ACTION_BAR_BACKGROUND">@color/PURPLE_HEART</item>
+        <item name="MENU_ITEM_BACKGROUND">@color/WHITE</item>
+        <item name="DATA_BLOCK_CONTENT_BACKGROUND">@color/LIGHT_GRAY</item>
+        <item name="VALUE_BLOCK_TEXT">@color/BLACK</item>
+        <item name="TIMESTAMP_BLOCK_TEXT">@color/BLACK</item>
+        <item name="BLOCK_TITLE_BACKGROUND_COLOR">@color/ALICE_BLUE</item>
+        <item name="SPINNER_BACKGROUND">@color/WHITE</item>
+        <item name="EDIT_TEXT_BACKGROUND">@color/WHITE</item>
+        <item name="BLOCK_TITLE_COLOR">@color/BLACK</item>
+        <item name="BLOCK_VIEW_BACKGROUND">@color/GRAY_93</item>
+        <item name="POPUP_TOP_BAR_COLOR">@color/VERY_LIGHT_GRAY</item>
+        <item name="POPUP_BACKGROUND_COLOR">@color/WHITE</item>
+        <item name="TABLE_BACKGROUND_COLOR">@color/LIGHT_GRAY</item>
+        <item name="BLOCK_CONFIGURATION_BACKGROUND_COLOR">@color/BRIGHT_GRAY</item>
+        <item name="VALUE_BLOCK_VIEW_BACKGROUND_COLOR">@color/BRIGHT_GRAY</item>
+        <item name="VALUE_BLOCK_VIEW_BORDER_COLOR">@color/LIGHT_GRAY</item>
+        <item name="LAYOUT_EDITOR_BACKGROUND">@color/GRAY_98</item>
+        <item name="LAYOUT_LIST_BACKGROUND">@color/GRAY_98</item>
+        <item name="MEASUREMENTS_BACKGROUND">@color/GRAY_98</item>
+        <item name="BUTTON_BACKGROUND_COLOR">@color/VERY_LIGHT_GRAY</item>
+        <item name="BUTTON_TEXT_COLOR">@color/BLACK</item>
+        <item name="MEASUREMENTS_LAYOUT_TITLE_BACKGROUND_COLOR">@color/ALICE_BLUE</item>
+        <item name="MEASUREMENTS_LAYOUT_TILE_COLOR">@color/BLACK</item>
+        <item name="DEFAULT_TEXT_COLOR">@color/BLACK</item>
+
+        <item name="ADD_ICON" >@drawable/ic_add_black_24dp</item>
+        <item name="ARROW_DOWNWARD_ICON" >@drawable/ic_arrow_downward_black_12dp</item>
+        <item name="ARROW_UPWARD_ICON" >@drawable/ic_arrow_upward_black_12dp</item>
+        <item name="CHECK_ICON" >@drawable/ic_check_black_12dp</item>
+        <item name="CLOSE_ICON" >@drawable/ic_close_black_12dp</item>
+        <item name="EDIT_ICON" >@drawable/ic_edit_black_12dp</item>
+        <item name="SAVE_ICON" >@drawable/ic_save_black_24dp</item>
+    </style>
+    <style name="DarkTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="ACTION_BAR_TITLE">@color/WHITE</item>
+        <item name="ACTION_BAR_BACKGROUND">@color/PURPLE_HEART</item>
+        <item name="MENU_ITEM_BACKGROUND">@color/VULCAN</item>
+        <item name="DATA_BLOCK_CONTENT_BACKGROUND">@color/BUNKER</item>
+        <item name="VALUE_BLOCK_TEXT">@color/WHITE</item>
+        <item name="TIMESTAMP_BLOCK_TEXT">@color/WHITE</item>
+        <item name="BLOCK_TITLE_BACKGROUND_COLOR">@color/ALICE_BLUE</item>
+        <item name="SPINNER_BACKGROUND">@color/STORM_GRAY</item>
+        <item name="EDIT_TEXT_BACKGROUND">@color/STORM_GRAY</item>
+        <item name="BLOCK_TITLE_COLOR">@color/BLACK</item>
+        <item name="BLOCK_VIEW_BACKGROUND">@color/VULCAN</item>
+        <item name="POPUP_TOP_BAR_COLOR">@color/EBONY</item>
+        <item name="POPUP_BACKGROUND_COLOR">@color/VULCAN</item>
+        <item name="TABLE_BACKGROUND_COLOR">@color/BUNKER</item>
+        <item name="BLOCK_CONFIGURATION_BACKGROUND_COLOR">@color/VULCAN</item>
+        <item name="VALUE_BLOCK_VIEW_BACKGROUND_COLOR">@color/VULCAN</item>
+        <item name="VALUE_BLOCK_VIEW_BORDER_COLOR">@color/BUNKER</item>
+        <item name="LAYOUT_EDITOR_BACKGROUND">@color/PAYNE_GRAY</item>
+        <item name="LAYOUT_LIST_BACKGROUND">@color/PAYNE_GRAY</item>
+        <item name="MEASUREMENTS_BACKGROUND">@color/PAYNE_GRAY</item>
+        <item name="BUTTON_BACKGROUND_COLOR">@color/VULCAN</item>
+        <item name="BUTTON_TEXT_COLOR">@color/WHITE</item>
+        <item name="MEASUREMENTS_LAYOUT_TITLE_BACKGROUND_COLOR">@color/BUNKER</item>
+        <item name="MEASUREMENTS_LAYOUT_TILE_COLOR">@color/WHITE</item>
+        <item name="DEFAULT_TEXT_COLOR">@color/WHITE</item>
+
+        <item name="ADD_ICON" >@drawable/ic_add_white_24dp</item>
+        <item name="ARROW_DOWNWARD_ICON" >@drawable/ic_arrow_downward_white_12dp</item>
+        <item name="ARROW_UPWARD_ICON" >@drawable/ic_arrow_upward_white_12dp</item>
+        <item name="CHECK_ICON" >@drawable/ic_check_white_12dp</item>
+        <item name="CLOSE_ICON" >@drawable/ic_close_white_12dp</item>
+        <item name="EDIT_ICON" >@drawable/ic_edit_white_12dp</item>
+        <item name="SAVE_ICON" >@drawable/ic_save_white_24dp</item>
     </style>
 </resources>

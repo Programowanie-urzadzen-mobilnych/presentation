@@ -1,5 +1,6 @@
 package measurements;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
@@ -21,6 +22,7 @@ import com.representation.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -196,6 +198,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         return convertView;
     }
 
+    @SuppressLint("ResourceType")
     private TableRow constructRow(ExampleRecord rec, TableRow.LayoutParams layoutParams, TableRow.LayoutParams cellLayoutParams, SimpleDateFormat dateFormat, DataBlock dataBlock) {
         TableRow tableRow = new TableRow(mContext);
         tableRow.setLayoutParams(layoutParams);
@@ -203,20 +206,29 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         // Construct cell one
         LinearLayout cell1 = new LinearLayout(mContext);
 
-        cell1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GREY_93));
+        if(Utils.isDark)
+            cell1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.VULCAN));
+        else
+            cell1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GRAY_93));
         cell1.setLayoutParams(cellLayoutParams);
 
         TextView timestamp = new TextView(mContext);
         timestamp.setText(dateFormat.format(rec.getTimestamp()));
         timestamp.setPadding(20, 10, 20, 10);
-        timestamp.setTextColor(ContextCompat.getColor(mContext, R.color.BLACK));
+        if(Utils.isDark)
+            timestamp.setTextColor(ContextCompat.getColor(mContext, R.color.WHITE));
+        else
+            timestamp.setTextColor(ContextCompat.getColor(mContext, R.color.BLACK));
 
         cell1.addView(timestamp);
 
         // Construct cell two
         LinearLayout cell2 = new LinearLayout(mContext);
 
-        cell2.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GREY_93));
+        if(Utils.isDark)
+            cell2.setBackgroundColor(ContextCompat.getColor(mContext, R.color.VULCAN));
+        else
+            cell2.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GRAY_93));
         cell2.setLayoutParams(cellLayoutParams);
 
 
@@ -225,7 +237,10 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         value.setText(RecalculateValue.recalculate(dataBlock.getUnit(), rec.getValue()));
 
         value.setPadding(20, 10, 20, 10);
-        value.setTextColor(ContextCompat.getColor(mContext, R.color.BLACK));
+        if(Utils.isDark)
+            value.setTextColor(ContextCompat.getColor(mContext, R.color.WHITE));
+        else
+            value.setTextColor(ContextCompat.getColor(mContext, R.color.BLACK));
 
         cell2.addView(value);
 
@@ -248,13 +263,21 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         // Header cell one
         LinearLayout headerCellOne = new LinearLayout(mContext);
 
-        headerCellOne.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GREY_93));
+        if(Utils.isDark)
+            headerCellOne.setBackgroundColor(ContextCompat.getColor(mContext, R.color.VULCAN));
+        else
+            headerCellOne.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GRAY_93));
         headerCellOne.setLayoutParams(headerCellLayoutParams);
 
         TextView timestampHeader = new TextView(mContext);
         timestampHeader.setText("Data pomiaru");
         timestampHeader.setPadding(20, 10, 20, 10);
-        timestampHeader.setTextColor(ContextCompat.getColor(mContext, R.color.BLACK));
+
+        if(Utils.isDark)
+            timestampHeader.setTextColor(ContextCompat.getColor(mContext, R.color.WHITE));
+        else
+            timestampHeader.setTextColor(ContextCompat.getColor(mContext, R.color.BLACK));
+
         timestampHeader.setTextSize(18);
 
         headerCellOne.addView(timestampHeader);
@@ -262,7 +285,11 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         // Header cell two
         LinearLayout headerCellTwo = new LinearLayout(mContext);
 
-        headerCellTwo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GREY_93));
+        if(Utils.isDark)
+            headerCellTwo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.VULCAN));
+        else
+            headerCellTwo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GRAY_93));
+
         headerCellTwo.setLayoutParams(headerCellLayoutParams);
 
         TextView valueHeader = new TextView(mContext);
@@ -272,7 +299,11 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
 
         valueHeader.setText(finalString);
         valueHeader.setPadding(20, 10, 20, 10);
-        valueHeader.setTextColor(ContextCompat.getColor(mContext, R.color.BLACK));
+        if(Utils.isDark)
+            valueHeader.setTextColor(ContextCompat.getColor(mContext, R.color.WHITE));
+        else
+            valueHeader.setTextColor(ContextCompat.getColor(mContext, R.color.BLACK));
+
         valueHeader.setTextSize(18);
 
         headerCellTwo.addView(valueHeader);

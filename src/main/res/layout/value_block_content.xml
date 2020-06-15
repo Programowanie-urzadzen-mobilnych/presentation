@@ -2,7 +2,7 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECECEC"
+    android:background="?attr/BLOCK_CONFIGURATION_BACKGROUND_COLOR"
     android:layout_marginTop="5dp"
     android:foreground="@drawable/grey_border">
 
@@ -19,24 +19,24 @@
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
             android:text="@string/MAGNITUDE"
-            android:textColor="@color/VALUE_BLOCK_TEXT"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/WHITE">
+            android:background="?attr/SPINNER_BACKGROUND">
 
             <Spinner
                 android:id="@+id/value_block_magnitude_spinner"
                 android:layout_width="160dp"
                 android:layout_height="match_parent"
                 android:entries="@array/MAGNITUDES_SPINNER" />
-        </RelativeLayout>
+        </LinearLayout>
     </TableRow>
 
     <TableRow
@@ -52,22 +52,22 @@
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
             android:text="@string/UNIT"
-            android:textColor="@color/VALUE_BLOCK_TEXT"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="15dp"
-            android:background="@color/WHITE">
+            android:background="?attr/SPINNER_BACKGROUND">
 
             <Spinner
                 android:id="@+id/value_block_unit_spinner"
                 android:layout_width="160dp"
                 android:layout_height="match_parent" />
-        </RelativeLayout>
+        </LinearLayout>
     </TableRow>
 </TableLayout>

@@ -4,7 +4,7 @@
     <string name="LOAD_LAYOUT_FROM_FILE">Wczytaj układ z pliku</string>
     <string name="SAVE_LAYOUT_IN_APP">Zapisz układ w aplikacji</string>
     <string name="ADD_BLOCK">Dodaj blok</string>
-    <string name="BLOCK_TITLE">Tytuł bloku...</string>
+    <string name="BLOCK_TITLE">Tytuł bloku…</string>
     <string name="BLOCK_TYPE">Typ bloku:</string>
     <string name="LAYOUT_LIST_ACTION_BAR_TTLE">Lista układów</string>
     <string name="ADD_NEW_LAYOUT">Dodaj nowy układ</string>

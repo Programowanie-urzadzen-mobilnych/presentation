@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="ACTION_BAR_TITLE" format="color" />
+    <attr name="ACTION_BAR_BACKGROUND" format="color" />
+    <attr name="MENU_ITEM_BACKGROUND" format="color" />
+    <attr name="DATA_BLOCK_CONTENT_BACKGROUND" format="color" />
+    <attr name="VALUE_BLOCK_TEXT" format="color" />
+    <attr name="TIMESTAMP_BLOCK_TEXT" format="color" />
+    <attr name="BLOCK_TITLE_BACKGROUND_COLOR" format="color" />
+    <attr name="SPINNER_BACKGROUND" format="color" />
+    <attr name="EDIT_TEXT_BACKGROUND" format="color" />
+    <attr name="BLOCK_TITLE_COLOR" format="color" />
+    <attr name="BLOCK_VIEW_BACKGROUND" format="color" />
+    <attr name="POPUP_TOP_BAR_COLOR" format="color" />
+    <attr name="POPUP_BACKGROUND_COLOR" format="color" />
+    <attr name="TABLE_BACKGROUND_COLOR" format="color" />
+    <attr name="BLOCK_CONFIGURATION_BACKGROUND_COLOR" format="color" />
+    <attr name="VALUE_BLOCK_VIEW_BACKGROUND_COLOR" format="color" />
+    <attr name="VALUE_BLOCK_VIEW_BORDER_COLOR" format="color" />
+    <attr name="LAYOUT_EDITOR_BACKGROUND" format="color" />
+    <attr name="LAYOUT_LIST_BACKGROUND" format="color" />
+    <attr name="MEASUREMENTS_BACKGROUND" format="color" />
+    <attr name="BUTTON_BACKGROUND_COLOR" format="color" />
+    <attr name="BUTTON_TEXT_COLOR" format="color" />
+    <attr name="MEASUREMENTS_LAYOUT_TITLE_BACKGROUND_COLOR" format="color" />
+    <attr name="MEASUREMENTS_LAYOUT_TILE_COLOR" format="color" />
+    <attr name="DEFAULT_TEXT_COLOR" format="color" />
+
+    <attr name="ADD_ICON" format="reference" />
+    <attr name="ARROW_DOWNWARD_ICON" format="reference" />
+    <attr name="ARROW_UPWARD_ICON" format="reference" />
+    <attr name="CHECK_ICON" format="reference" />
+    <attr name="CLOSE_ICON" format="reference" />
+    <attr name="EDIT_ICON" format="reference" />
+    <attr name="SAVE_ICON" format="reference" />
+</resources>

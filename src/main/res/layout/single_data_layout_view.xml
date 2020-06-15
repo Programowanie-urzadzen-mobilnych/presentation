@@ -13,8 +13,11 @@
         android:layout_toLeftOf="@id/delete_layout_button"
         android:padding="5dp"
         android:textSize="18sp"
+        android:text="@string/LAYOUT_TITLE"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/DEFAULT_TEXT_COLOR"
+        android:layout_margin="5dp" />
 
     <Button
         android:id="@+id/delete_layout_button"
@@ -25,7 +28,10 @@
         android:foreground="@drawable/ic_close_black_12dp"
         android:foregroundGravity="center_vertical|center_horizontal"
         android:freezesText="false"
-        tools:targetApi="m" />
+        tools:targetApi="m"
+        android:background="@color/BUTTON_BACKGROUND_COLOR"
+        android:textColor="@color/BUTTON_TEXT_COLOR"
+        android:layout_margin="5dp" />
 
     <Button
         android:id="@+id/edit_layout_button"
@@ -36,7 +42,10 @@
         android:foreground="@drawable/ic_edit_black_12dp"
         android:foregroundGravity="center_vertical|center_horizontal"
         android:freezesText="false"
-        tools:targetApi="m" />
+        tools:targetApi="m"
+        android:background="@color/BUTTON_BACKGROUND_COLOR"
+        android:textColor="@color/BUTTON_TEXT_COLOR"
+        android:layout_margin="5dp" />
 
     <Button
         android:id="@+id/select_layout_button"
@@ -47,7 +56,10 @@
         android:foreground="@drawable/ic_check_black_12dp"
         android:foregroundGravity="center_vertical|center_horizontal"
         android:freezesText="false"
-        tools:targetApi="m" />
+        tools:targetApi="m"
+        android:background="@color/BUTTON_BACKGROUND_COLOR"
+        android:textColor="@color/BUTTON_TEXT_COLOR"
+        android:layout_margin="5dp" />
 
     <Button
         android:id="@+id/save_layout_as_file_button"
@@ -58,6 +70,9 @@
         android:foreground="@drawable/ic_save_black_24dp"
         android:foregroundGravity="center_vertical|center_horizontal"
         android:freezesText="false"
-        tools:targetApi="m" />
+        tools:targetApi="m"
+        android:background="@color/BUTTON_BACKGROUND_COLOR"
+        android:textColor="@color/BUTTON_TEXT_COLOR"
+        android:layout_margin="5dp" />
 
 </RelativeLayout>

@@ -21,13 +21,22 @@ import com.representation.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 import charts.ChartObj;
 import charts.ChartView;
 import data.Database;
 import data.ExampleRecord;
 import layouteditor.DataBlock;
+import pl.grupa33inf.ssi.data_store.INodeDataStoreImpl;
+import pl.grupa33inf.ssi.data_store.api.NodeValue;
+import pl.grupa33inf.ssi.data_store.api.NodeVariable;
 
 public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
     private Context mContext;
@@ -103,6 +112,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
             }
 
             // Get Data from DB TODO: data should be already prepared
+            //getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
             ArrayList<ExampleRecord> data = Database.getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
 
             // Set title
@@ -130,6 +140,8 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
             if(convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.chart_view, parent, false);
                 ArrayList<Float> values = new ArrayList<>();
+
+                getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
                 ArrayList<ExampleRecord> data = Database.getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
                 for (ExampleRecord rec : data) {
                     values.add((float)rec.getValue());
@@ -152,31 +164,33 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
             // TODO: Chart View Case
             // Get Data from DB...
         }
-     else if(type == 3) {
-        if(convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.chart_view, parent, false);
-            ArrayList<Float> values = new ArrayList<>();
-            ArrayList<ExampleRecord> data = Database.getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
-            for (ExampleRecord rec : data) {
-                values.add((float)rec.getValue());
+        else if(type == 3) {
+            if(convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.chart_view, parent, false);
+                ArrayList<Float> values = new ArrayList<>();
+
+                getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
+                ArrayList<ExampleRecord> data = Database.getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
+                for (ExampleRecord rec : data) {
+                    values.add((float)rec.getValue());
+                }
+
+                ChartObj obj = new ChartObj(values, dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getUnit().toString(), true);
+                FrameLayout frameLayoutSubParent = convertView.findViewById(R.id.frameLayout);
+                ChartView chart = new ChartView(mContext, obj);
+                frameLayoutSubParent.addView(chart);
+                chartTwoViewHolder = new ChartTwoViewHolder(convertView);
+                convertView.setTag(chartTwoViewHolder);
+            } else {
+                chartTwoViewHolder = (ChartTwoViewHolder) convertView.getTag();
             }
 
-            ChartObj obj = new ChartObj(values, dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getUnit().toString(), true);
-            FrameLayout frameLayoutSubParent = convertView.findViewById(R.id.frameLayout);
-            ChartView chart = new ChartView(mContext, obj);
-            frameLayoutSubParent.addView(chart);
-            chartTwoViewHolder = new ChartTwoViewHolder(convertView);
-            convertView.setTag(chartTwoViewHolder);
-        } else {
-            chartTwoViewHolder = (ChartTwoViewHolder) convertView.getTag();
+            // Set title
+            chartTwoViewHolder.blockTitle.setText(dataBlock.getBlockTitle());
+
+            // TODO: Chart View Case
+            // Get Data from DB...
         }
-
-        // Set title
-        chartTwoViewHolder.blockTitle.setText(dataBlock.getBlockTitle());
-
-        // TODO: Chart View Case
-        // Get Data from DB...
-    }
         // Return the completed view to render on screen
         return convertView;
     }
@@ -188,7 +202,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         // Construct cell one
         LinearLayout cell1 = new LinearLayout(mContext);
 
-        cell1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GREY_93));
+        cell1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GRAY_93));
         cell1.setLayoutParams(cellLayoutParams);
 
         TextView timestamp = new TextView(mContext);
@@ -201,7 +215,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         // Construct cell two
         LinearLayout cell2 = new LinearLayout(mContext);
 
-        cell2.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GREY_93));
+        cell2.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GRAY_93));
         cell2.setLayoutParams(cellLayoutParams);
 
 
@@ -233,7 +247,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         // Header cell one
         LinearLayout headerCellOne = new LinearLayout(mContext);
 
-        headerCellOne.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GREY_93));
+        headerCellOne.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GRAY_93));
         headerCellOne.setLayoutParams(headerCellLayoutParams);
 
         TextView timestampHeader = new TextView(mContext);
@@ -247,7 +261,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         // Header cell two
         LinearLayout headerCellTwo = new LinearLayout(mContext);
 
-        headerCellTwo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GREY_93));
+        headerCellTwo.setBackgroundColor(ContextCompat.getColor(mContext, R.color.GRAY_93));
         headerCellTwo.setLayoutParams(headerCellLayoutParams);
 
         TextView valueHeader = new TextView(mContext);
@@ -304,5 +318,53 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         public ChartTwoViewHolder(View convertView) {
             blockTitle = convertView.findViewById(R.id.block_title_text_view);
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static ArrayList<ExampleRecord> getDataBetween(Date data1, Date data2, final Utils.Magnitude magnitude) {
+        //ArrayList<ExampleRecord> result = (ArrayList<ExampleRecord>) exampleData.stream().filter(rec -> rec.getMagnitude() == magnitude).collect(Collectors.toList());
+        ArrayList<ExampleRecord> result = new ArrayList<>();
+        Log.d("SHIT","KURWA");
+        INodeDataStoreImpl dataStore = new INodeDataStoreImpl();
+        try {
+            UUID uid =  UUID.fromString("14ed798f-37a4-4501-8489-5fa5528a20ec");
+            Map<String, NodeVariable> temp = dataStore.readAllVariables(uid);
+
+            Log.d("SHIT","ilosc : "+temp.values());
+
+            Collection<NodeVariable> nodeCol = temp.values();
+            ArrayList<NodeVariable> nodeArrList = new ArrayList<>(nodeCol);
+
+            ArrayList<NodeValue> nodeValArrList = new ArrayList<>();
+
+            for (int i = 0; i < nodeArrList.size(); i++) {
+                List<NodeValue> tempList = nodeArrList.get(i).getHistory();
+                for (int j = 0; j < tempList.size(); j++) {
+                    nodeValArrList.add(tempList.get(j));
+                }
+            }
+
+            for (int i = 0; i < nodeValArrList.size(); i++) {
+                Log.d("Shit",nodeValArrList.get(i).getValue().toString());
+            }
+
+            /*history.stream().filter( v => v.getTimestamp().before(od) && v.getTimestamp().after(do)).collect(Collectors.toList())*/
+
+
+
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+       /* ArrayList<ExampleRecord> exampleData;
+        for (ExampleRecord rec: exampleData) {
+            if(rec.getMagnitude()==magnitude)
+                result.add(rec);
+        }*/
+
+        return result;
     }
 }

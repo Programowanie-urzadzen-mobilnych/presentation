@@ -21,21 +21,30 @@
             android:foreground="@drawable/ic_close_black_12dp"
             android:foregroundGravity="center_vertical|center_horizontal"
             android:freezesText="false"
-            tools:targetApi="m" />
+            tools:targetApi="m"
+            android:background="@color/BUTTON_BACKGROUND_COLOR"
+            android:textColor="@color/BUTTON_TEXT_COLOR"
+            android:layout_margin="5dp"  />
 
         <Button
             android:id="@+id/move_block_up_button"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:foreground="@drawable/ic_arrow_upward_black_12dp"
-            android:foregroundGravity="center_vertical|center_horizontal" />
+            android:foregroundGravity="center_vertical|center_horizontal"
+            android:background="@color/BUTTON_BACKGROUND_COLOR"
+            android:textColor="@color/BUTTON_TEXT_COLOR"
+            android:layout_margin="5dp"  />
 
         <Button
             android:id="@+id/move_block_down_button"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:foreground="@drawable/ic_arrow_downward_black_12dp"
-            android:foregroundGravity="center_vertical|center_horizontal" />
+            android:foregroundGravity="center_vertical|center_horizontal"
+            android:background="@color/BUTTON_BACKGROUND_COLOR"
+            android:textColor="@color/BUTTON_TEXT_COLOR"
+            android:layout_margin="5dp"  />
 
         <EditText
             android:id="@+id/block_title_input"
@@ -48,7 +57,9 @@
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:textColor="@color/DEFAULT_TEXT_COLOR" />
     </LinearLayout>
 
     <LinearLayout
@@ -71,13 +82,13 @@
                 android:layout_marginRight="10dp"
                 android:padding="5dp"
                 android:text="@string/BLOCK_TYPE"
-                android:textColor="@color/VALUE_BLOCK_TEXT"
+                android:textColor="@color/DEFAULT_TEXT_COLOR"
                 android:textSize="20sp" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/WHITE">
+                android:background="@color/SPINNER_BACKGROUND">
 
                 <Spinner
                     android:id="@+id/block_type_spinner"

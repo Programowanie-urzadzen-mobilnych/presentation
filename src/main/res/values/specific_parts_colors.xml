@@ -1,9 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ACTION_BAR_TITLE">@color/WHITE</color>
-    <color name="ACTION_BAR_BACKGROUND">@color/colorPrimary</color>
+    <color name="ACTION_BAR_BACKGROUND">@color/PURPLE_HEART</color>
     <color name="MENU_ITEM_BACKGROUND">@color/WHITE</color>
-    <color name="DATA_BLOCK_CONTENT_BACKGROUND">@color/LIGHT_GREY</color>
+    <color name="DATA_BLOCK_CONTENT_BACKGROUND">@color/LIGHT_GRAY</color>
     <color name="VALUE_BLOCK_TEXT">@color/BLACK</color>
     <color name="TIMESTAMP_BLOCK_TEXT">@color/BLACK</color>
+    <color name="BLOCK_TITLE_BACKGROUND_COLOR">@color/ALICE_BLUE</color>
+    <color name="SPINNER_BACKGROUND">@color/WHITE</color>
+    <color name="EDIT_TEXT_BACKGROUND">@color/WHITE</color>
+    <color name="BLOCK_TITLE_COLOR">@color/BLACK</color>
+    <color name="BLOCK_VIEW_BACKGROUND">@color/GRAY_93</color>
+    <color name="POPUP_TOP_BAR_COLOR">@color/VERY_LIGHT_GRAY</color>
+    <color name="POPUP_BACKGROUND_COLOR">@color/WHITE</color>
+    <color name="TABLE_BACKGROUND_COLOR">@color/LIGHT_GRAY</color>
+    <color name="BLOCK_CONFIGURATION_BACKGROUND_COLOR">@color/BRIGHT_GRAY</color>
+    <color name="VALUE_BLOCK_VIEW_BACKGROUND_COLOR">@color/BRIGHT_GRAY</color>
+    <color name="VALUE_BLOCK_VIEW_BORDER_COLOR">@color/LIGHT_GRAY</color>
+    <color name="LAYOUT_EDITOR_BACKGROUND">@color/GRAY_98</color>
+    <color name="LAYOUT_LIST_BACKGROUND">@color/GRAY_98</color>
+    <color name="MEASUREMENTS_BACKGROUND">@color/GRAY_98</color>
+    <color name="BUTTON_BACKGROUND_COLOR">@color/VERY_LIGHT_GRAY</color>
+    <color name="BUTTON_TEXT_COLOR">@color/BLACK</color>
+    <color name="MEASUREMENTS_LAYOUT_TITLE_BACKGROUND_COLOR">@color/ALICE_BLUE</color>
+    <color name="MEASUREMENTS_LAYOUT_TILE_COLOR">@color/BLACK</color>
+    <color name="DEFAULT_TEXT_COLOR">@color/BLACK</color>
+
+<!--    <color name="ACTION_BAR_TITLE">@color/WHITE</color>-->
+<!--    <color name="ACTION_BAR_BACKGROUND">@color/PURPLE_HEART</color>-->
+<!--    <color name="MENU_ITEM_BACKGROUND">#37393e</color>-->
+<!--    <color name="DATA_BLOCK_CONTENT_BACKGROUND">#292B2E</color>-->
+<!--    <color name="VALUE_BLOCK_TEXT">@color/WHITE</color>-->
+<!--    <color name="TIMESTAMP_BLOCK_TEXT">@color/WHITE</color>-->
+<!--    <color name="BLOCK_TITLE_BACKGROUND_COLOR">@color/ALICE_BLUE</color>-->
+<!--    <color name="SPINNER_BACKGROUND">#747881</color>-->
+<!--    <color name="EDIT_TEXT_BACKGROUND">#747881</color>-->
+<!--    <color name="BLOCK_TITLE_COLOR">@color/BLACK</color>-->
+<!--    <color name="BLOCK_VIEW_BACKGROUND">#36383C</color>-->
+<!--    <color name="POPUP_TOP_BAR_COLOR">#313235</color>-->
+<!--    <color name="POPUP_BACKGROUND_COLOR">#37393e</color>-->
+<!--    <color name="TABLE_BACKGROUND_COLOR">#292B2E</color>-->
+<!--    <color name="BLOCK_CONFIGURATION_BACKGROUND_COLOR">#36383C</color>-->
+<!--    <color name="VALUE_BLOCK_VIEW_BACKGROUND_COLOR">#36383C</color>-->
+<!--    <color name="VALUE_BLOCK_VIEW_BORDER_COLOR">#26282B</color>-->
+<!--    <color name="LAYOUT_EDITOR_BACKGROUND">#3F4045</color>-->
+<!--    <color name="LAYOUT_LIST_BACKGROUND">#3F4045</color>-->
+<!--    <color name="MEASUREMENTS_BACKGROUND">#3F4045</color>-->
+<!--    <color name="BUTTON_BACKGROUND_COLOR">#36373A</color>-->
+<!--    <color name="BUTTON_TEXT_COLOR">@color/WHITE</color>-->
+<!--    <color name="MEASUREMENTS_LAYOUT_TITLE_BACKGROUND_COLOR">#26282B</color>-->
+<!--    <color name="MEASUREMENTS_LAYOUT_TILE_COLOR">@color/WHITE</color>-->
+<!--    <color name="DEFAULT_TEXT_COLOR">@color/WHITE</color>-->
 </resources>

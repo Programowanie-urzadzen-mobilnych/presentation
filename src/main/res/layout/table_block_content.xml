@@ -2,8 +2,8 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECECEC"
     android:layout_marginTop="5dp"
+    android:background="@color/BLOCK_CONFIGURATION_BACKGROUND_COLOR"
     android:foreground="@drawable/grey_border" >
 
     <TableRow
@@ -19,24 +19,24 @@
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
             android:text="@string/MAGNITUDE"
-            android:textColor="@color/VALUE_BLOCK_TEXT"
+            android:textColor="@color/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/WHITE">
+            android:background="@color/SPINNER_BACKGROUND">
 
             <Spinner
                 android:id="@+id/table_block_magnitude_spinner"
                 android:layout_width="160dp"
                 android:layout_height="match_parent"
                 android:entries="@array/MAGNITUDES_SPINNER" />
-        </RelativeLayout>
+        </LinearLayout>
     </TableRow>
 
     <TableRow
@@ -52,23 +52,23 @@
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
             android:text="@string/UNIT"
-            android:textColor="@color/VALUE_BLOCK_TEXT"
+            android:textColor="@color/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/WHITE">
+            android:background="@color/SPINNER_BACKGROUND">
 
             <Spinner
                 android:id="@+id/table_block_unit_spinner"
                 android:layout_width="160dp"
                 android:layout_height="match_parent" />
-        </RelativeLayout>
+        </LinearLayout>
     </TableRow>
 
     <TableRow
@@ -84,7 +84,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
             android:text="@string/DATE_START"
-            android:textColor="@color/TIMESTAMP_BLOCK_TEXT"
+            android:textColor="@color/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
         <RelativeLayout
@@ -94,13 +94,14 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/WHITE">
+            android:background="@color/EDIT_TEXT_BACKGROUND">
 
             <EditText
                 android:id="@+id/table_block_start_date_input"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:background="#00000000"
+                android:background="@color/EDIT_TEXT_BACKGROUND"
+                android:textColor="@color/DEFAULT_TEXT_COLOR"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:importantForAutofill="no"
@@ -122,7 +123,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
             android:text="@string/TIME_START"
-            android:textColor="@color/TIMESTAMP_BLOCK_TEXT"
+            android:textColor="@color/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
         <RelativeLayout
@@ -132,12 +133,13 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/WHITE">
+            android:background="@color/EDIT_TEXT_BACKGROUND">
             <EditText
                 android:id="@+id/table_block_start_time_input"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:background="#00000000"
+                android:background="@color/EDIT_TEXT_BACKGROUND"
+                android:textColor="@color/DEFAULT_TEXT_COLOR"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:importantForAutofill="no"
@@ -159,7 +161,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
             android:text="@string/DATE_END"
-            android:textColor="@color/TIMESTAMP_BLOCK_TEXT"
+            android:textColor="@color/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
         <RelativeLayout
@@ -169,13 +171,14 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/WHITE">
+            android:background="@color/EDIT_TEXT_BACKGROUND">
 
             <EditText
                 android:id="@+id/table_block_end_date_input"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:background="#00000000"
+                android:background="@color/EDIT_TEXT_BACKGROUND"
+                android:textColor="@color/DEFAULT_TEXT_COLOR"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:importantForAutofill="no"
@@ -198,7 +201,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
             android:text="@string/TIME_END"
-            android:textColor="@color/TIMESTAMP_BLOCK_TEXT"
+            android:textColor="@color/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
         <RelativeLayout
@@ -208,13 +211,14 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="15dp"
-            android:background="@color/WHITE">
+            android:background="@color/EDIT_TEXT_BACKGROUND">
 
             <EditText
                 android:id="@+id/table_block_end_time_input"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:background="#00000000"
+                android:background="@color/EDIT_TEXT_BACKGROUND"
+                android:textColor="@color/DEFAULT_TEXT_COLOR"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:importantForAutofill="no"

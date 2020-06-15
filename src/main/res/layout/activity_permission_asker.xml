@@ -13,7 +13,10 @@
         android:text="Nadaj zezwolenia"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/BUTTON_BACKGROUND_COLOR"
+        android:textColor="@color/BUTTON_TEXT_COLOR"
+        android:layout_margin="5dp" />
 
     <Button
         android:id="@+id/close_app_button"
@@ -22,6 +25,9 @@
         android:text="Zamknij aplikacje"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_permissions_button" />
+        app:layout_constraintTop_toBottomOf="@+id/add_permissions_button"
+        android:background="@color/BUTTON_BACKGROUND_COLOR"
+        android:textColor="@color/BUTTON_TEXT_COLOR"
+        android:layout_margin="5dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

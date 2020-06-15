@@ -2,7 +2,7 @@
 <resources>
     <style name="CustomActionBarStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@color/ACTION_BAR_BACKGROUND</item>
-        <item name="android:label">Pomiary</item>
+        <item name="android:label">@string/MEASUREMENTS</item>
     </style>
     <style name="CustomPopupStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@color/MENU_ITEM_BACKGROUND</item>

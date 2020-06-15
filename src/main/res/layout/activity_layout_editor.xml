@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layouteditor.LayoutEditor">
+    tools:context="layouteditor.LayoutEditor"
+    android:background="@color/LAYOUT_EDITOR_BACKGROUND">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical" >
 
         <include
             android:id="@+id/layout_editor_action_bar"
@@ -28,7 +29,10 @@
                 android:drawableStart="@drawable/ic_add_black_24dp"
                 android:drawableLeft="@drawable/ic_add_black_24dp"
                 android:paddingLeft="5dp"
-                android:text="@string/ADD_BLOCK" />
+                android:text="@string/ADD_BLOCK"
+                android:background="@color/BUTTON_BACKGROUND_COLOR"
+                android:textColor="@color/BUTTON_TEXT_COLOR"
+                android:layout_margin="5dp" />
 
             <ListView
                 android:id="@+id/layout_editor_list_view"

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:text="test4"
-        android:background="@color/BUTTON_BACKGROUND_COLOR"
-        android:textColor="@color/BUTTON_TEXT_COLOR"
+        android:background="?attr/BUTTON_BACKGROUND_COLOR"
+        android:textColor="?attr/BUTTON_TEXT_COLOR"
         android:layout_margin="5dp"/>
 </LinearLayout>

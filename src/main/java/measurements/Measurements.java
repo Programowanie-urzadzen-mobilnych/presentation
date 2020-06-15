@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.representation.R;
+import com.representation.Utils;
 
 import org.xml.sax.SAXException;
 
@@ -42,6 +43,11 @@ public class Measurements extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(Utils.isDark)
+            setTheme(R.style.DarkTheme);
+        else
+            setTheme(R.style.LightTheme);
+
         setContentView(R.layout.activity_measurements);
 
         // TODO: Replace data collecting method

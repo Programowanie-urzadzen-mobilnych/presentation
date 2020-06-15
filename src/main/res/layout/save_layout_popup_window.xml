@@ -3,13 +3,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
-    android:background="@color/POPUP_BACKGROUND_COLOR"
+    android:background="?attr/POPUP_BACKGROUND_COLOR"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/POPUP_TOP_BAR_COLOR"
+        android:background="?attr/POPUP_TOP_BAR_COLOR"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:text="@string/SAVE_LAYOUT_IN_APP"
-            android:textColor="@color/DEFAULT_TEXT_COLOR"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="22sp" />
 
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/LAYOUT_TITLE"
-            android:textColor="@color/DEFAULT_TEXT_COLOR"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"
             android:inputType="text"
             android:importantForAutofill="no" />
 
@@ -46,14 +46,14 @@
             android:id="@+id/layout_default_checkbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/DEFAULT_TEXT_COLOR"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"
             android:text="@string/SET_AS_DEFAULT" />
 
         <CheckBox
             android:id="@+id/layout_quick_select_checkbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/DEFAULT_TEXT_COLOR"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"
             android:text="@string/ADD_TO_QUICK_SELECT_MENU" />
 
         <Button
@@ -61,8 +61,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/SAVE"
-            android:background="@color/BUTTON_BACKGROUND_COLOR"
-            android:textColor="@color/BUTTON_TEXT_COLOR"
+            android:background="?attr/BUTTON_BACKGROUND_COLOR"
+            android:textColor="?attr/BUTTON_TEXT_COLOR"
             android:layout_margin="5dp" />
     </LinearLayout>
 

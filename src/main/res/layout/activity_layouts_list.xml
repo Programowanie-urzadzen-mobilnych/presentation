@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="layouts.LayoutsList"
-    android:background="@color/LAYOUT_LIST_BACKGROUND">
+    android:background="?attr/LAYOUT_LIST_BACKGROUND">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,8 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ADD_NEW_LAYOUT"
-            android:background="@color/BUTTON_BACKGROUND_COLOR"
-            android:textColor="@color/BUTTON_TEXT_COLOR"
+            android:background="?attr/BUTTON_BACKGROUND_COLOR"
+            android:textColor="?attr/BUTTON_TEXT_COLOR"
             android:layout_margin="5dp" />
 
         <ListView

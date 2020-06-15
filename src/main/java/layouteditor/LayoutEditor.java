@@ -44,6 +44,11 @@ public class LayoutEditor extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(Utils.isDark)
+            setTheme(R.style.DarkTheme);
+        else
+            setTheme(R.style.LightTheme);
+
         setContentView(R.layout.activity_layout_editor);
 
         // Configure action bar

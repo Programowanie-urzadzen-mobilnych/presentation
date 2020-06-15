@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="measurements.Measurements"
-    android:background="@color/MEASUREMENTS_BACKGROUND" >
+    android:background="?attr/MEASUREMENTS_BACKGROUND" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/MEASUREMENTS_LAYOUT_TITLE_BACKGROUND_COLOR"
+            android:background="?attr/MEASUREMENTS_LAYOUT_TITLE_BACKGROUND_COLOR"
             android:orientation="vertical"
             android:layout_marginBottom="10dp">
 
@@ -32,7 +32,7 @@
                 android:textSize="20sp"
                 android:layout_gravity="center"
                 android:background="@drawable/main_view_border"
-                android:textColor="@color/MEASUREMENTS_LAYOUT_TILE_COLOR"/>
+                android:textColor="?attr/MEASUREMENTS_LAYOUT_TILE_COLOR"/>
         </LinearLayout>
 
         <ListView

@@ -2,7 +2,7 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BLOCK_CONFIGURATION_BACKGROUND_COLOR"
+    android:background="?attr/BLOCK_CONFIGURATION_BACKGROUND_COLOR"
     android:id="@+id/chart_block_content">
 
     <TableRow
@@ -18,7 +18,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
             android:text="@string/MAGNITUDE"
-            android:textColor="@color/DEFAULT_TEXT_COLOR"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -28,7 +28,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/SPINNER_BACKGROUND">
+            android:background="?attr/SPINNER_BACKGROUND">
 
             <Spinner
                 android:id="@+id/chart_block_magnitude_spinner"
@@ -51,7 +51,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
             android:text="@string/UNIT"
-            android:textColor="@color/DEFAULT_TEXT_COLOR"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -61,7 +61,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/SPINNER_BACKGROUND">
+            android:background="?attr/SPINNER_BACKGROUND">
 
             <Spinner
                 android:id="@+id/chart_block_unit_spinner"
@@ -83,7 +83,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
             android:text="@string/DATE_START"
-            android:textColor="@color/DEFAULT_TEXT_COLOR"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
         <RelativeLayout
@@ -93,14 +93,14 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/EDIT_TEXT_BACKGROUND">
+            android:background="?attr/EDIT_TEXT_BACKGROUND">
 
             <EditText
                 android:id="@+id/chart_block_start_date_input"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:background="@color/EDIT_TEXT_BACKGROUND"
-                android:textColor="@color/DEFAULT_TEXT_COLOR"
+                android:background="?attr/EDIT_TEXT_BACKGROUND"
+                android:textColor="?attr/DEFAULT_TEXT_COLOR"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:importantForAutofill="no"
@@ -122,7 +122,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
             android:text="@string/TIME_START"
-            android:textColor="@color/DEFAULT_TEXT_COLOR"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
         <RelativeLayout
@@ -132,13 +132,13 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/EDIT_TEXT_BACKGROUND">
+            android:background="?attr/EDIT_TEXT_BACKGROUND">
             <EditText
                 android:id="@+id/chart_block_start_time_input"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:background="@color/EDIT_TEXT_BACKGROUND"
-                android:textColor="@color/DEFAULT_TEXT_COLOR"
+                android:background="?attr/EDIT_TEXT_BACKGROUND"
+                android:textColor="?attr/DEFAULT_TEXT_COLOR"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:importantForAutofill="no"
@@ -160,7 +160,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="5dp"
             android:text="@string/DATE_END"
-            android:textColor="@color/DEFAULT_TEXT_COLOR"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
         <RelativeLayout
@@ -170,14 +170,14 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/EDIT_TEXT_BACKGROUND">
+            android:background="?attr/EDIT_TEXT_BACKGROUND">
 
             <EditText
                 android:id="@+id/chart_block_end_date_input"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:background="@color/EDIT_TEXT_BACKGROUND"
-                android:textColor="@color/DEFAULT_TEXT_COLOR"
+                android:background="?attr/EDIT_TEXT_BACKGROUND"
+                android:textColor="?attr/DEFAULT_TEXT_COLOR"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:importantForAutofill="no"
@@ -200,7 +200,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
             android:text="@string/TIME_END"
-            android:textColor="@color/DEFAULT_TEXT_COLOR"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"
             android:textSize="18sp" />
 
         <RelativeLayout
@@ -210,14 +210,14 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="15dp"
-            android:background="@color/EDIT_TEXT_BACKGROUND">
+            android:background="?attr/EDIT_TEXT_BACKGROUND">
 
             <EditText
                 android:id="@+id/chart_block_end_time_input"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:background="@color/EDIT_TEXT_BACKGROUND"
-                android:textColor="@color/DEFAULT_TEXT_COLOR"
+                android:background="?attr/EDIT_TEXT_BACKGROUND"
+                android:textColor="?attr/DEFAULT_TEXT_COLOR"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:importantForAutofill="no"

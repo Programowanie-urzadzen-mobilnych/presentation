@@ -29,6 +29,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.representation.R;
+import com.representation.Utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -65,6 +66,17 @@ public class ChartView extends FrameLayout {
                 chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
                 chart.setExtraBottomOffset(10);
                 barSet.setColors(ColorTemplate.MATERIAL_COLORS);
+                if(Utils.isDark){
+                    barSet.setValueTextColor(Color.WHITE);
+                    chart.getXAxis().setTextColor(Color.WHITE);
+                    chart.getAxisLeft().setTextColor(Color.WHITE);
+                    chart.getLegend().setTextColor(Color.WHITE);
+                } else {
+                    barSet.setValueTextColor(Color.BLACK);
+                    chart.getXAxis().setTextColor(Color.BLACK);
+                    chart.getAxisLeft().setTextColor(Color.BLACK);
+                    chart.getLegend().setTextColor(Color.BLACK);
+                }
 
                 BarData data = new BarData(barSet);
 
@@ -106,7 +118,18 @@ public class ChartView extends FrameLayout {
                 lineSet.setDrawHighlightIndicators(true);
                 lineSet.setHighLightColor(Color.RED);
                 lineSet.setValueTextSize(12);
-                lineSet.setValueTextColor(Color.BLACK);
+
+                if(Utils.isDark){
+                    lineSet.setValueTextColor(Color.WHITE);
+                    chart.getXAxis().setTextColor(Color.WHITE);
+                    chart.getAxisLeft().setTextColor(Color.WHITE);
+                    chart.getLegend().setTextColor(Color.WHITE);
+                } else {
+                    lineSet.setValueTextColor(Color.BLACK);
+                    chart.getXAxis().setTextColor(Color.BLACK);
+                    chart.getAxisLeft().setTextColor(Color.BLACK);
+                    chart.getLegend().setTextColor(Color.BLACK);
+                }
                 LineData lineData = new LineData(lineSet);
 
                 if (chartObj.getType() == 3) {

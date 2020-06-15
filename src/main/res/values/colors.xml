@@ -13,4 +13,9 @@
     <color name="VERY_LIGHT_GRAY">#C8C8C8</color>
     <color name="BRIGHT_GRAY">#ECECEC</color>
     <color name="GRAY_98">#FAFAFA</color>
+    <color name="VULCAN">#37393e</color>
+    <color name="BUNKER">#292B2E</color>
+    <color name="STORM_GRAY">#747881</color>
+    <color name="EBONY">#313235</color>
+    <color name="PAYNE_GRAY">#3F4045</color>
 </resources>

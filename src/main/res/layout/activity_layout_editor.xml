@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="layouteditor.LayoutEditor"
-    android:background="@color/LAYOUT_EDITOR_BACKGROUND">
+    android:background="?attr/LAYOUT_EDITOR_BACKGROUND">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,12 +26,12 @@
                 android:id="@+id/add_block_to_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_add_black_24dp"
-                android:drawableLeft="@drawable/ic_add_black_24dp"
+                android:drawableStart="?attr/ADD_ICON"
+                android:drawableLeft="?attr/ADD_ICON"
                 android:paddingLeft="5dp"
                 android:text="@string/ADD_BLOCK"
-                android:background="@color/BUTTON_BACKGROUND_COLOR"
-                android:textColor="@color/BUTTON_TEXT_COLOR"
+                android:background="?attr/BUTTON_BACKGROUND_COLOR"
+                android:textColor="?attr/BUTTON_TEXT_COLOR"
                 android:layout_margin="5dp" />
 
             <ListView

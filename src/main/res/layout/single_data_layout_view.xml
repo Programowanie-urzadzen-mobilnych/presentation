@@ -16,7 +16,7 @@
         android:text="@string/LAYOUT_TITLE"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textColor="@color/DEFAULT_TEXT_COLOR"
+        android:textColor="?attr/DEFAULT_TEXT_COLOR"
         android:layout_margin="5dp" />
 
     <Button
@@ -25,12 +25,12 @@
         android:layout_height="35dp"
         android:layout_toStartOf="@+id/edit_layout_button"
         android:layout_toLeftOf="@+id/edit_layout_button"
-        android:foreground="@drawable/ic_close_black_12dp"
+        android:foreground="?attr/CLOSE_ICON"
         android:foregroundGravity="center_vertical|center_horizontal"
         android:freezesText="false"
         tools:targetApi="m"
-        android:background="@color/BUTTON_BACKGROUND_COLOR"
-        android:textColor="@color/BUTTON_TEXT_COLOR"
+        android:background="?attr/BUTTON_BACKGROUND_COLOR"
+        android:textColor="?attr/BUTTON_TEXT_COLOR"
         android:layout_margin="5dp" />
 
     <Button
@@ -39,12 +39,12 @@
         android:layout_height="35dp"
         android:layout_toStartOf="@+id/save_layout_as_file_button"
         android:layout_toLeftOf="@+id/save_layout_as_file_button"
-        android:foreground="@drawable/ic_edit_black_12dp"
+        android:foreground="?attr/EDIT_ICON"
         android:foregroundGravity="center_vertical|center_horizontal"
         android:freezesText="false"
         tools:targetApi="m"
-        android:background="@color/BUTTON_BACKGROUND_COLOR"
-        android:textColor="@color/BUTTON_TEXT_COLOR"
+        android:background="?attr/BUTTON_BACKGROUND_COLOR"
+        android:textColor="?attr/BUTTON_TEXT_COLOR"
         android:layout_margin="5dp" />
 
     <Button
@@ -53,12 +53,12 @@
         android:layout_height="35dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:foreground="@drawable/ic_check_black_12dp"
+        android:foreground="?attr/CHECK_ICON"
         android:foregroundGravity="center_vertical|center_horizontal"
         android:freezesText="false"
         tools:targetApi="m"
-        android:background="@color/BUTTON_BACKGROUND_COLOR"
-        android:textColor="@color/BUTTON_TEXT_COLOR"
+        android:background="?attr/BUTTON_BACKGROUND_COLOR"
+        android:textColor="?attr/BUTTON_TEXT_COLOR"
         android:layout_margin="5dp" />
 
     <Button
@@ -67,12 +67,12 @@
         android:layout_height="35dp"
         android:layout_toStartOf="@+id/select_layout_button"
         android:layout_toLeftOf="@+id/select_layout_button"
-        android:foreground="@drawable/ic_save_black_24dp"
+        android:foreground="?attr/SAVE_ICON"
         android:foregroundGravity="center_vertical|center_horizontal"
         android:freezesText="false"
         tools:targetApi="m"
-        android:background="@color/BUTTON_BACKGROUND_COLOR"
-        android:textColor="@color/BUTTON_TEXT_COLOR"
+        android:background="?attr/BUTTON_BACKGROUND_COLOR"
+        android:textColor="?attr/BUTTON_TEXT_COLOR"
         android:layout_margin="5dp" />
 
 </RelativeLayout>

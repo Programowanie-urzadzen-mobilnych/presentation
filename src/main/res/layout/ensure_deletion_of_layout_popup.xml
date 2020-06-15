@@ -3,13 +3,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
-    android:background="@color/POPUP_BACKGROUND_COLOR"
+    android:background="?attr/POPUP_BACKGROUND_COLOR"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/POPUP_TOP_BAR_COLOR"
+        android:background="?attr/POPUP_TOP_BAR_COLOR"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
@@ -24,7 +24,7 @@
             android:text="@string/LAYOUT_DELETION"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="22sp"
-            android:textColor="@color/DEFAULT_TEXT_COLOR" />
+            android:textColor="?attr/DEFAULT_TEXT_COLOR" />
 
     </LinearLayout>
 
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            android:textColor="@color/DEFAULT_TEXT_COLOR"
+            android:textColor="?attr/DEFAULT_TEXT_COLOR"
             android:text="@string/LAYOUT_DELETION_WARNING_MESSAGE" />
 
         <LinearLayout
@@ -51,8 +51,8 @@
                 android:layout_height="match_parent"
                 android:text="@string/KEEP_LAYOUT"
                 android:layout_weight="1"
-                android:background="@color/BUTTON_BACKGROUND_COLOR"
-                android:textColor="@color/BUTTON_TEXT_COLOR"
+                android:background="?attr/BUTTON_BACKGROUND_COLOR"
+                android:textColor="?attr/BUTTON_TEXT_COLOR"
                 android:layout_margin="5dp"/>
             <Button
                 android:id="@+id/confirm_button"
@@ -60,8 +60,8 @@
                 android:layout_height="match_parent"
                 android:text="@string/CONFIRM_DELETION"
                 android:layout_weight="1"
-                android:background="@color/BUTTON_BACKGROUND_COLOR"
-                android:textColor="@color/BUTTON_TEXT_COLOR"
+                android:background="?attr/BUTTON_BACKGROUND_COLOR"
+                android:textColor="?attr/BUTTON_TEXT_COLOR"
                 android:layout_margin="5dp" />
         </LinearLayout>
     </LinearLayout>

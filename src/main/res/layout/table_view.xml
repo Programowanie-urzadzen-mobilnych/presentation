@@ -8,7 +8,7 @@
         android:id="@+id/block_title_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/BLOCK_TITLE_BACKGROUND_COLOR"
+        android:background="?attr/BLOCK_TITLE_BACKGROUND_COLOR"
         android:orientation="vertical" >
 
         <TextView
@@ -19,7 +19,7 @@
             android:paddingHorizontal="10dp"
             android:paddingVertical="5dp"
             android:textSize="16sp"
-            android:textColor="@color/BLOCK_TITLE_COLOR"
+            android:textColor="?attr/BLOCK_TITLE_COLOR"
             android:background="@drawable/main_view_border"/>
     </LinearLayout>
 
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:stretchColumns="*"
-            android:background="@color/TABLE_BACKGROUND_COLOR"
+            android:background="?attr/TABLE_BACKGROUND_COLOR"
             android:isScrollContainer="true" />
     </HorizontalScrollView>
 </RelativeLayout>

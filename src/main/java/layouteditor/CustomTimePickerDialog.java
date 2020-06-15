@@ -29,7 +29,7 @@ public class CustomTimePickerDialog implements TimePickerDialog.OnTimeSetListene
         if (layoutEditorContext instanceof LayoutEditor) {
             try {
                 SimpleDateFormat timeFormat = new SimpleDateFormat(Utils.TIME_FORMAT, Locale.getDefault());
-                Date date = timeFormat.parse(hourOfDay + ":" + minute);
+                Date date = timeFormat.parse(hourOfDay + ":" + minute + ":" + 0);
                 if(dialogType == DialogType.START)
                     ((LayoutEditor) layoutEditorContext).setStartDateTimeText(date, itemPosition);
                 else if (dialogType == DialogType.END)

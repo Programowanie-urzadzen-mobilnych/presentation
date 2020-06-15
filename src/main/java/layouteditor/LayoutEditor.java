@@ -1,24 +1,19 @@
 package layouteditor;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroupOverlay;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -29,12 +24,17 @@ import androidx.appcompat.widget.Toolbar;
 import com.representation.R;
 import com.representation.Utils;
 
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-import data.Database;
+import javax.xml.parsers.ParserConfigurationException;
+
+import data.LayoutsXml;
 import layouts.DataLayout;
-import layouts.LayoutsList;
 
 public class LayoutEditor extends AppCompatActivity {
     private DataLayout layout;
@@ -59,7 +59,16 @@ public class LayoutEditor extends AppCompatActivity {
             // TODO: Replace data collecting method
             // Collect needed data from DataBase
             this.layoutPosition = extras.getInt("layoutPosition");
-            this.layout = new DataLayout(Database.layouts.get(layoutPosition));
+            try {
+                ArrayList<DataLayout> list = LayoutsXml.readData(getApplicationContext());
+                this.layout = list.get(layoutPosition);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
+            } catch (SAXException e) {
+                e.printStackTrace();
+            }
         } else {
             this.layout = new DataLayout();
             this.layoutPosition = -1;
@@ -190,7 +199,7 @@ public class LayoutEditor extends AppCompatActivity {
             public void onClick(View v) {
                 // Defaultly set newly added layout as selected. Before it deselect all layouts
                 // to prevent situation where there are multiple layouts selected.
-                Database.deselectAllLayouts();
+                LayoutsXml.deselectAllLayouts(getApplicationContext());
                 layout.setSelected(true);
 
                 // If newly added layout is selected as default and checkbox is enabled than all
@@ -198,7 +207,7 @@ public class LayoutEditor extends AppCompatActivity {
                 // multiple default layouts.
                 if(isDefault.isChecked()){
                     if(isDefault.isEnabled()){
-                        Database.undefaultAllLayouts();
+                        LayoutsXml.undefaultAllLayouts(getApplicationContext());
                     }
                     layout.setDefaultChoice(true);
                 } else {
@@ -213,12 +222,7 @@ public class LayoutEditor extends AppCompatActivity {
                     layout.setLayoutTitle(layoutTitle.getText().toString());
                 }
 
-                // If in editing mode, remove edited layout and add it back with changes made
-                // (duplicates prevention)
-                if(layoutPosition > -1) {
-                    Database.layouts.remove(layoutPosition);
-                }
-                Database.layouts.add(layout);
+                LayoutsXml.replaceLayout(getApplicationContext(), layout, layoutPosition);
 
                 // Move to LayoutsList activity where new added element should be listed
                 popup.dismiss();
@@ -275,11 +279,11 @@ public class LayoutEditor extends AppCompatActivity {
 
     public void setUnit(int itemPosition, int position, Utils.Magnitude magnitude) {
         layout.getDataBlocks().get(itemPosition).setUnit(Utils.Unit.fromId(position, magnitude));
-        displayLayoutContent();
+        // displayLayoutContent();
     }
 
     public void setStartDateTimeText(Date date, int itemPosition) {
-        layout.getDataBlocks().get(itemPosition).setDateStart(date);;
+        layout.getDataBlocks().get(itemPosition).setDateStart(date);
         dataBlockAdapter.notifyDataSetChanged();
     }
 
@@ -288,7 +292,7 @@ public class LayoutEditor extends AppCompatActivity {
         dataBlockAdapter.notifyDataSetChanged();
     }
 
-    public void displayLayoutContent(){
-        layout.displayContent();
-    }
+//    public void displayLayoutContent(){
+//        layout.displayContent();
+//    }
 }

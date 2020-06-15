@@ -18,9 +18,15 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.representation.R;
 
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import data.Database;
+import data.LayoutsXml;
 import layouteditor.DataBlock;
 import layouteditor.LayoutEditor;
 import layouts.DataLayout;
@@ -40,7 +46,15 @@ public class Measurements extends AppCompatActivity {
 
         // TODO: Replace data collecting method
         // Collect needed data from DataBase
-        this.layouts = Database.layouts;
+        try {
+            this.layouts = LayoutsXml.readData(getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
 
         // Configure action bar
         Toolbar actionbar = findViewById(R.id.measurements_action_bar);
@@ -146,16 +160,24 @@ public class Measurements extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        // TODO: Replace data pushing method
-        // Push changed data to DataBase
-        Database.layouts = this.layouts;
+        try {
+            LayoutsXml.saveLayouts(getApplicationContext(), layouts);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // TODO: Replace data collecting method
-        // Collect needed data from DataBase
-        this.layouts = Database.layouts;
+        try {
+            this.layouts = LayoutsXml.readData(getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
     }
 }

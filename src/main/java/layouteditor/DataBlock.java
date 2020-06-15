@@ -1,11 +1,15 @@
 package layouteditor;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.representation.Utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 
@@ -22,8 +26,8 @@ public class DataBlock {
         this.blockType = Utils.BlockTypeEnum.VALUE;
         this.magnitude = Utils.Magnitude.TEMPERATURE;
         this.unit = Utils.Unit.CELSIUS;
-        this.dateStart = Calendar.getInstance().getTime();
-        this.dateEnd = Calendar.getInstance().getTime();
+        this.dateStart = new Date();
+        this.dateEnd = new Date();
     }
 
     public DataBlock(String blockTitle, Utils.BlockTypeEnum blockType) {
@@ -31,8 +35,13 @@ public class DataBlock {
         this.blockType = blockType;
         this.magnitude = Utils.Magnitude.TEMPERATURE;
         this.unit = Utils.Unit.KELWIN;
-        this.dateStart = Calendar.getInstance().getTime();
-        this.dateEnd = Calendar.getInstance().getTime();
+        if (blockType == Utils.BlockTypeEnum.VALUE) {
+            this.dateStart = new Date();
+            this.dateEnd = new Date();
+        } else {
+            this.dateStart = Calendar.getInstance().getTime();
+            this.dateEnd = Calendar.getInstance().getTime();
+        }
     }
 
     public DataBlock(String blockTitle, Utils.BlockTypeEnum blockType, Utils.Magnitude magnitude, Utils.Unit unit) {
@@ -40,8 +49,13 @@ public class DataBlock {
         this.blockType = blockType;
         this.magnitude = magnitude;
         this.unit = unit;
-        this.dateStart = Calendar.getInstance().getTime();
-        this.dateEnd = Calendar.getInstance().getTime();
+        if (blockType == Utils.BlockTypeEnum.VALUE) {
+            this.dateStart = new Date();
+            this.dateEnd = new Date();
+        } else {
+            this.dateStart = Calendar.getInstance().getTime();
+            this.dateEnd = Calendar.getInstance().getTime();
+        }
     }
 
     public DataBlock(String blockTitle, Utils.BlockTypeEnum blockType, Utils.Magnitude magnitude, Utils.Unit unit, Date dateStart, Date dateEnd) {
@@ -96,7 +110,39 @@ public class DataBlock {
     }
 
     public void setDateStart(Date dateStart) {
-        this.dateStart = dateStart;
+        Calendar newCalendar = Calendar.getInstance();
+        Calendar oldCalendar = Calendar.getInstance();
+
+        newCalendar.setTime(dateStart);
+        oldCalendar.setTime(this.dateStart);
+
+        if(newCalendar.get(Calendar.YEAR) == 0){
+            // Log.println(Log.INFO, "setDateStart", "Year is 0");
+            newCalendar.set(newCalendar.get(Calendar.YEAR),
+                    newCalendar.get(Calendar.MONTH),
+                    newCalendar.get(Calendar.DAY_OF_MONTH),
+                    oldCalendar.get(Calendar.HOUR_OF_DAY),
+                    oldCalendar.get(Calendar.MINUTE),
+                    oldCalendar.get(Calendar.SECOND));
+        } else {
+            // Log.println(Log.INFO, "setDateStart", "Year is not 0");
+            newCalendar.set(oldCalendar.get(Calendar.YEAR),
+                    oldCalendar.get(Calendar.MONTH),
+                    oldCalendar.get(Calendar.DAY_OF_MONTH),
+                    newCalendar.get(Calendar.HOUR_OF_DAY),
+                    newCalendar.get(Calendar.MINUTE),
+                    newCalendar.get(Calendar.SECOND));
+        }
+        this.dateStart = newCalendar.getTime();
+    }
+
+    public void setDateStart(String dateStart) {
+        try {
+            Date date = new SimpleDateFormat(Utils.DATETIME_FORMAT, Locale.getDefault()).parse(dateStart);
+            setDateStart(date);
+        } catch (ParseException e) {
+            Log.println(Log.ERROR, "setDateStart", "Error while parsing date string");
+        }
     }
 
     public Date getDateEnd() {
@@ -104,11 +150,42 @@ public class DataBlock {
     }
 
     public void setDateEnd(Date dateEnd) {
-        this.dateEnd = dateEnd;
+        Calendar newCalendar = Calendar.getInstance();
+        Calendar oldCalendar = Calendar.getInstance();
+
+        newCalendar.setTime(dateEnd);
+        oldCalendar.setTime(this.dateEnd);
+
+        if (newCalendar.get(Calendar.YEAR) == 0){
+            //Log.println(Log.INFO, "setDateEnd", "Year is 0");
+            newCalendar.set(newCalendar.get(Calendar.YEAR),
+                    newCalendar.get(Calendar.MONTH),
+                    newCalendar.get(Calendar.DAY_OF_MONTH),
+                    oldCalendar.get(Calendar.HOUR_OF_DAY),
+                    oldCalendar.get(Calendar.MINUTE),
+                    oldCalendar.get(Calendar.SECOND));
+        } else {
+            //Log.println(Log.INFO, "setDateEnd", "Year is not 0");
+            newCalendar.set(oldCalendar.get(Calendar.YEAR),
+                    oldCalendar.get(Calendar.MONTH),
+                    oldCalendar.get(Calendar.DAY_OF_MONTH),
+                    newCalendar.get(Calendar.HOUR_OF_DAY),
+                    newCalendar.get(Calendar.MINUTE),
+                    newCalendar.get(Calendar.SECOND));
+        }
+        this.dateEnd = newCalendar.getTime();
+    }
+
+    public void setDateEnd(String dateEnd) {
+        try {
+            Date date = new SimpleDateFormat(Utils.DATETIME_FORMAT, Locale.getDefault()).parse(dateEnd);
+            setDateEnd(date);
+        } catch (ParseException e) {
+            Log.println(Log.ERROR, "setDateEnd", "Error while parsing date string");
+        }
     }
 
     public void displayContent() {
-        Log.println(Log.ERROR, "DataBlock", "content");
         Log.println(Log.INFO, "DataBlock", "blockTitle: " + blockTitle + "\n" +
                 "blockType: " + blockType.name() + "\n" +
                 "magnitude: " + magnitude.name() + "\n" +

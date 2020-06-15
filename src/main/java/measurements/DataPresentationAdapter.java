@@ -22,8 +22,13 @@ import com.representation.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
@@ -32,8 +37,15 @@ import charts.ChartView;
 import data.Database;
 import data.ExampleRecord;
 import layouteditor.DataBlock;
+import pl.grupa33inf.ssi.data_store.api.DataStoreApi;
+import pl.grupa33inf.ssi.data_store.api.INodeDataStore;
+import pl.grupa33inf.ssi.data_store.api.NodeValue;
+import pl.grupa33inf.ssi.data_store.api.NodeVariable;
+
+import static data.Database.getLatestValue;
 
 public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
+    private static final String TAG = "DATABEJS";
     private Context mContext;
     private ArrayList<DataBlock> dataBlocks;
     private ValueViewHolder valueViewHolder;
@@ -87,7 +99,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
             }
 
             // get data from db TODO: data should be already prepared
-            ExampleRecord rec = Database.getLatestValue(dataBlock.getMagnitude());
+            ExampleRecord rec = getLatestValue(dataBlock.getMagnitude());
 
             // Set title
             valueViewHolder.blockTitle.setText(dataBlock.getBlockTitle());
@@ -107,7 +119,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
             }
 
             // Get Data from DB TODO: data should be already prepared
-            ArrayList<ExampleRecord> data = Database.getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
+            ArrayList<ExampleRecord> data = getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
 
             // Set title
             tableViewHolder.blockTitle.setText(dataBlock.getBlockTitle());
@@ -134,7 +146,8 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
             if(convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.chart_view, parent, false);
                 ArrayList<Float> values = new ArrayList<>();
-                ArrayList<ExampleRecord> data = Database.getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
+                ArrayList<ExampleRecord> data = getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
+                //ArrayList<ExampleRecord> data = Database.getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
                 for (ExampleRecord rec : data) {
                     values.add((float)rec.getValue());
                 }
@@ -160,7 +173,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.chart_view, parent, false);
             ArrayList<Float> values = new ArrayList<>();
-            ArrayList<ExampleRecord> data = Database.getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
+            ArrayList<ExampleRecord> data = getDataBetween(dataBlock.getDateStart(), dataBlock.getDateEnd(), dataBlock.getMagnitude());
             for (ExampleRecord rec : data) {
                 values.add((float)rec.getValue());
             }
@@ -338,4 +351,81 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
             blockTitle = convertView.findViewById(R.id.block_title_text_view);
         }
     }
+
+    public static ArrayList<ExampleRecord> getDataBetween(Date data1, Date data2, final Utils.Magnitude magnitude) {
+        INodeDataStore ds = DataStoreApi.getNodeDataStore();
+        ArrayList<ExampleRecord> result = new ArrayList<>();
+        String tag = "dbNodesTest";
+
+        try {
+            UUID uid =  UUID.fromString("14ed798f-37a4-4501-8489-5fa5528a20ec");
+            Map<String, NodeVariable> temp = ds.readAllVariables(uid);
+            Collection<NodeVariable> nodeCol = temp.values();
+
+            String dbMagnitude = temp.keySet().toString();
+
+            ArrayList<NodeVariable> nodeArrList = new ArrayList<>(nodeCol);
+            ArrayList<NodeValue> nodeValArrList = new ArrayList<>();
+            for (int i = 0; i < nodeArrList.size(); i++) {
+                List<NodeValue> tempList = nodeArrList.get(i).getHistory();
+                for (int j = 0; j < tempList.size(); j++) {
+                    Log.d(tag,tempList.get(j).getValue()+" "+tempList.get(j).getTimestamp());
+                    nodeValArrList.add(tempList.get(j));
+                }
+            }
+
+            for (int i = 0; i < nodeValArrList.size(); i++) {
+                Log.d(tag,nodeValArrList.get(i).getValue().toString());
+                //if(rec.getMagnitude()==magnitude)
+                Double val = Double.parseDouble(nodeValArrList.get(i).getValue());
+                result.add(new ExampleRecord(nodeValArrList.get(i).getTimestamp(),magnitude,Utils.Unit.CELSIUS, val));
+
+            }
+            /*history.stream().filter( v => v.getTimestamp().before(od) && v.getTimestamp().after(do)).collect(Collectors.toList())*/
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public static ExampleRecord getLatestValue(Utils.Magnitude magnitude) {
+        //TODO: Return latest data of given magnitude
+        ExampleRecord exampleRecord = new ExampleRecord();
+        INodeDataStore ds = DataStoreApi.getNodeDataStore();
+        String tag = "dbNodesTestLastValue";
+
+        try {
+            UUID uid =  UUID.fromString("14ed798f-37a4-4501-8489-5fa5528a20ec");
+            Map<String, NodeVariable> temp = ds.readAllVariables(uid);
+            Collection<NodeVariable> nodeCol = temp.values();
+
+            String dbMagnitude = temp.keySet().toString();
+
+            ArrayList<NodeVariable> nodeArrList = new ArrayList<>(nodeCol);
+
+            Log.d("DAWAJ SINGLA",temp.toString());
+            if(nodeArrList.get(0).getCurrentValue()!=null){
+                Log.d("VAL: ",nodeArrList.get(0).getCurrentValue().toString());
+                Double value = Double.parseDouble(nodeArrList.get(0).getCurrentValue().toString());
+                exampleRecord.setValue(value);
+            }else{
+                //get 1st from history
+                Double value = Double.parseDouble(nodeArrList.get(0).getHistory().get(0).getValue());
+                exampleRecord.setValue(value);
+            }
+
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return exampleRecord;
+    }
+
 }

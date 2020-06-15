@@ -23,7 +23,6 @@ import layouteditor.LayoutEditor;
 
 public class DataLayoutAdapter extends ArrayAdapter<DataLayout> {
     private Context mContext;
-    private ViewHolder viewHolder;
 
     public DataLayoutAdapter(Context context, ArrayList<DataLayout> layouts) {
         super(context, 0, layouts);
@@ -37,13 +36,11 @@ public class DataLayoutAdapter extends ArrayAdapter<DataLayout> {
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_data_layout_view, parent, false);
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.layoutTitle.setText(dataLayout.getLayoutTitle());
+        TextView layoutTitle = convertView.findViewById(R.id.layout_title);
+        layoutTitle.setText(dataLayout.getLayoutTitle());
+        Log.println(Log.ERROR, "viewHolder", dataLayout.getLayoutTitle());
 
         // Bind listener to deleteButton to make it work.
         // If layout is default button should be disabled and inform user why it is disabled.
@@ -96,13 +93,5 @@ public class DataLayoutAdapter extends ArrayAdapter<DataLayout> {
 
         // Return the completed view to render on screen
         return convertView;
-    }
-
-    static class ViewHolder {
-        TextView layoutTitle;
-
-        public ViewHolder(View convertView) {
-            this.layoutTitle = convertView.findViewById(R.id.layout_title);
-        }
     }
 }

@@ -4,18 +4,12 @@
 
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application android:name="com.representation.ThisApplication">
         <activity android:name="measurements.Measurements" />
         <activity android:name="charts.TestActivity" />
-        <activity android:name="com.representation.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="com.representation.MainActivity" />
         <activity android:name="layouteditor.LayoutEditor">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

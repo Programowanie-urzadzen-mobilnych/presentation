@@ -31,13 +31,13 @@ public class Database {
         dataBlocks.add(new DataBlock("Blok trzeci", Utils.BlockTypeEnum.TABLE));
 
         layouts.add(new DataLayout("Tytuł pierwszy", new ArrayList<DataBlock>(), false, false, true));
-        layouts.add(new DataLayout("Tytuł drugi", dataBlocks, true, false));
-        layouts.add(new DataLayout("Przykładowy tytuł układu", dataBlocks, false, false, true));
+        layouts.add(new DataLayout("Tytuł drugi", new ArrayList<>(dataBlocks), true, false));
+        layouts.add(new DataLayout("Przykładowy tytuł układu", new ArrayList<>(dataBlocks), false, false, true));
         dataBlocks.remove(0);
 
         dataBlocks.add(new DataBlock("Blok czwarty", Utils.BlockTypeEnum.CHART));
         dataBlocks.add(new DataBlock("Blok piąty", Utils.BlockTypeEnum.VALUE));
-        layouts.add(new DataLayout("Tytuł czwarty", dataBlocks, false, true, true));
+        layouts.add(new DataLayout("Tytuł czwarty", new ArrayList<>(dataBlocks), false, true, true));
 
         DateFormat format = new SimpleDateFormat(Utils.DATETIME_FORMAT, Locale.getDefault());
 
@@ -83,7 +83,7 @@ public class Database {
     }
 
     public static void selectDefaultLayout(){
-        deselectAllLayouts();
+        // deselectAllLayouts();
         for (int i = 0; i < layouts.size(); i++) {
             if(layouts.get(i).isDefaultChoice()){
                 layouts.get(i).setSelected(true);

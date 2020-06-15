@@ -34,6 +34,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.representation.R;
 import com.representation.Utils;
 
+import org.xml.sax.SAXException;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -47,7 +49,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import data.Database;
+import data.LayoutsXml;
 import layouteditor.DataBlock;
 import layouteditor.LayoutEditor;
 import lib.folderpicker.FolderPicker;
@@ -78,7 +83,15 @@ public class LayoutsList extends AppCompatActivity {
 
         // TODO: Replace data collecting method
         // Collect needed data from DataBase
-        this.layouts = Database.layouts;
+        try {
+            this.layouts = LayoutsXml.readData(getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
 
         // Create the adapter to convert the array to views
         this.dataLayoutAdapter = new DataLayoutAdapter(this, layouts);
@@ -95,6 +108,13 @@ public class LayoutsList extends AppCompatActivity {
                 v.getContext().startActivity(i);
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    @Override
+    public void onBackPressed(){
+        // define what happens when back button pressed
+        finish();
     }
 
     @Override
@@ -126,7 +146,11 @@ public class LayoutsList extends AppCompatActivity {
         super.onPause();
         // TODO: Replace data pushing method
         // Push changed data to DataBase
-        Database.layouts = this.layouts;
+        try {
+            LayoutsXml.saveLayouts(getApplicationContext(), layouts);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -134,11 +158,31 @@ public class LayoutsList extends AppCompatActivity {
         super.onResume();
         // TODO: Replace data collecting method
         // Collect needed data from DataBase
-        this.layouts = Database.layouts;
+        try {
+            ArrayList<DataLayout> temp = LayoutsXml.readData(getApplicationContext());
+            this.layouts.removeAll(this.layouts);
+
+            this.layouts.addAll(temp);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
         this.dataLayoutAdapter.notifyDataSetChanged();
     }
 
     public void deleteButtonHandler(int position) {
+        if(layouts.get(position).isSelected()){
+            for (int i = 0; i < layouts.size(); i++) {
+                if(layouts.get(i).isDefaultChoice()){
+                    layouts.get(i).setSelected(true);
+                    break;
+                }
+            }
+        }
+
         // Remove chosen layout from list
         this.layouts.remove(position);
     }
@@ -314,7 +358,7 @@ public class LayoutsList extends AppCompatActivity {
             br.close();
             dl.setDataBlocks(dbs);
             //layouts.add(dl);
-            Database.layouts.add(dl);
+            this.layouts.add(dl);
             dataLayoutAdapter.notifyDataSetInvalidated();
         }
         catch (Exception e) {

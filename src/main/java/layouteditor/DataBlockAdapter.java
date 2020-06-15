@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -242,7 +243,9 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         SimpleDateFormat timeFormat = new SimpleDateFormat(Utils.TIME_FORMAT, Locale.getDefault());
 
         viewHolder.tableStartDateInput.setText(dateFormat.format(dataBlock.getDateStart()));
+        // Log.println(Log.INFO, "Table", "newCalendar.getTime(): " + dateFormat.format(dataBlock.getDateStart()));
         viewHolder.tableStartTimeInput.setText(timeFormat.format(dataBlock.getDateStart()));
+        // Log.println(Log.INFO, "Table", "newCalendar.getTime(): " + timeFormat.format(dataBlock.getDateStart()));
         viewHolder.tableEndDateInput.setText(dateFormat.format(dataBlock.getDateEnd()));
         viewHolder.tableEndTimeInput.setText(timeFormat.format(dataBlock.getDateEnd()));
 
@@ -258,7 +261,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         viewHolder.tableEndDateInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomDatePickerDialog dialog = new CustomDatePickerDialog(mContext, itemPosition, CustomDatePickerDialog.DialogType.START);
+                CustomDatePickerDialog dialog = new CustomDatePickerDialog(mContext, itemPosition, CustomDatePickerDialog.DialogType.END);
                 DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, dialog, Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
                 datePickerDialog.show();
             }
@@ -267,7 +270,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         viewHolder.tableStartTimeInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomTimePickerDialog dialog = new CustomTimePickerDialog(mContext, itemPosition, CustomTimePickerDialog.DialogType.END);
+                CustomTimePickerDialog dialog = new CustomTimePickerDialog(mContext, itemPosition, CustomTimePickerDialog.DialogType.START);
                 TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, dialog, Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
                 timePickerDialog.show();
             }
@@ -359,7 +362,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         viewHolder.chartEndDateInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomDatePickerDialog dialog = new CustomDatePickerDialog(mContext, itemPosition, CustomDatePickerDialog.DialogType.START);
+                CustomDatePickerDialog dialog = new CustomDatePickerDialog(mContext, itemPosition, CustomDatePickerDialog.DialogType.END);
                 DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, dialog, Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
                 datePickerDialog.show();
             }
@@ -368,7 +371,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         viewHolder.chartStartTimeInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomTimePickerDialog dialog = new CustomTimePickerDialog(mContext, itemPosition, CustomTimePickerDialog.DialogType.END);
+                CustomTimePickerDialog dialog = new CustomTimePickerDialog(mContext, itemPosition, CustomTimePickerDialog.DialogType.START);
                 TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, dialog, Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
                 timePickerDialog.show();
             }
@@ -460,7 +463,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         viewHolder.chartTwoEndDateInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomDatePickerDialog dialog = new CustomDatePickerDialog(mContext, itemPosition, CustomDatePickerDialog.DialogType.START);
+                CustomDatePickerDialog dialog = new CustomDatePickerDialog(mContext, itemPosition, CustomDatePickerDialog.DialogType.END);
                 DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, dialog, Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);
                 datePickerDialog.show();
             }
@@ -469,7 +472,7 @@ public class DataBlockAdapter extends ArrayAdapter<DataBlock> {
         viewHolder.chartTwoStartTimeInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomTimePickerDialog dialog = new CustomTimePickerDialog(mContext, itemPosition, CustomTimePickerDialog.DialogType.END);
+                CustomTimePickerDialog dialog = new CustomTimePickerDialog(mContext, itemPosition, CustomTimePickerDialog.DialogType.START);
                 TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, dialog, Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
                 timePickerDialog.show();
             }

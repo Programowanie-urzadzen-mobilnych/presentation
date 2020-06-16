@@ -67,6 +67,24 @@ public class DataBlock {
         this.dateEnd = dateEnd;
     }
 
+    public DataBlock(String dataBlock){
+        String[] tempvals = dataBlock.split(";");
+        this.blockTitle = tempvals[0];
+        this.blockType = Utils.BlockTypeEnum.fromString(tempvals[1]);
+        this.magnitude = Utils.Magnitude.fromString(tempvals[2]);
+        this.unit = Utils.Unit.fromString(tempvals[3]);
+        try {
+            this.dateStart = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(tempvals[4]);
+        } catch (ParseException e) {
+            this.dateStart = new Date();
+        }
+        try {
+            this.dateEnd = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(tempvals[5]);
+        } catch (ParseException e) {
+            this.dateEnd = new Date();
+        }
+    }
+
     @NonNull
     @Override
     public String toString() {

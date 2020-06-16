@@ -55,6 +55,7 @@
 
     <!-- strings for charts -->
     <string name="NO_DATA">Brak danych do wyświetlenia</string>
+    <string name="EXPORT_DATA_TO_PDF">Exportuj dane do PDF</string>
 
     <!-- Never change arrays item order unless you change enum types values -->
     <string-array name="BLOCK_TYPE_SPINNER">

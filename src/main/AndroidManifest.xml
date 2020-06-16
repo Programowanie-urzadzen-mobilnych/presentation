@@ -8,8 +8,8 @@
 
     <application android:name="com.representation.ThisApplication">
         <activity android:name="measurements.Measurements" />
-        <activity android:name="charts.TestActivity" />
         <activity android:name="com.representation.MainActivity" />
+        <activity android:name="SaveData.SaveData"/>
         <activity android:name="layouteditor.LayoutEditor">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

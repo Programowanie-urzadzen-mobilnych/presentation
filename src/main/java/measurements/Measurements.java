@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import SaveData.SaveData;
 import data.Database;
 import data.LayoutsXml;
 import layouteditor.DataBlock;
@@ -114,6 +115,19 @@ public class Measurements extends AppCompatActivity {
             this.startActivity(i);
         } else if (itemId == R.id.measurements_show_layouts_list) {
             Intent i = new Intent(this, LayoutsList.class);
+            this.startActivity(i);
+        } else if(itemId == R.id.measurements_export_to_pdf){
+            Intent i = new Intent(this, SaveData.class);
+            i.putExtra("layoutName",currentLayout.getLayoutTitle());
+
+            ArrayList<DataBlock> dataBlockArrayList = currentLayout.getDataBlocks();
+            int size = dataBlockArrayList.size();
+            i.putExtra("datablockAmount",String.valueOf(size));
+
+            for (int j = 0; j < dataBlockArrayList.size(); j++) {
+                i.putExtra("datablock"+j,dataBlockArrayList.get(j).toString());
+            }
+
             this.startActivity(i);
         }
 

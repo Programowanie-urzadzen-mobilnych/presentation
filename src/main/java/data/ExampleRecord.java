@@ -23,6 +23,10 @@ public class ExampleRecord {
         this.value = value;
     }
 
+    public String toString() {
+        return value+" "+unit.toString()+" "+timestamp;
+    }
+
     public Date getTimestamp() {
         return timestamp;
     }

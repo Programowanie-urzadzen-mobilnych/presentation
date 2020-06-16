@@ -392,7 +392,7 @@ public class DataPresentationAdapter extends ArrayAdapter<DataBlock> {
         return result;
     }
 
-    public static ExampleRecord getLatestValue(Utils.Magnitude magnitude) {
+    private static ExampleRecord getLatestValue(Utils.Magnitude magnitude) {
         //TODO: Return latest data of given magnitude
         ExampleRecord exampleRecord = new ExampleRecord();
         INodeDataStore ds = DataStoreApi.getNodeDataStore();
